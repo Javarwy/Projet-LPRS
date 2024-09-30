@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 23 sep. 2024 à 15:10
+-- Généré le : lun. 30 sep. 2024 à 12:12
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.2.0
 
@@ -228,6 +228,9 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `prenom` varchar(50) NOT NULL,
   `email` varchar(150) NOT NULL,
   `mdp` varchar(100) NOT NULL,
+  `info_sup` text,
+  `role` varchar(30) NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_utilisateur`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Table de l''utilisateur';
 
