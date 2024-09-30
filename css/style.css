@@ -311,7 +311,7 @@ a:focus {
 .slider_section .detail-box .btn-box .btn2 {
   display: inline-block;
   padding: 10px 15px;
-  background-color: #8019c8;
+  background-color: #19a5c8;
   color: #ffffff;
   border-radius: 0;
   -webkit-transition: all 0.3s;
@@ -320,7 +320,7 @@ a:focus {
 }
 
 .slider_section .detail-box .btn-box .btn2:hover {
-  background-color: #541184;
+  background-color: #118484;
 }
 
 .slider_section .img-box img {
@@ -415,7 +415,7 @@ a:focus {
 }
 
 .service_section .box .detail-box a:hover {
-  color: #8019c8;
+  color: #19c8c8;
 }
 
 .service_section .box:hover .img-box img {
@@ -512,7 +512,7 @@ a:focus {
 }
 
 .about_section .detail-box a:hover {
-  background-color: #541184;
+  background-color: #118480;
 }
 
 .product_section {
@@ -627,7 +627,7 @@ a:focus {
 .product_section .product_container .box .btn-box a {
   display: inline-block;
   padding: 10px 30px;
-  background-color: #8019c8;
+  background-color: #199cc8;
   color: #ffffff;
   border-radius: 5px;
   -webkit-transition: all 0.3s;
@@ -636,7 +636,7 @@ a:focus {
 }
 
 .product_section .product_container .box .btn-box a:hover {
-  background-color: #541184;
+  background-color: #0bb0a5;
 }
 
 .client_section .box {
@@ -675,7 +675,7 @@ a:focus {
 
 .client_section .box .client_info .client_name h5 {
   font-weight: bold;
-  color: #8019c8;
+  color: #19c8c2;
   margin-bottom: 0;
   text-transform: uppercase;
 }
@@ -690,7 +690,7 @@ a:focus {
 
 .client_section .box .client_info i {
   font-size: 24px;
-  color: #8019c8;
+  color: #19c2c8;
 }
 
 .client_section .box p {
@@ -783,7 +783,7 @@ a:focus {
   text-transform: uppercase;
   display: inline-block;
   padding: 12px 55px;
-  background-color: #8019c8;
+  background-color: #19b1c8;
   color: #ffffff;
   border-radius: 5px;
   -webkit-transition: all 0.3s;
@@ -792,7 +792,7 @@ a:focus {
 }
 
 .contact_section .form_container button:hover {
-  background-color: #541184;
+  background-color: #0cabc0;
 }
 
 .contact_section .map_container {
@@ -898,7 +898,7 @@ a:focus {
 .info_section .info_form form button {
   display: inline-block;
   padding: 8px 30px;
-  background-color: #8019c8;
+  background-color: #1945c8;
   color: #ffffff;
   border-radius: 0;
   -webkit-transition: all 0.3s;
