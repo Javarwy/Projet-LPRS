@@ -131,7 +131,7 @@ a:focus {
 
 .custom_nav-container .navbar-nav .nav-item:hover .nav-link, .custom_nav-container .navbar-nav .nav-item.active .nav-link {
   color: #ffffff;
-  background-color: #8019c8;
+  background-color: #245694;
 }
 
 .custom_nav-container .nav_search-btn {
@@ -910,7 +910,7 @@ a:focus {
 }
 
 .info_section .info_form form button:hover {
-  background-color: #541184;
+  background-color: #115a84;
 }
 
 .info_section .info_form .social_box {
