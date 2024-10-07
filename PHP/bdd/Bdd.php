@@ -2,7 +2,7 @@
 class Bdd {
     private $bdd;
     private $serveur = "localhost" ;
-    private $nomBdd = "aeroport" ;
+    private $nomBdd = "projet_lprs" ;
     private $username = "root";
     private $password = "";
 
