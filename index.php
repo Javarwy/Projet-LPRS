@@ -32,6 +32,44 @@
 
 </head>
 
+  <style>
+      .dropbtn {
+          font-size: 16px;
+          border: none;
+          outline: none;
+          color: white;
+          padding: 14px 16px;
+          background-color: inherit;
+          font-family: inherit;
+          margin: 0;
+      }
+      .dropdown-content {
+          display: none;
+          position: absolute;
+          background-color: #f9f9f9;
+          min-width: 160px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 1;
+      }
+
+      .dropdown-content a {
+          float: none;
+          color: black;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+          text-align: left;
+      }
+
+      .dropdown-content a:hover {
+          background-color: #ddd;
+      }
+
+      .dropdown:hover .dropdown-content {
+          display: block;
+      }
+  </style>
+
 <body>
 
   <div class="hero_area">
@@ -39,7 +77,7 @@
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html">
+          <a class="navbar-brand" href="../index.php">
             <span>
               <img src="images/RobertSchuman.webp" alt="" width="150" height="100" />
             </span>
@@ -51,20 +89,65 @@
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  ">
-              <li class="nav-item active">
-                <a class="nav-link" href="index.html">Acceuil<span class="sr-only">(current)</span></a>
+              <li class="nav-item">
+                <a class="nav-link" href="../index.php">Accueil</a>
+                <div class="dropdown-content">
+                          <a href="#">Annuaire des anciens élèves</a>
+                          <a href="#">Forum de discussion</a>
+                          <a href="#">Oportunités d'emploi et de stage</a>
+                          <a href="#">Participation des évènements</a>
+                      </div>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="about.html">Formations</a>
+                  <div class="dropdown">
+                      <button class="nav-link dropbtn">Etudiant
+                      </button>
+                      <div class="dropdown-content">
+                          <a href="#">Profils des anciens élèves</a>
+                          <a href="#">Profils des étudiants actuels</a>
+                          <a href="#">Publication d'événements</a>
+                          <a href="#">Section d'offres</a>
+                      </div>
+                  </div>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="product.html">Evenements</a>
+                  <div class="dropdown">
+                      <button class="nav-link dropbtn">Alumni
+                      </button>
+                      <div class="dropdown-content">
+                          <a href="#">Profils des anciens élèves</a>
+                          <a href="#">Profils des étudiants actuels</a>
+                          <a href="#">Publication d'événements</a>
+                          <a href="#">Section d'offres</a>
+                      </div>
+                  </div>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="testimonial.html">Contacts</a>
+                  <div class="dropdown">
+                      <button class="nav-link dropbtn">Professeur
+                      </button>
+                      <div class="dropdown-content">
+                          <a href="#">Profils des anciens élèves</a>
+                          <a href="#">Profils des étudiants actuels</a>
+                          <a href="#">Publication d'événements</a>
+                          <a href="#">Section d'offres</a>
+                      </div>
+                  </div>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="contact.html">Forums</a>
+                  <div class="dropdown">
+                      <button class="nav-link dropbtn">Contact
+                      </button>
+                      <div class="dropdown-content">
+                          <a href="#">Profils des anciens élèves</a>
+                          <a href="#">Profils des étudiants actuels</a>
+                          <a href="#">Publication d'événements</a>
+                          <a href="#">Section d'offres</a>
+                      </div>
+                  </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../contact.php">Contact</a>
               </li>
             </ul>
             <div class="user_optio_box">

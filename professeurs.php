@@ -39,7 +39,7 @@
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html">
+          <a class="navbar-brand" href="../index.php">
             <span>
               <img src="images/RobertSchuman.webp" alt="" width="150" height="100" />
             </span>
@@ -51,20 +51,32 @@
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  ">
-              <li class="nav-item active">
-                <a class="nav-link" href="index.html">Acceuil<span class="sr-only">(current)</span></a>
+              <li class="nav-item">
+                <a class="nav-link" href="../index.php">Accueil</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="about.html">Formations</a>
+                <a class="nav-link" href="etudiant.php">Etudiant</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="product.html">Evenements</a>
+                <a class="nav-link" href="alumni.php">Alumni</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="testimonial.html">Contacts</a>
+                <a class="nav-link" href="entreprises.php">Entreprises</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="contact.html">Forums</a>
+                  <div class="dropdown">
+                      <button class="nav-link dropbtn">Professeur
+                      </button>
+                      <div class="dropdown-content">
+                          <a href="#">Profils des anciens élèves</a>
+                          <a href="#">Profils des étudiants actuels</a>
+                          <a href="#">Publication d'événements</a>
+                          <a href="#">Section d'offres</a>
+                      </div>
+                  </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../contact.php">Contact</a>
               </li>
             </ul>
             <div class="user_optio_box">
