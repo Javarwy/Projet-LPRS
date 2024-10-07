@@ -161,7 +161,7 @@ class Utilisateur {
 
     public function getInfo_sup()
     {
-        return $this->info_sup
+        return $this->info_sup;
     }
 
     public function setInfo_sup($info_sup)
@@ -171,7 +171,7 @@ class Utilisateur {
 
     public function getRole()
     {
-        return $this->role
+        return $this->role;
     }
 
     public function setRole ($role)
@@ -181,10 +181,10 @@ class Utilisateur {
 
     public function getActive()
     {
-        return $this->active
+        return $this->active;
     }
 
-    public function setRole ($active)
+    public function setActive ($active)
     {
         $this->active = $active;
     }
