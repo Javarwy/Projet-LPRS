@@ -1,7 +1,7 @@
 <?php
 include '../PHP/bdd/Bdd.php';
 $bdd = new Bdd;
-$req = $bdd->getBdd()->query('SELECT a.REF_UTILISATEUR as id, u.nom, u.prenom, u.email, e.nom as entreprise FROM utilisateur as u INNER JOIN alumni as a ON u.id_utilisateur = a.REF_UTILISATEUR INNER JOIN entreprise as e ON e.id_entreprise = a.REF_ENTREPRISE;');
+$req = $bdd->getBdd()->query('SELECT e.REF_UTILISATEUR, u.nom, u.prenom, e.annee_promo, e.nom_promo, e.cv, e.formation FROM utilisateur as u INNER JOIN etudiant as e ON u.id_utilisateur = e.REF_UTILISATEUR;');
 $res = $req->fetchAll();
 ?>
 <!DOCTYPE html>
@@ -145,33 +145,37 @@ $res = $req->fetchAll();
       <div class="row">
           <div style="text-align: center; margin: auto;">
               <br>
-              <h2 style="color: #19c880">Profils des anciens élèves</h2>
+              <h2 style="color: #19c880">Profils des étudiants actuels</h2>
               <br>
-              <h5>Annuaire des alumni</h5>
+              <h5>Annuaire des étudiants</h5>
               <table border="1px" style="text-align: center; margin:auto;">
                   <tr>
                       <th hidden="hidden">Id</th>
                       <th>Nom</th>
                       <th>Prénom</th>
-                      <th>Email</th>
-                      <th>Entreprise</th>
+                      <th>Année promo</th>
+                      <th>Nom promo</th>
+                      <th>CV</th>
+                      <th>Formation</th>
                   </tr>
                   <?php
                   if (empty($res)) {
                   ?>
                       <tr>
-                          <td colspan="5">Aucun alumni trouvé.</td>
+                          <td colspan="6">Aucun étudiant trouvé.</td>
                       </tr>
                   <?php
                   } else {
-                      foreach($res as $alumni){
+                      foreach($res as $etudiant){
                   ?>
                     <tr>
-                        <td hidden="hidden"><?php echo $alumni['id'] ?></td>
-                        <td><?php echo $alumni['nom'] ?></td>
-                        <td><?php echo $alumni['prenom'] ?></td>
-                        <td><?php echo $alumni['email'] ?></td>
-                        <td><?php echo $alumni['entreprise'] ?></td>
+                        <td hidden="hidden"><?php echo $etudiant['id'] ?></td>
+                        <td><?php echo $etudiant['nom'] ?></td>
+                        <td><?php echo $etudiant['prenom'] ?></td>
+                        <td><?php echo $etudiant['annee_promo'] ?></td>
+                        <td><?php echo $etudiant['nom_promo'] ?></td>
+                        <td><?php echo $etudiant['cv'] ?></td>
+                        <td><?php echo $etudiant['formation'] ?></td>
                     </tr>
                   <?php
                       }

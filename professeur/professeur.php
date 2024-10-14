@@ -111,7 +111,7 @@
                                 </a>
                                 <div class="dropdown-content">
                                     <a href="prof_profils_anciens_eleves.php">Profils des anciens élèves</a>
-                                    <a href="#">Profils des étudiants actuels</a>
+                                    <a href="prof_profils_etudiants_actuels.php">Profils des étudiants actuels</a>
                                     <a href="#">Publication d'événements</a>
                                     <a href="#">Section d'offres</a>
                                 </div>
@@ -153,7 +153,7 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="box ">
                         <div class="detail-box">
-                            <a href="#">
+                            <a href="prof_profils_etudiants_actuels.php">
                                 <h5>
                                     Profils des étudiants actuels
                                 </h5>
