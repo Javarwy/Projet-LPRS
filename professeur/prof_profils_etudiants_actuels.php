@@ -174,7 +174,12 @@ $res = $req->fetchAll();
                         <td><?php echo $etudiant['prenom'] ?></td>
                         <td><?php echo $etudiant['annee_promo'] ?></td>
                         <td><?php echo $etudiant['nom_promo'] ?></td>
-                        <td><?php echo $etudiant['cv'] ?></td>
+                        <td>
+                            <?php
+                            $pdfData = base64_encode($etudiant['cv']);
+                            echo '<embed src="data:application/pdf;base64,'.$pdfData.'"width="300" height="400" />'
+                            ?>
+                        </td>
                         <td><?php echo $etudiant['formation'] ?></td>
                     </tr>
                   <?php
