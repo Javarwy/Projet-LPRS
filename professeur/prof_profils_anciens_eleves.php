@@ -109,10 +109,12 @@ $res = $req->fetchAll();
               </li>
               <li class="nav-item">
                   <div class="dropdown">
-                      <button class="nav-link dropbtn">Professeur
-                      </button>
+                      <a href="professeur.php">
+                          <button class="nav-link dropbtn">Professeur
+                          </button>
+                      </a>
                       <div class="dropdown-content">
-                          <a href="#">Profils des anciens élèves</a>
+                          <a href="prof_profils_anciens_eleves.php">Profils des anciens élèves</a>
                           <a href="#">Profils des étudiants actuels</a>
                           <a href="#">Publication d'événements</a>
                           <a href="#">Section d'offres</a>
