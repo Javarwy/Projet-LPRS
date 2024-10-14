@@ -1,10 +1,11 @@
 <?php
-class Professeur {
+class Professeur extends Utilisateur {
     private $refUtilisateur;
     private $matiere;
     private $formation;
 
     public function __construct(array $donnee) {
+        parent::__construct($donnee);
         $this->hydrate($donnee);
     }
 
