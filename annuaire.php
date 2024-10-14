@@ -168,23 +168,25 @@
               <th>Supprimer</th>
           </tr>
           <?php
-          $reponse = bdd->query('SELECT * FROM entreprise ORDER BY ENT_Nom');
+          $reponse = bdd->query('SELECT u.nom, u.prenom, u.email, et.annee_promo, et.nom_promo, et.cv, et.formation, et.info_sup
+                                 FROM utilisateur AS u
+                                 INNER JOIN etudiant AS et ON u.id_utilisateur = et.REF_UTILISATEUR');
 
           while($donnees = $reponse->fetch())
           {?>
-              <tr>
-                  <td><?php echo $donnees['ENT_Nom'];?></td>
-                  <td><?php echo $donnees['ENT_Coordonnees'];?></td>
-                  <td><?php echo $donnees['ENT_Mail'];?></td>
-                  <td><?php echo $donnees['ENT_ADM_HSE'];?></td>
-                  <td><?php echo $donnees['ENT_Login'];?></td>
-                  <td><select><option value="<?php echo $donnees['ENT_Niveau'];?>"></option>
-                          <option value"<?php echo $donnees['ENT_Niveau'];?>"></option>
-                          <option value"<?php echo $donnees['ENT_Niveau'];?>"></option></select></td>
-                 <!-- <td><a href="modifier.php?ENT_ID= <?php echo $donnees['ENT_ID']; ?>">Modifier</a></td>
-                  <td><a href="supprimer.php?ENT_ID="<?php echo $donnees['ENT_ID']; ?>">Supprimer</a></td>-->
-              </tr>
-              <?php
+           <tr>
+              <td><?php echo $donnees['nom'];?></td>
+              <td><?php echo $donnees['prenom'];?></td>
+              <td><?php echo $donnees['email'];?></td>
+              <td><?php echo $donnees['annee_promo'];?></td>
+               <td><?php echo $donnees['nom_promo'];?></td>
+               <td><?php echo $donnees['cv'];?></td>
+               <td><?php echo $donnees['formation'];?></td>
+               <td><?php echo $donnees['info_sup'];?></td>
+
+             
+          </tr>
+          <?php
           }
           $reponse->closeCursor();
           ?>
