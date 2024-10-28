@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Projet BTS" company="" webLink="http://" view-date="2024-09-01" view-index="0" gantt-divider-location="610" resource-divider-location="300" version="3.3.3309" locale="fr_FR">
+    <description/>
+    <view zooming-state="default:10" id="gantt-chart">
+        <field id="tpd3" name="Nom" width="337" order="0"/>
+        <field id="tpd4" name="Date de début" width="127" order="1"/>
+        <field id="tpd5" name="Date de fin" width="130" order="2"/>
+        <field id="tpd15" name="Notes" width="20" order="3"/>
+        <option id="filter.completedTasks" value="false"/>
+        <option id="filter.dueTodayTasks" value="false"/>
+        <option id="filter.overdueTasks" value="false"/>
+        <option id="filter.inProgressTodayTasks" value="false"/>
+        <timeline><![CDATA[17]]></timeline>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Nom" width="210" order="0"/>
+        <field id="1" name="Rôle par défaut" width="86" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="1" wed="1" thu="1" fri="1" sat="0"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="0" uid="10fa2ca9d5e84cdcae868d5e8e70fd76" name="Analyse des besoins" meeting="false" start="2024-09-09" duration="3" complete="0" expand="true"/>
+        <task id="1" uid="ff52a6a392a04ce690750f4ad9151228" name="Conception BDD" meeting="false" start="2024-09-09" duration="3" complete="0" expand="true"/>
+        <task id="2" uid="34194d1bf2dc462492b1326049cebe06" name="Conception architecturale" meeting="false" start="2024-09-23" duration="1" complete="0" expand="true">
+            <task id="3" uid="2cdbd02f13004f4d919766f84a3e0c16" name="Hébergement" meeting="false" start="2024-09-23" duration="1" complete="0" expand="true"/>
+            <task id="4" uid="6d6f8eb958804570a7997d4a6f380279" name="Choix de la technologie" meeting="false" start="2024-09-23" duration="1" complete="0" expand="true"/>
+            <task id="5" uid="389a266c75f64b0abfde800e2befe52c" name="Choix du style" meeting="false" start="2024-09-23" duration="1" complete="0" expand="true"/>
+        </task>
+        <task id="6" uid="f448a381febd483e9bfa8e4fba2a0545" name="Dev" meeting="false" start="2024-09-30" duration="13" complete="0" expand="true">
+            <task id="7" uid="81325ba4222b4a63923c9cba7f3633e6" name="Section Accueil" meeting="false" start="2024-09-30" duration="13" complete="0" expand="true"/>
+            <task id="8" uid="44ad25201346458882daf3c0327618fd" name="Section Etudiant" meeting="false" start="2024-09-30" duration="13" complete="0" expand="true"/>
+            <task id="15" uid="d6d7c207ccdb41e0a423bbff565949f5" name="Section Alumni" meeting="false" start="2024-09-30" duration="13" complete="0" expand="true"/>
+            <task id="16" uid="ad85053f148b4363bb92d4512af9d15e" name="Section Professeur" meeting="false" start="2024-09-30" duration="13" complete="0" expand="true"/>
+            <task id="17" uid="16c9e1286e2b4a11aa1b1983cf9faf58" name="Section Contact" meeting="false" start="2024-09-30" duration="13" complete="0" expand="true"/>
+            <task id="18" uid="91418ad696864290845367ded509958a" name="Section Entreprise" meeting="false" start="2024-09-30" duration="13" complete="0" expand="true"/>
+        </task>
+        <task id="9" uid="fb196e5055e145bfa3ecab67d67b3e06" name="Tests" meeting="false" start="2024-12-02" duration="7" complete="0" expand="true">
+            <task id="10" uid="728080bc2266498fbdd61186f156230c" name="Test intégration" meeting="false" start="2024-12-02" duration="1" complete="0" expand="true"/>
+            <task id="11" uid="e10a5a17afc34093aba4fb7eb1fd2b5a" name="Tests globaux + correction de bugs" meeting="false" start="2024-12-16" duration="3" complete="0" expand="true"/>
+        </task>
+        <task id="12" uid="7f03d492bc1c4ef7ac7209ca6fcb67ba" name="Déploiement" meeting="false" start="2024-12-30" duration="3" complete="0" expand="true">
+            <task id="13" uid="2e78630ad307466493d0988a020244fd" name="Déploiement serveur" meeting="false" start="2024-12-30" duration="1" complete="0" expand="true"/>
+            <task id="14" uid="d50df9398147489d8b7f3db27af5bdcc" name="Déploiement site" meeting="false" start="2025-01-06" duration="1" complete="0" expand="true"/>
+        </task>
+    </tasks>
+    <resources>
+        <resource id="0" name="Aurélien" function="Default:0" contacts="" phone=""/>
+        <resource id="1" name="Raphaël C." function="Default:0" contacts="" phone=""/>
+        <resource id="2" name="Raphaël M." function="Default:0" contacts="" phone=""/>
+        <resource id="3" name="Yohan" function="Default:0" contacts="" phone=""/>
+    </resources>
+    <allocations>
+        <allocation task-id="0" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="1" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="3" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="8" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="15" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="11" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="13" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="14" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="1" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="3" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="4" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="5" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="7" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="15" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="10" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="11" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="13" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="14" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="0" resource-id="2" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="1" resource-id="2" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="8" resource-id="2" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="15" resource-id="2" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="10" resource-id="2" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="11" resource-id="2" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="14" resource-id="2" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="0" resource-id="3" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="1" resource-id="3" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="5" resource-id="3" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="7" resource-id="3" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="15" resource-id="3" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="11" resource-id="3" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="13" resource-id="3" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="14" resource-id="3" function="Default:0" responsible="true" load="100.0"/>
+    </allocations>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+</project>

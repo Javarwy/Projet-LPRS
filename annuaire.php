@@ -1,3 +1,12 @@
+<?php
+include 'PHP/bdd/Bdd.php';
+$bdd = new Bdd;
+$reponse = $bdd->getBdd()->query('SELECT etudiant.REF_UTILISATEUR as id_utilisateur, utilisateur.nom, utilisateur.prenom, utilisateur.email, utilisateur.info_sup, etudiant.annee_promo, etudiant.nom_promo, etudiant.cv, etudiant.formation
+                                 FROM utilisateur
+                                 INNER JOIN etudiant ON utilisateur.id_utilisateur = etudiant.REF_UTILISATEUR');
+
+$resultat = $reponse ->fetchAll();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -158,22 +167,19 @@
     <!-- slider section -->
       <table>
           <tr>
-              <th>Nom de la Socièté</th>
-              <th>Coordonnées</th>
+              <th>Nom</th>
+              <th>Prenom</th>
               <th>Email</th>
-              <th>Responsable HSE</th>
-              <th>Login</th>
-              <th>Niveau d'Accès</th>
-              <th>Modifier</th>
-              <th>Supprimer</th>
+              <th>Année de promo</th>
+              <th>Nom de la promo</th>
+              <th>CV</th>
+              <th>Formation</th>
+              <th>info_supplémentaire</th>
           </tr>
           <?php
-          $reponse = bdd->query('SELECT u.nom, u.prenom, u.email, et.annee_promo, et.nom_promo, et.cv, et.formation, et.info_sup
-                                 FROM utilisateur AS u
-                                 INNER JOIN etudiant AS et ON u.id_utilisateur = et.REF_UTILISATEUR');
+          foreach($resultat as $donnees){
+          ?>
 
-          while($donnees = $reponse->fetch())
-          {?>
            <tr>
               <td><?php echo $donnees['nom'];?></td>
               <td><?php echo $donnees['prenom'];?></td>
@@ -184,12 +190,13 @@
                <td><?php echo $donnees['formation'];?></td>
                <td><?php echo $donnees['info_sup'];?></td>
 
-             
+
           </tr>
           <?php
           }
-          $reponse->closeCursor();
           ?>
+
+
       </table>
   <!-- End Google Map -->
 
