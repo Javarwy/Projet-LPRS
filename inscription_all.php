@@ -176,7 +176,6 @@
      <h2>Veuillez sélectionner votre type de compte (Une vérification vous sera demandée)</h2>
        <br>
      <br>
-
   <div>
   <h3><button class="nav-link dropbtn">El
                       </button>

@@ -116,7 +116,7 @@ $res = $req->fetchAll();
                       <div class="dropdown-content">
                           <a href="prof_profils_anciens_eleves.php">Profils des anciens élèves</a>
                           <a href="prof_profils_etudiants_actuels.php">Profils des étudiants actuels</a>
-                          <a href="#">Publication d'événements</a>
+                          <a href="prof_publication_evenements.php">Publication d'événements</a>
                           <a href="#">Section d'offres</a>
                       </div>
                   </div>

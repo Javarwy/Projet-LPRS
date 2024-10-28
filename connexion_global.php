@@ -177,23 +177,9 @@
        <br>
      <br>
   <div>
-  <form action="PHP\controleur\TraitementUtilisateur.php" method="get" class="form_inscription">
+  <form action="PHP\controleur\TraitementUtilisateur.php" method="get" class="form_connexion">
   <h3>
-   Nom :</h3>
-   <input type="text" id="name" name="nom" required minlength="3" maxlength="25" size="10" required />
-   </div>
    <div>
-   <br>
-   <br>
-  <h3>
-  <div>
-  <h3>
-   Prénom :</h3>
-   <input type="text" id="surname" name="prenom" required minlength="3" maxlength="25" size="10" required />
-   </div>
-   <div>
-   <br>
-   <br>
   <h3>
    Email :</h3>
    <input type="text" id="email" name="email" required minlength="3" maxlength="25" size="10" required />
@@ -205,40 +191,6 @@
    Mot de passe :</h3>
    <input type="password" id="pswd" name="mdp" required minlength="3" maxlength="25" size="10" required />
    </div>
-   <div>
-    <br>
-    <br>
-    <h3>
-   Confirmation du Mot de passe :</h3>
-   <input type="password" id="pswd_sure" name="mdp" required minlength="3" maxlength="25" size="10" required />
-   </div>
-   <br>
-   <br>
-   <div>
-   <h3>
-   Information supplémentaires : </h3>
-   <input type="text" id="sup_info" name="info_sup " required minlength="3" maxlength="60" size="50" />
-   </div>
-   <div>
-    <br>
-    <br>
-    <br>
-    <br>
-   <h5>
-  (Une vérification manuelle sera effectuée.)</h5>
-  </div>
-  <div>
-    <br>
-    <br>
-    <h3>
-   Avec quel fonction souhaitez vous vous inscrire ? :</h3>
-   <select name="role" id="pet-select">
-  <option value="">--Choisir--</option>
-  <option value="eleve">En tant qu'élève</option>
-  <option value="prof">En tant que professeur</option>
-  <option value="alumni">En tant qu'ancien élève (ALUMNI)</option>
-  <option value="entreprise">En tant qu'entreprise</option>
-</select>
    </div>
    <div>
     <br>

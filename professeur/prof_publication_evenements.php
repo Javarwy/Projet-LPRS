@@ -1,4 +1,8 @@
 <?php
+include '../PHP/bdd/Bdd.php';
+$bdd = new Bdd;
+$req = $bdd->getBdd()->query('SELECT e.id_evenement, e.nom_evenement, e.type, e.description_evenement, e.adresse, e.nb_de_places-COUNT(p.REF_UTILISATEUR) as "nb_de_places", u.nom, u.prenom, u.id_utilisateur FROM creer as c INNER JOIN utilisateur as u ON u.id_utilisateur = c.REF_UTILISATEUR INNER JOIN evenement as e ON e.id_evenement = c.REF_EVENEMENT LEFT JOIN participer as p ON p.REF_EVENEMENT = e.id_evenement GROUP BY c.REF_UTILISATEUR ORDER BY c.REF_EVENEMENT;');
+$res = $req->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -139,49 +143,53 @@
     <section class="service_section">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-6 col-lg-3">
-                    <div class="box ">
-                        <div class="detail-box">
-                            <a href="prof_profils_anciens_eleves.php">
-                                <h5>
-                                    Profils des anciens élèves
-                                </h5>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="box ">
-                        <div class="detail-box">
-                            <a href="prof_profils_etudiants_actuels.php">
-                                <h5>
-                                    Profils des étudiants actuels
-                                </h5>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="box ">
-                        <div class="detail-box">
-                            <a href="prof_publication_evenements.php">
-                                <h5>
-                                    Publication d'événements
-                                </h5>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="box ">
-                        <div class="detail-box">
-                            <a href="#">
-                                <h5>
-                                    Accès à la section des offres
-                                </h5>
-                            </a>
-                        </div>
-                    </div>
+                <div style="text-align: center; margin: auto;">
+                    <br>
+                    <h2 style="color: #19c880">Publication d'événements</h2>
+                    <br>
+                    <h5>Liste des événéments</h5>
+                    <small>Vous pouvez modifier ou supprimer uniquement les événements que vous avez créés !</small>
+                    <br>
+                    <table border="1px" style="text-align: center; margin:auto;">
+                        <tr>
+                            <th hidden="hidden">Id</th>
+                            <th>Nom</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Adresse</th>
+                            <th>Nombre de places restantes</th>
+                            <th>Organisateur(s)</th>
+                        </tr>
+                        <tr>
+                            <?php
+                            if (empty($res)) {
+                            ?>
+                        <tr>
+                            <td colspan="5">Aucun événement trouvé.</td>
+                        </tr>
+                        <?php
+                        } else {
+                            foreach($res as $evenement){
+                                ?>
+                                <tr>
+                                    <td hidden="hidden"><?php echo $evenement['id'] ?></td>
+                                    <td><?php echo $evenement['nom_evenement'] ?></td>
+                                    <td><?php echo $evenement['type'] ?></td>
+                                    <td><?php echo $evenement['description_evenement'] ?></td>
+                                    <td><?php echo $evenement['adresse'] ?></td>
+                                    <td><?php echo $evenement['nb_de_places'] ?></td>
+                                    <td><?php echo $evenement['prenom']." ".$evenement['nom'] ?></td>
+                                </tr>
+                                <?php
+                            }
+                        }
+                        ?>
+                    </table>
+                    <br>
+                    <a href="#">
+                        <button type="button">Créer un événement</button>
+                    </a>
+                    <br>
                 </div>
             </div>
         </div>
