@@ -13,7 +13,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>Inscription étudiants - Lycée Privé Robert Schuman</title>
+  <title>Inscription Alumnis - Lycée Privé Robert Schuman</title>
 
 
   <!-- bootstrap core css -->

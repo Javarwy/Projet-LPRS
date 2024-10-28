@@ -173,48 +173,71 @@
      <center>
      <b><h1>Inscription</h1></b>
      <br>
-     <h5>Vous vous apprêtez à vous enregistrer en tant qu'eleve. Veuillez nous fournir les informations suivantes :</h5>
+     <h5>Veuillez nous donner quelques informations suplémentaires : </h5>
        <br>
      <br>
 
   <div>
   <h3>
-   Nom de promo :</h3>
-   <input type="text" id="name_promo" name="name_promo" required minlength="3" maxlength="25" size="10" />
+   Nom :</h3>
+   <input type="text" id="name" name="name" required minlength="3" maxlength="25" size="10" required />
    </div>
    <div>
    <br>
    <br>
   <h3>
-   Année de promo :</h3>
-   <input type="date" id="date_promo" name="date_promo" required minlength="3" maxlength="25" size="10" />
+  <div>
+  <h3>
+   Prénom :</h3>
+   <input type="text" id="surname" name="surname" required minlength="3" maxlength="25" size="10" required />
+   </div>
+   <div>
+   <br>
+   <br>
+  <h3>
+   Email :</h3>
+   <input type="text" id="email" name="email" required minlength="3" maxlength="25" size="10" required />
    </div>
    <div>
     <br>
     <br>
     <h3>
-   CV :</h3>
-   <input type="file" id="cv" name="cv" accept="image/png, image/jpeg, image/jpg, application/pdf" />
+   Mot de passe :</h3>
+   <input type="password" id="pswd" name="pswd" required minlength="3" maxlength="25" size="10" required />
    </div>
    <div>
     <br>
     <br>
+    <h3>
+   Confirmation du Mot de passe :</h3>
+   <input type="password" id="pswd_sure" name="pswd_sure" required minlength="3" maxlength="25" size="10" required />
+   </div>
+   <br>
+   <br>
+   <div>
+   <h3>
+   Information supplémentaires : </h3>
+   <input type="text" id="sup_info" name="sup_info" required minlength="3" maxlength="60" size="50" />
+   </div>
+   <div>
+    <br>
+    <br>
+    <br>
+    <br>
    <h5>
-  (Une véfication manuelle sera effectuée.)</h5>
+  (Une vérification manuelle sera effectuée.)</h5>
   </div>
   <div>
     <br>
     <br>
     <h3>
-   Formation :</h3>
-   <select name="pets" id="pet-select">
-  <option value="">--Choisir une formation--</option>
-  <option value="dog">STI2D</option>
-  <option value="cat">BAC Pro</option>
-  <option value="hamster">BTS SIO</option>
-  <option value="parrot">BTS CPRP</option>
-  <option value="spider">CQPM</option>
-  <option value="goldfish">BTS MS</option>
+   Avec quel fonction souhaitez vous vous inscrire ? :</h3>
+   <select name="fonction" id="pet-select">
+  <option value="">--Choisir--</option>
+  <option value="eleve">En tant qu'élève</option>
+  <option value="prof">En tant que professeur</option>
+  <option value="alumni">En tant qu'ancien élève (ALUMNI)</option>
+  <option value="entreprise">En tant qu'entreprise</option>
 </select>
    </div>
    <div>

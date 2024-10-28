@@ -124,7 +124,7 @@
               </li>
               <li class="nav-item">
                   <div class="dropdown">
-                      <button class="nav-link dropbtn">Professeur
+                      <button class="nav-link dropbtn">Entreprise
                       </button>
                       <div class="dropdown-content">
                           <a href="#">Profils des anciens élèves</a>
@@ -136,7 +136,7 @@
               </li>
               <li class="nav-item">
                   <div class="dropdown">
-                      <button class="nav-link dropbtn">Entreprise
+                      <button class="nav-link dropbtn">Professeur
                       </button>
                       <div class="dropdown-content">
                           <a href="#">Profils des anciens élèves</a>

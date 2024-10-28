@@ -13,7 +13,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>Inscription étudiants - Lycée Privé Robert Schuman</title>
+  <title>Inscription Entreprises - Lycée Privé Robert Schuman</title>
 
 
   <!-- bootstrap core css -->
@@ -173,55 +173,20 @@
      <center>
      <b><h1>Inscription</h1></b>
      <br>
-     <h5>Vous vous apprêtez à vous enregistrer en tant qu'eleve. Veuillez nous fournir les informations suivantes :</h5>
+     <h2>Vous vous apprêtez à vous enregistrer en tant qu'entreprise. Veuillez nous fournir les informations suivantes :</h2>
        <br>
      <br>
 
   <div>
   <h3>
-   Nom de promo :</h3>
-   <input type="text" id="name_promo" name="name_promo" required minlength="3" maxlength="25" size="10" />
-   </div>
-   <div>
-   <br>
-   <br>
-  <h3>
-   Année de promo :</h3>
-   <input type="date" id="date_promo" name="date_promo" required minlength="3" maxlength="25" size="10" />
-   </div>
-   <div>
-    <br>
-    <br>
-    <h3>
-   CV :</h3>
-   <input type="file" id="cv" name="cv" accept="image/png, image/jpeg, image/jpg, application/pdf" />
+   Nom de l'entreprise :</h3>
+   <input type="text" id="name" name="name" required minlength="3" maxlength="25" size="10" />
    </div>
    <div>
     <br>
     <br>
    <h5>
-  (Une véfication manuelle sera effectuée.)</h5>
-  </div>
-  <div>
-    <br>
-    <br>
-    <h3>
-   Formation :</h3>
-   <select name="pets" id="pet-select">
-  <option value="">--Choisir une formation--</option>
-  <option value="dog">STI2D</option>
-  <option value="cat">BAC Pro</option>
-  <option value="hamster">BTS SIO</option>
-  <option value="parrot">BTS CPRP</option>
-  <option value="spider">CQPM</option>
-  <option value="goldfish">BTS MS</option>
-</select>
-   </div>
-   <div>
-    <br>
-    <br>
-   <h5>
-  (Une véfication manuelle sera effectuée.)</h5>
+  (Une véfication avec le chef d'établisement sera nécessaire concernant une demande telle.)</h5>
   </div>
 
   <div>

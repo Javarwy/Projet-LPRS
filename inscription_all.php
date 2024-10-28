@@ -13,7 +13,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>Profil Des Entreprises - Lycée Privé Robert Schuman</title>
+  <title>Inscription - Lycée Privé Robert Schuman</title>
 
 
   <!-- bootstrap core css -->
