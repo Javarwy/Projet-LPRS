@@ -65,7 +65,7 @@ class Utilisateur {
         if (is_array($res)) {
             header("Location: ../../index.php?erreur=0");
         } else {
-            $req = $bdd->getBdd()->prepare('INSERT INTO `utilisateur`(`nom`,`prenom`,`email`,`mdp`,`info_sup`,`role`,`active`) VALUES (:nom,:prenom,:email,:mdp,:info_sup,:role,:active)');
+            $req = $bdd->getBdd()->prepare('INSERT INTO `utilisateur`(`nom`,`prenom`,`email`,`mdp`,`info_sup`,`role`,`active`) VALUES (:nom,:prenom,:email,:mdp,:info_sup,:role,0)');
             $req->execute(array(
                 'nom' => $this->getNom(),
                 'prenom' => $this->getPrenom(),
@@ -73,7 +73,6 @@ class Utilisateur {
                 'mdp' => $this->getMdp(),
                 'info_sup' => $this->getInfo_sup(),
                 'role' => $this->getRole(),
-                'active' => $this->getActive()
             ));
             header("Location: ../../index.php");
         }
