@@ -1,5 +1,8 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
   <!-- Basic -->
@@ -136,12 +139,14 @@
               </li>
               <li class="nav-item">
                   <div class="dropdown">
-                      <button class="nav-link dropbtn">Professeur
-                      </button>
+                      <a href="professeur/professeur.php">
+                          <button class="nav-link dropbtn">Professeur
+                          </button>
+                      </a>
                       <div class="dropdown-content">
-                          <a href="#">Profils des anciens élèves</a>
-                          <a href="#">Profils des étudiants actuels</a>
-                          <a href="#">Publication d'événements</a>
+                          <a href="professeur/prof_profils_anciens_eleves.php">Profils des anciens élèves</a>
+                          <a href="professeur/prof_profils_etudiants_actuels.php">Profils des étudiants actuels</a>
+                          <a href="professeur/prof_publication_evenements.php">Publication d'événements</a>
                           <a href="#">Section d'offres</a>
                       </div>
                   </div>
