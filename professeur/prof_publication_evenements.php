@@ -1,7 +1,8 @@
 <?php
+session_start();
 include '../PHP/bdd/Bdd.php';
 $bdd = new Bdd;
-$req = $bdd->getBdd()->query('SELECT e.id_evenement, e.nom_evenement, e.type, e.description_evenement, e.adresse, e.nb_de_places-COUNT(p.REF_UTILISATEUR) as "nb_de_places", u.nom, u.prenom, u.id_utilisateur FROM creer as c INNER JOIN utilisateur as u ON u.id_utilisateur = c.REF_UTILISATEUR INNER JOIN evenement as e ON e.id_evenement = c.REF_EVENEMENT LEFT JOIN participer as p ON p.REF_EVENEMENT = e.id_evenement GROUP BY c.REF_UTILISATEUR ORDER BY c.REF_EVENEMENT;');
+$req = $bdd->getBdd()->query('SELECT e.id_evenement, e.nom_evenement, e.type, e.description_evenement, e.adresse, e.nb_de_places-COUNT(p.REF_UTILISATEUR) as "nb_de_places", e.date_evenement, u.nom, u.prenom, u.id_utilisateur FROM creer as c INNER JOIN utilisateur as u ON u.id_utilisateur = c.REF_UTILISATEUR INNER JOIN evenement as e ON e.id_evenement = c.REF_EVENEMENT LEFT JOIN participer as p ON p.REF_EVENEMENT = e.id_evenement WHERE e.verification = 1 GROUP BY c.REF_UTILISATEUR ORDER BY c.REF_EVENEMENT;');
 $res = $req->fetchAll();
 ?>
 <!DOCTYPE html>
@@ -145,8 +146,21 @@ $res = $req->fetchAll();
             <div class="row">
                 <div style="text-align: center; margin: auto;">
                     <br>
+                    <?php
+                    if (isset($_GET['ok'])){
+                        if ($_GET['ok'] == 1){
+                            ?>
+                            <h7 style="color: blue">Votre événement a bien été créé. Il est en cours de validation par un gestionnaire et apparaîtra après celle-ci.</h7><br><br>
+                            <?php
+                        }
+                    }
+                    ?>
                     <h2 style="color: #19c880">Publication d'événements</h2>
                     <br>
+                    <a href="prof_creer_evenement.php">
+                        <button type="button">Créer un événement</button>
+                    </a>
+                    <br><br>
                     <h5>Liste des événéments</h5>
                     <small>Vous pouvez modifier ou supprimer uniquement les événements que vous avez créés !</small>
                     <br>
@@ -156,6 +170,7 @@ $res = $req->fetchAll();
                             <th>Nom</th>
                             <th>Type</th>
                             <th>Description</th>
+                            <th>Date et heure</th>
                             <th>Adresse</th>
                             <th>Nombre de places restantes</th>
                             <th>Organisateur(s)</th>
@@ -165,7 +180,7 @@ $res = $req->fetchAll();
                             if (empty($res)) {
                             ?>
                         <tr>
-                            <td colspan="5">Aucun événement trouvé.</td>
+                            <td colspan="10">Aucun événement trouvé.</td>
                         </tr>
                         <?php
                         } else {
@@ -176,6 +191,13 @@ $res = $req->fetchAll();
                                     <td><?php echo $evenement['nom_evenement'] ?></td>
                                     <td><?php echo $evenement['type'] ?></td>
                                     <td><?php echo $evenement['description_evenement'] ?></td>
+                                    <td>
+                                        <?php
+                                            $date = new DateTime($evenement['date_evenement']);
+                                            $dateString = date_format($date,'d/m/Y H:i');
+                                            echo $dateString;
+                                        ?>
+                                    </td>
                                     <td><?php echo $evenement['adresse'] ?></td>
                                     <td><?php echo $evenement['nb_de_places'] ?></td>
                                     <td><?php echo $evenement['prenom']." ".$evenement['nom'] ?></td>
@@ -185,10 +207,6 @@ $res = $req->fetchAll();
                         }
                         ?>
                     </table>
-                    <br>
-                    <a href="#">
-                        <button type="button">Créer un événement</button>
-                    </a>
                     <br>
                 </div>
             </div>

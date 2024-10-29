@@ -232,7 +232,7 @@
     <br>
     <h3>
    Avec quel fonction souhaitez vous vous inscrire ? :</h3>
-   <select name="role" id="pet-select">
+   <select name="role" id="choix-role">
   <option value="">--Choisir--</option>
   <option value="eleve">En tant qu'élève</option>
   <option value="prof">En tant que professeur</option>
@@ -248,7 +248,7 @@
   </div>
 
   <div>
-  <input type="submit" value="inscription">
+  <input type="submit" value="inscription" name="inscription">
   </div>
   </form>
 
