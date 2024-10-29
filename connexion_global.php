@@ -200,7 +200,7 @@
   </div>
 
   <div>
-  <input type="submit" value="connexion">
+  <input type="submit" value="connexion" name="connexion">
   </div>
   </form>
 
