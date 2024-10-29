@@ -50,9 +50,9 @@ class Utilisateur {
             $_SESSION["info_sup"] = $res['info_sup'];
             $_SESSION["role"] = $res['role'];
             $_SESSION["active"] = $res['active'];
-            header("Location: ../../accueil.php");
+            header("Location: ../../index.php");
         } else {
-            header("Location: ../../connexion.html");
+            header("Location: ../../index.php");
         }
     }
     public function inscription(){
@@ -63,7 +63,7 @@ class Utilisateur {
         ));
         $res = $req->fetch();
         if (is_array($res)) {
-            header("Location: ../../inscription.html?erreur=0");
+            header("Location: ../../index.php?erreur=0");
         } else {
             $req = $bdd->getBdd()->prepare('INSERT INTO `utilisateur`(`nom`,`prenom`,`email`,`mdp`,`info_sup`,`role`,`active`) VALUES (:nom,:prenom,:email,:mdp,:info_sup,:role,:active)');
             $req->execute(array(
@@ -75,7 +75,7 @@ class Utilisateur {
                 'role' => $this->getRole(),
                 'active' => $this->getActive()
             ));
-            header("Location: ../../connexion.html");
+            header("Location: ../../index.php");
         }
     }
 
@@ -101,10 +101,10 @@ class Utilisateur {
             $_SESSION["info_sup"] = $this->getInfo_sup();;
             $_SESSION["role"] = $this->getRole();
             $_SESSION["active"] = $this->getActive();
-            header("Location: ../../mon_compte.php?success");
+            header("Location: ../../profil.php?success");
         }
         else{
-            header("Location: ../../infos_compte.php?id_utilisateur=".$this->getIdUtilisateur()."&erreur");
+            header("Location: ../../profil.php?id_utilisateur=".$this->getIdUtilisateur()."&erreur");
         }
     }
 

@@ -13,7 +13,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>Inscription étudiants - Lycée Privé Robert Schuman</title>
+  <title>Connexion - Lycée Privé Robert Schuman</title>
 
 
   <!-- bootstrap core css -->
@@ -94,7 +94,7 @@
           </button>
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav  ">
+            <ul class="navbar-nav">
               <li class="nav-item">
                 <a class="nav-link" href="../index.php">Accueil</a>
                 <div class="dropdown-content">
@@ -177,7 +177,7 @@
        <br>
      <br>
   <div>
-  <form action="PHP\controleur\TraitementUtilisateur.php" method="get" class="form_connexion">
+  <form action="PHP\controleur\TraitementUtilisateur.php" method="post" class="form_connexion">
   <h3>
    <div>
   <h3>
@@ -200,9 +200,7 @@
   </div>
 
   <div>
-  <h3><button class="nav-link dropbtn">El
-                      </button>
-                          <a href="#">Inscription</a></h3>
+  <input type="submit" value="connexion">
   </div>
   </form>
 

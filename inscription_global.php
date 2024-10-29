@@ -13,7 +13,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>Inscription étudiants - Lycée Privé Robert Schuman</title>
+  <title>Inscription - Lycée Privé Robert Schuman</title>
 
 
   <!-- bootstrap core css -->
@@ -177,7 +177,7 @@
        <br>
      <br>
   <div>
-  <form action="PHP\controleur\TraitementUtilisateur.php" method="get" class="form_inscription">
+  <form action="PHP\controleur\TraitementUtilisateur.php" method="post" class="form_inscription">
   <h3>
    Nom :</h3>
    <input type="text" id="name" name="nom" required minlength="3" maxlength="25" size="10" required />
@@ -244,13 +244,11 @@
     <br>
     <br>
    <h5>
-  (Une véfication manuelle sera effectuée.)</h5>
+  (Une vérification manuelle sera effectuée.)</h5>
   </div>
 
   <div>
-  <h3><button class="nav-link dropbtn">El
-                      </button>
-                          <a href="#">Inscription</a></h3>
+  <input type="submit" value="inscription">
   </div>
   </form>
 
