@@ -196,6 +196,8 @@
                 }
                 ?>
             </table>
+            <a href="modification.php"><button>Modifier mes informations de compte</button></a>
+            <a href="vols.php"><button type="button">Déconnexion</button></a>
         </div>
      <br>
   <div>

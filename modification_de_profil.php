@@ -171,9 +171,9 @@
     <!-- end header section -->
     <br>
      <center>
-     <b><h1>Inscription</h1></b>
+     <b><h1>Modification</h1></b>
      <br>
-     <h5>Veuillez nous donner quelques informations suplémentaires : </h5>
+     <h5>Modification des informations : </h5>
        <br>
      <br>
   <div>
@@ -225,20 +225,11 @@
     <br>
     <br>
    <h5>
-  (Une vérification manuelle sera effectuée.)</h5>
   </div>
   <div>
     <br>
     <br>
     <h3>
-   Avec quel fonction souhaitez vous vous inscrire ? :</h3>
-   <select name="role" id="choix-role">
-  <option value="">--Choisir--</option>
-  <option value="eleve">En tant qu'élève</option>
-  <option value="prof">En tant que professeur</option>
-  <option value="alumni">En tant qu'ancien élève (ALUMNI)</option>
-  <option value="entreprise">En tant qu'entreprise</option>
-</select>
    </div>
    <div>
     <br>
@@ -248,7 +239,7 @@
   </div>
 
   <div>
-  <input type="submit" value="S'inscrire" name="inscription">
+  <input type="submit" value="Modifier" name = "modification">
   </div>
   </form>
 
