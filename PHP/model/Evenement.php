@@ -49,6 +49,45 @@ class Evenement {
         }
     }
 
+    public function modifierEvenement(Evenement $evenement) : bool{
+        $bdd = new Bdd();
+        $verif = $this->getEvenementById($evenement->idEvenement);
+        foreach($verif as $element){
+            $old = new Evenement([
+                'nomEvenement' => $element['nom_evenement'],
+                'type' => $element['type'],
+                'descriptionEvenement' => $element['description_evenement'],
+                'adresse' => $element['adresse'],
+                'nbDePlaces' => $element['nb_de_places'],
+                'dateEvenement' => $element['date_evenement']
+            ]);
+        }
+        $req = $bdd->getBdd()->prepare('UPDATE evenement SET nom_evenement = :nom_evenement, type = :type, description_evenement = :description_evenement, adresse = :adresse, nb_de_places = :nb_de_places, date_evenement = :date_evenement, verification = 0 WHERE id_evenement = :id_evenement');
+        $req->execute(array(
+            'nom_evenement'=>$evenement->nomEvenement,
+            'type'=>$evenement->type,
+            'description_evenement'=>$evenement->descriptionEvenement,
+            'adresse'=>$evenement->adresse,
+            'nb_de_places'=>$evenement->nbDePlaces,
+            'date_evenement'=>$evenement->dateEvenement,
+            'id_evenement'=>$evenement->idEvenement
+        ));
+        if ($evenement === $old){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public function getEvenementById($idEvenement) : array {
+        $bdd = new Bdd();
+        $req = $bdd->getBdd()->prepare('SELECT * FROM evenement WHERE id_evenement = :id_evenement');
+        $req->execute(array(
+            'id_evenement'=>$idEvenement
+        ));
+        return $req->fetchAll();
+    }
+
     public function getEvenementByName($nomEvenement) : array{
         $bdd = new Bdd();
         $req = $bdd->getBdd()->prepare('SELECT * FROM evenement WHERE nom_evenement = :nom_evenement');

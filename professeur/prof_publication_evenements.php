@@ -152,6 +152,10 @@ $res = $req->fetchAll();
                             ?>
                             <h7 style="color: blue">Votre événement a bien été créé. Il est en cours de validation par un gestionnaire et apparaîtra après celle-ci.</h7><br><br>
                             <?php
+                        } else if ($_GET['ok'] == 2){
+                            ?>
+                            <h7 style="color: blue">Votre événement a bien été modifié. Il est en cours de validation par un gestionnaire et apparaîtra après celle-ci.</h7><br><br>
+                            <?php
                         }
                     }
                     if (isset($_SESSION['id']) && $_SESSION['role'] == "professeur") {
@@ -205,14 +209,19 @@ $res = $req->fetchAll();
                                     if ($evenement['id_utilisateur'] == $_SESSION['id']){
                                     ?>
                                         <td>
-                                            <form method="post" action="#">
+                                            <form method="post" action="prof_modifier_evenement.php">
                                                 <input type="hidden" name="id_evenement" value="<?php echo $evenement['id_evenement'] ?>">
+                                                <input type="hidden" name="nom_evenement" value="<?php echo $evenement['nom_evenement'] ?>">
+                                                <input type="hidden" name="type" value="<?php echo $evenement['type'] ?>">
+                                                <input type="hidden" name="description_evenement" value="<?php echo $evenement['description_evenement'] ?>">
+                                                <input type="hidden" name="adresse" value="<?php echo $evenement['adresse'] ?>">
+                                                <input type="hidden" name="nb_de_places" value="<?php echo $evenement['nb_de_places'] ?>">
+                                                <input type="hidden" name="date_evenement" value="<?php echo $evenement['date_evenement'] ?>">
                                                 <button type="submit">Modifier</button>
                                             </form>
                                         </td>
                                         <td>
                                             <form method="post" action="#">
-                                                <input type="hidden" name="id_evenement" value="<?php echo $evenement['id_evenement'] ?>">
                                                 <button type="submit">Supprimer</button>
                                             </form>
                                         </td>

@@ -16,7 +16,7 @@ session_start();
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>Professeur - Créer un événement</title>
+    <title>Professeur - Modifier un événement</title>
 
 
     <!-- bootstrap core css -->
@@ -220,25 +220,25 @@ session_start();
                 <?php
                 } else if ($_GET['erreur'] == 2){
                 ?>
-                    <h7 style="color: red">Erreur lors de la création de votre événement. Veuillez réessayer.</h7><br><br>
+                    <h7 style="color: red">Erreur lors de la modification de votre événement. Veuillez réessayer.</h7><br><br>
         <?php
                 }
             }
-            if (isset($_SESSION['id']) && $_SESSION['role'] == "professeur"){
+            if (isset($_SESSION['id']) && $_SESSION['role'] == "professeur" && isset($_POST['id_evenement'])){
         ?>
-        <h1>Créer un événement</h1>
+        <h1>Modifier un événement</h1>
         <br>
         <h5>Veuillez renseigner les informations suivantes : </h5>
         <br>
         <div>
-            <form method="post" action="../PHP/controleur/CreerEvenementController.php" id="creer" class="form_inscription">
+            <form method="post" action="../PHP/controleur/ModifierEvenementController.php" id="modifier" class="form_inscription">
                 <table style="text-align: center; margin:auto;">
                     <tr>
                         <td>
                             <label for="nom">Nom de l'événement :</label>
                         </td>
                         <td>
-                            <input id="nom" name="nomEvenement" type="text" required>
+                            <input id="nom" name="nomEvenement" type="text" value="<?php echo $_POST['nom_evenement'] ?>" required>
                         </td>
                     </tr>
                     <tr>
@@ -246,7 +246,7 @@ session_start();
                             <label for="type">Type :</label>
                         </td>
                         <td>
-                            <input id="type" name="type" type="text" required>
+                            <input id="type" name="type" type="text" value="<?php echo $_POST['type'] ?>" required>
                         </td>
                     </tr>
                     <tr>
@@ -254,7 +254,7 @@ session_start();
                             <label for="description">Description :</label>
                         </td>
                         <td>
-                            <textarea id="description" name="descriptionEvenement" form="creer" required>
+                            <textarea id="description" name="descriptionEvenement" placeholder="(Réécrire description) <?php echo $_POST['description_evenement'] ?>" form="modifier" required>
                             </textarea>
                         </td>
                     </tr>
@@ -263,7 +263,7 @@ session_start();
                             <label for="adresse">Adresse :</label>
                         </td>
                         <td>
-                            <input id="adresse" name="adresse" type="text" required>
+                            <input id="adresse" name="adresse" type="text" value="<?php echo $_POST['adresse'] ?>" required>
                         </td>
                     </tr>
                     <tr>
@@ -271,7 +271,7 @@ session_start();
                             <label for="nb_de_places">Nombre de places :</label>
                         </td>
                         <td>
-                            <input id="nb_de_places" name="nbDePlaces" type="number" required>
+                            <input id="nb_de_places" name="nbDePlaces" type="number" value="<?php echo $_POST['nb_de_places'] ?>" required>
                         </td>
                     </tr>
                     <tr>
@@ -279,7 +279,7 @@ session_start();
                             <label for="date_evenement">Date et heure :</label>
                         </td>
                         <td>
-                            <input id="date_evenement" name="dateEvenement" type="datetime-local" required>
+                            <input id="date_evenement" name="dateEvenement" type="datetime-local" value="<?php echo $_POST['date_evenement'] ?>" required>
                         </td>
                     </tr>
                     <tr>
@@ -288,13 +288,13 @@ session_start();
                         </td>
                     </tr>
                 </table>
-                <input type="hidden" name="id_utilisateur" value="<?php echo $_SESSION['id'] ?>">
+                <input type="hidden" name="id_evenement" value="<?php echo $_POST['id_evenement']?>">
             </form>
         </div>
         <?php
             } else {
         ?>
-                <h1>Vous n'avez pas accès à cette page.</h1>
+        <h1>Vous n'avez pas accès à cette page.</h1>
         <?php
         }
         ?>
