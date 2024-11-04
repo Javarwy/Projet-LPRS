@@ -4,9 +4,9 @@
 <?php
 include 'PHP/bdd/Bdd.php';
 $bdd = new Bdd;
-$forum = $bdd->getBdd()->query('SELECT * FROM message');
+$evenement = $bdd->getBdd()->query('SELECT * FROM message');
 
-$evenement = $forum ->fetchAll();
+$res = $evenement ->fetchAll();
 ?>
 
 <head>
@@ -78,6 +78,46 @@ $evenement = $forum ->fetchAll();
       .fade-in-text {
   animation: fadeIn 5s;
 }
+
+table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px;
+}
+
+thead th:nth-child(1) {
+  width: 30%;
+}
+
+thead th:nth-child(2) {
+  width: 20%;
+}
+
+thead th:nth-child(3) {
+  width: 15%;
+}
+
+thead th:nth-child(4) {
+  width: 35%;
+}
+
+th,
+td {
+  padding: 20px;
+}
+
+.button {
+  background-color: #04AA6D; 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
 
 
   </style>
@@ -183,6 +223,7 @@ $evenement = $forum ->fetchAll();
     <br>
      <center>
      <b><h1>Derniers messages</h1></b>
+     <button href="ecriture_de_message.php">Rédigez un message !</button>
      <br>
        <br>
        <div class="main-block">
@@ -191,7 +232,6 @@ $evenement = $forum ->fetchAll();
                 <h5></h5>
                     <table border="1px" style="text-align: center; margin:auto;">
                         <tr>
-                            <th hidden="hidden">Id</th>
                             <th>Canal</th>
                             <th>Titre</th>
                             <th>Message</th>
@@ -209,12 +249,12 @@ $evenement = $forum ->fetchAll();
                                 ?>
                                 <form action="">
                                 <tr>
-                                    <td hidden="hidden"><?php echo $evenement['canal'] ?></td>
+                                    <td><?php echo $evenement['canal'] ?></td>
                                     <td><?php echo $evenement['titre'] ?></td>
                                     <td><?php echo $evenement['message'] ?></td>
                                     <td><?php echo $evenement['date'] ?></td>
                                     <td>
-                                       <input type="submit" value="Reserver" name="reserver"></form>
+                                       <input type="submit" value="Répondre" name="Answer"></form>
 
                                 </tr>
                                 <?php
