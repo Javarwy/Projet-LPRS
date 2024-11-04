@@ -16,7 +16,7 @@ if (!isset($_POST['nomEvenement']) || !isset($_POST['type']) || !isset($_POST['d
             'nbDePlaces' => $_POST['nbDePlaces'],
             'dateEvenement' => $_POST['dateEvenement']
         ]);
-        $verif = $evenement->creerEvenement($evenement);
+        $verif = $evenement->creerEvenement($evenement, $_POST['id_utilisateur']);
         if ($verif){
             header('Location: ../../professeur/prof_publication_evenements.php?ok=1');
         } else {

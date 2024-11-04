@@ -154,6 +154,7 @@ $res = $req->fetchAll();
                             <?php
                         }
                     }
+                    if (isset($_SESSION['id']) && $_SESSION['role'] == "professeur") {
                     ?>
                     <h2 style="color: #19c880">Publication d'événements</h2>
                     <br>
@@ -187,7 +188,6 @@ $res = $req->fetchAll();
                             foreach($res as $evenement){
                                 ?>
                                 <tr>
-                                    <td hidden="hidden"><?php echo $evenement['id'] ?></td>
                                     <td><?php echo $evenement['nom_evenement'] ?></td>
                                     <td><?php echo $evenement['type'] ?></td>
                                     <td><?php echo $evenement['description_evenement'] ?></td>
@@ -201,6 +201,33 @@ $res = $req->fetchAll();
                                     <td><?php echo $evenement['adresse'] ?></td>
                                     <td><?php echo $evenement['nb_de_places'] ?></td>
                                     <td><?php echo $evenement['prenom']." ".$evenement['nom'] ?></td>
+                                    <?php
+                                    if ($evenement['id_utilisateur'] == $_SESSION['id']){
+                                    ?>
+                                        <td>
+                                            <form method="post" action="#">
+                                                <input type="hidden" name="id_evenement" value="<?php echo $evenement['id_evenement'] ?>">
+                                                <button type="submit">Modifier</button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form method="post" action="#">
+                                                <input type="hidden" name="id_evenement" value="<?php echo $evenement['id_evenement'] ?>">
+                                                <button type="submit">Supprimer</button>
+                                            </form>
+                                        </td>
+                                    <?php
+                                    } else {
+                                    ?>
+                                      <td>
+                                          <form method="post" action="#">
+                                              <input type="hidden" name="id_evenement" value="<?php echo $evenement['id_evenement'] ?>">
+                                              <button type="submit">Réserver</button>
+                                          </form>
+                                      </td>
+                                    <?php
+                                    }
+                                    ?>
                                 </tr>
                                 <?php
                             }
@@ -208,6 +235,14 @@ $res = $req->fetchAll();
                         ?>
                     </table>
                     <br>
+                    <?php
+                    } else {
+                    ?>
+                        <h1>Vous n'avez pas accès à cette page.</h1>
+                        <br>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
         </div>

@@ -287,6 +287,7 @@ session_start();
                         </td>
                     </tr>
                 </table>
+                <input type="hidden" name="id_utilisateur" value="<?php echo $_SESSION['id'] ?>">
             </form>
         </div>
 

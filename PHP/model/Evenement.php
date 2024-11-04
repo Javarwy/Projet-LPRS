@@ -22,7 +22,7 @@ class Evenement {
         }
     }
 
-    public function creerEvenement(Evenement $evenement) : bool {
+    public function creerEvenement(Evenement $evenement, $id_utilisateur) : bool {
         $bdd = new Bdd();
         $req = $bdd->getBdd()->prepare('INSERT INTO evenement (nom_evenement, type, description_evenement, adresse, nb_de_places, verification, date_evenement) VALUES (:nom_evenement, :type, :description_evenement, :adresse, :nb_de_places, 0, :date_evenement)');
         $req->execute(array(
@@ -34,24 +34,28 @@ class Evenement {
             'date_evenement'=>$evenement->dateEvenement
         ));
         $verif = $this->getEvenementByName($evenement->nomEvenement);
+        foreach($verif as $element){
+            $id_evenement = $element['id_evenement'];
+        }
         if ($verif){
+            $creer = $bdd->getBdd()->prepare('INSERT INTO creer VALUES (:ref_utilisateur, :ref_evenement)');
+            $creer->execute(array(
+               'ref_utilisateur'=>$id_utilisateur,
+               'ref_evenement'=>$id_evenement,
+            ));
             return true;
         } else {
             return false;
         }
     }
 
-    public function getEvenementByName($nomEvenement) : bool{
+    public function getEvenementByName($nomEvenement) : array{
         $bdd = new Bdd();
-        $req = $bdd->getBdd()->prepare('SELECT nom_evenement FROM evenement WHERE nom_evenement = :nom_evenement');
+        $req = $bdd->getBdd()->prepare('SELECT * FROM evenement WHERE nom_evenement = :nom_evenement');
         $req->execute(array(
             'nom_evenement'=>$nomEvenement
         ));
-        if ($req->rowCount() > 0){
-            return true;
-        } else {
-            return false;
-        }
+        return $req->fetchAll();
     }
 
     public function getIdEvenement()
