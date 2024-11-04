@@ -234,15 +234,14 @@ $res = $req->fetchAll();
                         }
                         ?>
                     </table>
-                    <br>
                     <?php
                     } else {
                     ?>
                         <h1>Vous n'avez pas accès à cette page.</h1>
-                        <br>
                     <?php
                     }
                     ?>
+                <br>
                 </div>
             </div>
         </div>
