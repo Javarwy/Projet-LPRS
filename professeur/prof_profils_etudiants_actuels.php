@@ -1,4 +1,5 @@
 <?php
+session_start();
 include '../PHP/bdd/Bdd.php';
 $bdd = new Bdd;
 $req = $bdd->getBdd()->query('SELECT e.REF_UTILISATEUR, u.nom, u.prenom, e.annee_promo, e.nom_promo, e.cv, e.formation FROM utilisateur as u INNER JOIN etudiant as e ON u.id_utilisateur = e.REF_UTILISATEUR;');
@@ -145,6 +146,9 @@ $res = $req->fetchAll();
       <div class="row">
           <div style="text-align: center; margin: auto;">
               <br>
+              <?php
+              if (isset($_SESSION['id']) && $_SESSION['role'] == "professeur"){
+              ?>
               <h2 style="color: #19c880">Profils des étudiants actuels</h2>
               <br>
               <h5>Annuaire des étudiants</h5>
@@ -187,6 +191,13 @@ $res = $req->fetchAll();
                   }
                   ?>
               </table>
+              <?php
+              } else {
+              ?>
+                  <h1>Vous n'avez pas accès à cette page.</h1>
+              <?php
+              }
+              ?>
               <br>
           </div>
       </div>
