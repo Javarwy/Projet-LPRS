@@ -35,6 +35,6 @@ if (array_key_exists("modification",$_POST)){
         "info_sup" => $_POST['info_sup'],
         "role"=>$_POST['role']
     ]);
+    header("Location: ../../profile.html");
     $user->modification();
-    session_start();
 }

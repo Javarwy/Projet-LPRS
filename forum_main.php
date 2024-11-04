@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
 
+<?php
+include 'PHP/bdd/Bdd.php';
+$bdd = new Bdd;
+$forum = $bdd->getBdd()->query('SELECT * FROM message');
+
+$evenement = $forum ->fetchAll();
+?>
+
 <head>
   <!-- Basic -->
   <meta charset="utf-8" />
@@ -12,8 +20,6 @@
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-
-  <title>Inscription - Lycée Privé Robert Schuman</title>
 
 
   <!-- bootstrap core css -->
@@ -88,13 +94,14 @@
               <img src="images/RobertSchuman.webp" alt="" width="150" height="100" />
             </span>
           </a>
+          
 
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class=""> </span>
           </button>
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav  ">
+            <ul class="navbar-nav">
               <li class="nav-item">
                 <a class="nav-link" href="../index.php">Accueil</a>
                 <div class="dropdown-content">
@@ -169,89 +176,57 @@
       </div>
     </header>
     <!-- end header section -->
+     <br>
+      <br>
+     <Br>
+  <h3>Bienvenue sur notre forum</h3>
     <br>
      <center>
-     <b><h1>Inscription</h1></b>
+     <b><h1>Derniers messages</h1></b>
      <br>
-     <h5>Veuillez nous donner quelques informations suplémentaires : </h5>
        <br>
+       <div class="main-block">
+            <h1></h1>
+            <table style="text-align: center" border="1px">
+                <h5></h5>
+                    <table border="1px" style="text-align: center; margin:auto;">
+                        <tr>
+                            <th hidden="hidden">Id</th>
+                            <th>Canal</th>
+                            <th>Titre</th>
+                            <th>Message</th>
+                            <th>Date</th>
+                        </tr>
+                        <?php
+                        if (empty($res)) {
+                            ?>
+                            <tr>
+                                <td colspan="6">Aucun message trouvé.</td>
+                            </tr>
+                            <?php
+                        } else {
+                            foreach($res as $evenement){
+                                ?>
+                                <form action="">
+                                <tr>
+                                    <td hidden="hidden"><?php echo $evenement['canal'] ?></td>
+                                    <td><?php echo $evenement['titre'] ?></td>
+                                    <td><?php echo $evenement['message'] ?></td>
+                                    <td><?php echo $evenement['date'] ?></td>
+                                    <td>
+                                       <input type="submit" value="Reserver" name="reserver"></form>
+
+                                </tr>
+                                <?php
+                            }
+                        }
+                        ?>
+
+                    </table>
+            </table>
+        </div>
      <br>
   <div>
-  <form action="PHP\controleur\TraitementUtilisateur.php" method="post" class="form_inscription">
-  <h3>
-   Nom :</h3>
-   <input type="text" id="name" name="nom" required minlength="3" maxlength="25" size="10" required />
-   </div>
-   <div>
-   <br>
-   <br>
-  <h3>
-  <div>
-  <h3>
-   Prénom :</h3>
-   <input type="text" id="surname" name="prenom" required minlength="3" maxlength="25" size="10" required />
-   </div>
-   <div>
-   <br>
-   <br>
-  <h3>
-   Email :</h3>
-   <input type="text" id="email" name="email" required minlength="3" maxlength="25" size="10" required />
-   </div>
-   <div>
-    <br>
-    <br>
-    <h3>
-   Mot de passe :</h3>
-   <input type="password" id="pswd" name="mdp" required minlength="3" maxlength="25" size="10" required />
-   </div>
-   <div>
-    <br>
-    <br>
-    <h3>
-   Confirmation du Mot de passe :</h3>
-   <input type="password" id="pswd_sure" name="mdp" required minlength="3" maxlength="25" size="10" required />
-   </div>
-   <br>
-   <br>
-   <div>
-   <h3>
-   Information supplémentaires : </h3>
-   <input type="text" id="sup_info" name="info_sup " required minlength="3" maxlength="60" size="50" />
-   </div>
-   <div>
-    <br>
-    <br>
-    <br>
-    <br>
-   <h5>
-  (Une vérification manuelle sera effectuée.)</h5>
-  </div>
-  <div>
-    <br>
-    <br>
-    <h3>
-   Avec quel fonction souhaitez vous vous inscrire ? :</h3>
-   <select name="role" id="choix-role">
-  <option value="">--Choisir--</option>
-  <option value="eleve">En tant qu'élève</option>
-  <option value="prof">En tant que professeur</option>
-  <option value="alumni">En tant qu'ancien élève (ALUMNI)</option>
-  <option value="entreprise">En tant qu'entreprise</option>
-</select>
-   </div>
-   <div>
-    <br>
-    <br>
-   <h5>
-  (Une vérification manuelle sera effectuée.)</h5>
-  </div>
-
-  <div>
-  <input type="submit" value="S'inscrire" name="inscription">
-  </div>
-  </form>
-
     <!-- slider section -->
     </section>
     <!-- end slider section -->
