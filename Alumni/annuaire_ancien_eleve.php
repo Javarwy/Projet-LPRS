@@ -146,9 +146,9 @@ $resultat = $reponse ->fetchAll();
             <div class="row">
                 <div style="text-align: center; margin: auto;">
                     <br>
-                    <h2 style="color: #19c880">Inscription d'evenment</h2>
+
                     <br>
-                    <h5>Annuaire des étudiants</h5>
+                    <h5>Annuaire des Alumni</h5>
                     <table border="1px" style="text-align: center; margin:auto;">
                         <tr>
                             <th hidden="hidden">Id</th>

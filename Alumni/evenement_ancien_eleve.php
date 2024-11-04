@@ -1,5 +1,5 @@
 <?php
-include 'PHP/bdd/Bdd.php';
+include '../PHP/bdd/Bdd.php';
 $bdd = new Bdd;
 $req = $bdd->getBdd()->query('SELECT e.id_evenement, e.nom_evenement, e.type, e.description_evenement, e.adresse, e.nb_de_places, e.date_evenement FROM evenement as e');
 $res = $req->fetchAll();
@@ -145,8 +145,9 @@ $res = $req->fetchAll();
             <div class="row">
                 <div style="text-align: center; margin: auto;">
                     <br>
-                    <h2 style="color: #19c880">Reservation etudiants d'evenements</h2>
+                    <h2 style="color: #19c880">Reservation d'evenement pour Alumni</h2>
                     <br>
+
                     <table border="1px" style="text-align: center; margin:auto;">
                         <tr>
                             <th hidden="hidden">Id</th>
@@ -168,16 +169,16 @@ $res = $req->fetchAll();
                             foreach($res as $evenement){
                                 ?>
                                 <form action="">
-                                <tr>
-                                    <td hidden="hidden"><?php echo $evenement['id_evenement'] ?></td>
-                                    <td><?php echo $evenement['nom_evenement'] ?></td>
-                                    <td><?php echo $evenement['type'] ?></td>
-                                    <td><?php echo $evenement['description_evenement'] ?></td>
-                                    <td><?php echo $evenement['adresse'] ?></td>
-                                    <td><?php echo $evenement['nb_de_places'] ?></td>
-                                    <td><?php echo $evenement['date_evenement'] ?></td>
-                                    <td>
-                                       <input type="submit" value="Reserver" name="reserver"></form>
+                                    <tr>
+                                        <td hidden="hidden"><?php echo $evenement['id_evenement'] ?></td>
+                                        <td><?php echo $evenement['nom_evenement'] ?></td>
+                                        <td><?php echo $evenement['type'] ?></td>
+                                        <td><?php echo $evenement['description_evenement'] ?></td>
+                                        <td><?php echo $evenement['adresse'] ?></td>
+                                        <td><?php echo $evenement['nb_de_places'] ?></td>
+                                        <td><?php echo $evenement['date_evenement'] ?></td>
+                                        <td>
+                                            <input type="submit" value="Reserver" name="reserver"></form>
 
                                 </tr>
                                 <?php
