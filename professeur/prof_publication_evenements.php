@@ -75,6 +75,14 @@ $res = $req->fetchAll();
         }
     </style>
 
+    <script>
+        function confirmerSuppression(){
+            if(confirm("Souhaitez-vous réellement supprimer cet événement ?\n(Cette action est irréversible !)")){
+                document.getElementById("supprimer").submit();
+            }
+        }
+    </script>
+
 </head>
 
 <body>
@@ -147,6 +155,13 @@ $res = $req->fetchAll();
                 <div style="text-align: center; margin: auto;">
                     <br>
                     <?php
+                    if (isset($_GET['erreur'])) {
+                        if ($_GET['erreur'] == 1){
+                            ?>
+                            <h7 style="color: red">Erreur lors de la création de votre événement. Veuillez réessayer.</h7><br><br>
+                            <?php
+                        }
+                    }
                     if (isset($_GET['ok'])){
                         if ($_GET['ok'] == 1){
                             ?>
@@ -155,6 +170,10 @@ $res = $req->fetchAll();
                         } else if ($_GET['ok'] == 2){
                             ?>
                             <h7 style="color: blue">Votre événement a bien été modifié. Il est en cours de validation par un gestionnaire et apparaîtra après celle-ci.</h7><br><br>
+                            <?php
+                        } else if ($_GET['ok'] == 3){
+                            ?>
+                            <h7 style="color: blue">Votre événement a bien été supprimé.</h7><br><br>
                             <?php
                         }
                     }
@@ -221,8 +240,9 @@ $res = $req->fetchAll();
                                             </form>
                                         </td>
                                         <td>
-                                            <form method="post" action="#">
-                                                <button type="submit">Supprimer</button>
+                                            <form method="post" action="../PHP/controleur/SupprimerEvenementController.php" id="supprimer">
+                                                <input type="hidden" name="id_evenement" value="<?php echo $evenement['id_evenement'] ?>">
+                                                <button type="button" onclick="confirmerSuppression()">Supprimer</button>
                                             </form>
                                         </td>
                                     <?php

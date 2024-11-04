@@ -2,10 +2,10 @@
 include '../bdd/Bdd.php';
 include '../model/Evenement.php';
 $bdd = new Bdd;
-if (!isset($_POST['nomEvenement']) || !isset($_POST['type']) || !isset($_POST['descriptionEvenement']) || !isset($_POST['adresse']) || !isset($_POST['nbDePlaces']) || !isset($_POST['dateEvenement'])){
+if (!isset($_POST['nomEvenement']) || !isset($_POST['type']) || !isset($_POST['descriptionEvenement']) || !isset($_POST['adresse']) || !isset($_POST['nbDePlaces']) || !isset($_POST['dateEvenement']) || !isset($_POST['id_evenement'])){
     header('Location: ../../professeur/prof_modifier_evenement.php?erreur=1');
 } else {
-    if (empty($_POST['nomEvenement']) || empty($_POST['type']) || empty($_POST['descriptionEvenement']) || empty($_POST['adresse']) || empty($_POST['nbDePlaces']) || empty($_POST['dateEvenement'])){
+    if (empty($_POST['nomEvenement']) || empty($_POST['type']) || empty($_POST['descriptionEvenement']) || empty($_POST['adresse']) || empty($_POST['nbDePlaces']) || empty($_POST['dateEvenement']) || empty($_POST['id_evenement'])){
         header('Location: ../../professeur/prof_modifier_evenement.php?erreur=1');
     } else {
         $evenement = new Evenement([
@@ -18,7 +18,6 @@ if (!isset($_POST['nomEvenement']) || !isset($_POST['type']) || !isset($_POST['d
             'idEvenement' => $_POST['id_evenement']
         ]);
         $verif = $evenement->modifierEvenement($evenement);
-        echo $_POST['nomEvenement'];
         if ($verif){
             header('Location: ../../professeur/prof_publication_evenements.php?ok=2');
         } else {

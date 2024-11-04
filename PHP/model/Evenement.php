@@ -79,6 +79,24 @@ class Evenement {
         }
     }
 
+    public function supprimerEvenement(Evenement $evenement) : bool{
+        $bdd = new Bdd();
+        $req = $bdd->getBdd()->prepare('DELETE FROM creer WHERE ref_evenement = :ref_evenement');
+        $req->execute(array(
+            'ref_evenement'=>$evenement->idEvenement
+        ));
+        $req2 = $bdd->getBdd()->prepare('DELETE FROM evenement WHERE id_evenement = :id_evenement');
+        $req2->execute(array(
+           'id_evenement'=>$evenement->idEvenement
+        ));
+        $verif = $this->getEvenementById($evenement->idEvenement);
+        if (empty($verif)){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function getEvenementById($idEvenement) : array {
         $bdd = new Bdd();
         $req = $bdd->getBdd()->prepare('SELECT * FROM evenement WHERE id_evenement = :id_evenement');
