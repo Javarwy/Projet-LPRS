@@ -1,5 +1,9 @@
 <?php
 session_start();
+include '../PHP/bdd/Bdd.php';
+$bdd = new Bdd;
+$req = $bdd->getBdd()->query('SELECT id_utilisateur, nom, prenom, role FROM utilisateur WHERE active = 1 AND role != "gestionnaire";');
+$res = $req->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -70,6 +74,12 @@ session_start();
             display: block;
         }
     </style>
+
+    <script>
+        function ajoutOrga(){
+            var nbOrga = 1;
+        }
+    </script>
 
 </head>
 
@@ -224,7 +234,7 @@ session_start();
         <?php
                 }
             }
-            if (isset($_SESSION['id']) && $_SESSION['role'] == "professeur"){
+            if (isset($_SESSION['id']) && $_SESSION['role'] == "prof"){
         ?>
         <h1>Créer un événement</h1>
         <br>
@@ -283,12 +293,32 @@ session_start();
                         </td>
                     </tr>
                     <tr>
+                        <td>
+                            <label for="organisateur">Organisateur(s) :</label>
+                        </td>
+                        <td>
+                            <select id="organisateur" name="orga1" readonly>
+                                <?php
+                                foreach($res as $orga){
+                                    if ($_SESSION['id'] == $orga['id_utilisateur']){
+                                ?>
+                                    <option value="<?php echo $_SESSION['id'] ?>"><?php echo $orga['nom']." ".$orga['prenom'] ?></option>
+                                <?php
+                                    }
+                                }
+                                ?>
+                            </select>
+                            <small>
+                                <button id="ajout" type="button" onclick="ajoutOrga();"><small>Ajouter</small></button>
+                            </small>
+                        </td>
+                    </tr>
+                    <tr>
                         <td colspan="2">
                             <button type="submit">Envoyer pour validation</button>
                         </td>
                     </tr>
                 </table>
-                <input type="hidden" name="id_utilisateur" value="<?php echo $_SESSION['id'] ?>">
             </form>
         </div>
         <?php
