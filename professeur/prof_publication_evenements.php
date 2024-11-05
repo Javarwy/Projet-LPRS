@@ -177,7 +177,7 @@ $res = $req->fetchAll();
                             <?php
                         }
                     }
-                    if (isset($_SESSION['id']) && $_SESSION['role'] == "professeur") {
+                    if (isset($_SESSION['id']) && $_SESSION['role'] == "prof") {
                     ?>
                     <h2 style="color: #19c880">Publication d'événements</h2>
                     <br>

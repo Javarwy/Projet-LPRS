@@ -224,7 +224,7 @@ session_start();
         <?php
                 }
             }
-            if (isset($_SESSION['id']) && $_SESSION['role'] == "professeur" && isset($_POST['id_evenement'])){
+            if (isset($_SESSION['id']) && $_SESSION['role'] == "prof" && isset($_POST['id_evenement'])){
         ?>
         <h1>Modifier un événement</h1>
         <br>

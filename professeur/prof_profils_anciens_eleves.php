@@ -147,7 +147,7 @@ $res = $req->fetchAll();
           <div style="text-align: center; margin: auto;">
               <br>
               <?php
-              if (isset($_SESSION['id']) && $_SESSION['role'] == "professeur"){
+              if (isset($_SESSION['id']) && $_SESSION['role'] == "prof"){
               ?>
               <h2 style="color: #19c880">Profils des anciens élèves</h2>
               <br>
