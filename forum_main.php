@@ -223,7 +223,7 @@ td {
     <br>
      <center>
      <b><h1>Derniers messages</h1></b>
-     <button href="ecriture_de_message.php">Rédigez un message !</button>
+     <a class="nav-link" href="ecriture_de_message.php">Rédigez un message !</a>
      <br>
        <br>
        <div class="main-block">
@@ -253,8 +253,8 @@ td {
                                     <td><?php echo $evenement['titre'] ?></td>
                                     <td><?php echo $evenement['message'] ?></td>
                                     <td><?php echo $evenement['date'] ?></td>
-                                    <td>
-                                       <input type="submit" value="Répondre" name="Answer"></form>
+                                    <td><input type="submit" value="Répondre" name="Answer"></form></td>
+                                    <td><input type="submit" value="Voir les réponses" name="Comments"></form></td>
 
                                 </tr>
                                 <?php
