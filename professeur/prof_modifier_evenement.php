@@ -232,7 +232,7 @@ session_start();
         <br>
         <div>
             <form method="post" action="../PHP/controleur/ModifierEvenementController.php" id="modifier" class="form_inscription">
-                <table style="text-align: center; margin:auto;">
+                <table style="text-align: center;">
                     <tr>
                         <td>
                             <label for="nom">Nom de l'événement :</label>
@@ -254,8 +254,7 @@ session_start();
                             <label for="description">Description :</label>
                         </td>
                         <td>
-                            <textarea id="description" name="descriptionEvenement" placeholder="(Réécrire description) <?php echo $_POST['description_evenement'] ?>" form="modifier" required>
-                            </textarea>
+                            <textarea id="description" name="descriptionEvenement" required="required"><?php echo $_POST['description_evenement']?></textarea>
                         </td>
                     </tr>
                     <tr>

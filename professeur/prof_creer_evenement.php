@@ -292,8 +292,7 @@ $res = $req->fetchAll();
                             <label for="description">Description :</label>
                         </td>
                         <td>
-                            <textarea id="description" name="descriptionEvenement" form="creer" required>
-                            </textarea>
+                            <textarea id="description" name="descriptionEvenement" required="required"></textarea>
                         </td>
                     </tr>
                     <tr>
