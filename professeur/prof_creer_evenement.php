@@ -2,7 +2,10 @@
 session_start();
 include '../PHP/bdd/Bdd.php';
 $bdd = new Bdd;
-$req = $bdd->getBdd()->query('SELECT id_utilisateur, nom, prenom, role FROM utilisateur WHERE active = 1 AND role != "gestionnaire";');
+$req = $bdd->getBdd()->prepare('SELECT id_utilisateur, nom, prenom, role FROM utilisateur WHERE active = 1 AND role != "gestionnaire" AND id_utilisateur != :id');
+$req->execute(array(
+        'id' => $_SESSION['id']
+));
 $res = $req->fetchAll();
 ?>
 <!DOCTYPE html>
@@ -76,8 +79,33 @@ $res = $req->fetchAll();
     </style>
 
     <script>
+        let nbOrgas = 1;
         function ajoutOrga(){
-            var nbOrga = 1;
+            nbOrgas++;
+            const selectDiv = document.createElement("div");
+            selectDiv.id = "orga"+nbOrgas;
+
+            const select = document.createElement("select");
+            select.name = "orga"+nbOrgas;
+
+            const utilisateurs = <?php echo json_encode($res) ?>;
+            utilisateurs.forEach(utilisateur => {
+                const option = document.createElement("option");
+                option.value = utilisateur.id_utilisateur;
+                option.text = `${utilisateur.nom} ${utilisateur.prenom}`;
+                select.appendChild(option);
+            });
+
+            const retirerOrga = document.createElement("button");
+            retirerOrga.textContent = "Retirer";
+            retirerOrga.onclick = () => {
+                selectDiv.remove();
+                nbOrgas = Math.max(1, nbOrgas - 1);
+            }
+
+            selectDiv.appendChild(select);
+            selectDiv.appendChild(document.createElement("small")).appendChild(retirerOrga);
+            document.getElementById("organisateurs").appendChild(selectDiv);
         }
     </script>
 
@@ -294,22 +322,23 @@ $res = $req->fetchAll();
                     </tr>
                     <tr>
                         <td>
-                            <label for="organisateur">Organisateur(s) :</label>
+                            <label for="organisateurs">Organisateur(s) :</label>
+                        </td>
+                        <td id="organisateurs">
+                            <div id="orga1">
+                                <select name="orga1" readonly="">
+                                    <option value="<?php echo $_SESSION['id'] ?>"><?php echo $_SESSION['nom']." ".$_SESSION['prenom'] ?></option>
+                                </select>
+                            </div>
+                            <?php
+                                foreach($res as $orga){
+
+                                }
+                            ?>
                         </td>
                         <td>
-                            <select id="organisateur" name="orga1" readonly>
-                                <?php
-                                foreach($res as $orga){
-                                    if ($_SESSION['id'] == $orga['id_utilisateur']){
-                                ?>
-                                    <option value="<?php echo $_SESSION['id'] ?>"><?php echo $orga['nom']." ".$orga['prenom'] ?></option>
-                                <?php
-                                    }
-                                }
-                                ?>
-                            </select>
                             <small>
-                                <button id="ajout" type="button" onclick="ajoutOrga();"><small>Ajouter</small></button>
+                                <button id="ajout1" type="button" onclick="ajoutOrga();">Ajouter</button>
                             </small>
                         </td>
                     </tr>

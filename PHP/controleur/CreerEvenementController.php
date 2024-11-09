@@ -16,7 +16,13 @@ if (!isset($_POST['nomEvenement']) || !isset($_POST['type']) || !isset($_POST['d
             'nbDePlaces' => $_POST['nbDePlaces'],
             'dateEvenement' => $_POST['dateEvenement']
         ]);
-        $verif = $evenement->creerEvenement($evenement, $_POST['orga1']);
+        $organisateurs = [];
+        foreach ($_POST as $key => $organisateurId) {
+            if (strpos($key, 'orga') === 0 && !empty($organisateurId)) {
+                $organisateurs[] = $organisateurId;
+            }
+        }
+        $verif = $evenement->creerEvenement($evenement, $organisateurs);
         if ($verif){
             header('Location: ../../professeur/prof_publication_evenements.php?ok=1');
         } else {

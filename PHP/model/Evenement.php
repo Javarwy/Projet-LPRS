@@ -22,7 +22,7 @@ class Evenement {
         }
     }
 
-    public function creerEvenement(Evenement $evenement, $id_utilisateur) : bool {
+    public function creerEvenement(Evenement $evenement, array $organisateurs) : bool {
         $bdd = new Bdd();
         $req = $bdd->getBdd()->prepare('INSERT INTO evenement (nom_evenement, type, description_evenement, adresse, nb_de_places, verification, date_evenement) VALUES (:nom_evenement, :type, :description_evenement, :adresse, :nb_de_places, 0, :date_evenement)');
         $req->execute(array(
@@ -39,10 +39,12 @@ class Evenement {
         }
         if ($verif){
             $creer = $bdd->getBdd()->prepare('INSERT INTO creer VALUES (:ref_utilisateur, :ref_evenement)');
-            $creer->execute(array(
-               'ref_utilisateur'=>$id_utilisateur,
-               'ref_evenement'=>$id_evenement,
-            ));
+            foreach($organisateurs as $organisateur){
+                $creer->execute(array(
+                    'ref_utilisateur'=>$organisateur,
+                    'ref_evenement'=>$id_evenement,
+                ));
+            }
             return true;
         } else {
             return false;
