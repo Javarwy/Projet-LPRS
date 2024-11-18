@@ -182,7 +182,23 @@ foreach ($res as $evenement){
                     if (isset($_GET['erreur'])) {
                         if ($_GET['erreur'] == 1){
                             ?>
-                            <h7 style="color: red">Erreur lors de la création de votre événement. Veuillez réessayer.</h7><br><br>
+                            <h7 style="color: red">Erreur lors de la suppression de votre événement. Veuillez réessayer.</h7><br><br>
+                            <?php
+                        } else if ($_GET['erreur'] == 2){
+                            ?>
+                            <h7 style="color: red">Erreur lors de la réservation de votre événement. Veuillez réessayer.</h7><br><br>
+                            <?php
+                        } else if ($_GET['erreur'] == 3){
+                            ?>
+                            <h7 style="color: red">Impossible de réserver cet événement : <b>il n'y a plus de places disponibles</b>.</h7><br><br>
+                            <?php
+                        } else if ($_GET['erreur'] == 4){
+                            ?>
+                            <h7 style="color: red">Impossible de réserver cet événement : il a lieu dans <b>moins de deux jours</b>.</h7><br><br>
+                            <?php
+                        } else if ($_GET['erreur'] == 5){
+                            ?>
+                            <h7 style="color: red">Impossible de réserver cet événement : vous avez <b>déjà réservé</b> pour cet événement.</h7><br><br>
                             <?php
                         }
                     }
@@ -198,6 +214,10 @@ foreach ($res as $evenement){
                         } else if ($_GET['ok'] == 3){
                             ?>
                             <h7 style="color: blue">Votre événement a bien été supprimé.</h7><br><br>
+                            <?php
+                        } else if ($_GET['ok'] == 4){
+                            ?>
+                            <h7 style="color: blue">Vous avez bien réservé pour l'événement.</h7><br><br>
                             <?php
                         }
                     }
@@ -270,18 +290,21 @@ foreach ($res as $evenement){
                                             </form>
                                         </td>
                                         <td>
-                                            <form method="post" action="../PHP/controleur/SupprimerEvenementController.php" id="supprimer">
+                                            <form method="post" action="../PHP/controleur/EvenementsController.php" id="supprimer">
                                                 <input type="hidden" name="id_evenement" value="<?php echo $id_evenement ?>">
-                                                <button type="button" onclick="confirmerSuppression()" name="suppression">Supprimer</button>
+                                                <button type="submit" onclick="confirmerSuppression()" name="supprimerProf">Supprimer</button>
                                             </form>
                                         </td>
                                     <?php
                                     } else {
                                     ?>
                                       <td colspan="2">
-                                          <form method="post" action="#">
+                                          <form method="post" action="../PHP/controleur/EvenementsController.php">
                                               <input type="hidden" name="id_evenement" value="<?php echo $id_evenement ?>">
-                                              <button type="submit">Réserver</button>
+                                              <input type="hidden" name="nb_de_places" value="<?php echo $evenement['nb_de_places'] ?>">
+                                              <input type="hidden" name="date_evenement" value="<?php echo $evenement['date_evenement'] ?>">
+                                              <input type="hidden" name="participant" value="<?php echo $_SESSION['id'] ?>">
+                                              <button type="submit" name="reserverProf">Réserver</button>
                                           </form>
                                       </td>
                                     <?php

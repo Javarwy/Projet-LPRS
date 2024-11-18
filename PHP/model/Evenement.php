@@ -22,18 +22,18 @@ class Evenement {
         }
     }
 
-    public function creerEvenement(Evenement $evenement, array $organisateurs) : bool {
+    public function creerEvenement(array $organisateurs) : bool {
         $bdd = new Bdd();
         $req = $bdd->getBdd()->prepare('INSERT INTO evenement (nom_evenement, type, description_evenement, adresse, nb_de_places, verification, date_evenement) VALUES (:nom_evenement, :type, :description_evenement, :adresse, :nb_de_places, 0, :date_evenement)');
         $req->execute(array(
-            'nom_evenement'=>$evenement->nomEvenement,
-            'type'=>$evenement->type,
-            'description_evenement'=>$evenement->descriptionEvenement,
-            'adresse'=>$evenement->adresse,
-            'nb_de_places'=>$evenement->nbDePlaces,
-            'date_evenement'=>$evenement->dateEvenement
+            'nom_evenement'=>$this->getNomEvenement(),
+            'type'=>$this->getType(),
+            'description_evenement'=>$this->getDescriptionEvenement(),
+            'adresse'=>$this->getAdresse(),
+            'nb_de_places'=>$this->getNbDePlaces(),
+            'date_evenement'=>$this->dateEvenement
         ));
-        $verif = $this->getEvenementByName($evenement->nomEvenement);
+        $verif = $this->getEvenementByName($this->getNomEvenement());
         foreach($verif as $element){
             $id_evenement = $element['id_evenement'];
         }
@@ -53,7 +53,7 @@ class Evenement {
 
     public function modifierEvenement(Evenement $evenement) : bool{
         $bdd = new Bdd();
-        $verif = $this->getEvenementById($evenement->idEvenement);
+        $verif = $this->getEvenementById($this->getIdEvenement());
         foreach($verif as $element){
             $old = new Evenement([
                 'nomEvenement' => $element['nom_evenement'],
@@ -66,13 +66,13 @@ class Evenement {
         }
         $req = $bdd->getBdd()->prepare('UPDATE evenement SET nom_evenement = :nom_evenement, type = :type, description_evenement = :description_evenement, adresse = :adresse, nb_de_places = :nb_de_places, date_evenement = :date_evenement, verification = 0 WHERE id_evenement = :id_evenement');
         $req->execute(array(
-            'nom_evenement'=>$evenement->nomEvenement,
-            'type'=>$evenement->type,
-            'description_evenement'=>$evenement->descriptionEvenement,
-            'adresse'=>$evenement->adresse,
-            'nb_de_places'=>$evenement->nbDePlaces,
-            'date_evenement'=>$evenement->dateEvenement,
-            'id_evenement'=>$evenement->idEvenement
+            'nom_evenement'=>$this->getNomEvenement(),
+            'type'=>$this->getType(),
+            'description_evenement'=>$this->getDescriptionEvenement(),
+            'adresse'=>$this->getAdresse(),
+            'nb_de_places'=>$this->getNbDePlaces(),
+            'date_evenement'=>$this->getDateEvenement(),
+            'id_evenement'=>$this->getIdEvenement()
         ));
         if ($evenement === $old){
             return false;
@@ -81,18 +81,38 @@ class Evenement {
         }
     }
 
-    public function supprimerEvenement(Evenement $evenement) : bool{
+    public function supprimerEvenement() : bool{
         $bdd = new Bdd();
         $req = $bdd->getBdd()->prepare('DELETE FROM creer WHERE ref_evenement = :ref_evenement');
         $req->execute(array(
-            'ref_evenement'=>$evenement->idEvenement
+            'ref_evenement'=>$this->getIdEvenement()
         ));
         $req2 = $bdd->getBdd()->prepare('DELETE FROM evenement WHERE id_evenement = :id_evenement');
         $req2->execute(array(
-           'id_evenement'=>$evenement->idEvenement
+           'id_evenement'=>$this->getIdEvenement()
         ));
-        $verif = $this->getEvenementById($evenement->idEvenement);
+        $verif = $this->getEvenementById($this->getIdEvenement());
         if (empty($verif)){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function reserverEvenement($idUtilisateur) : bool{
+        $bdd = new Bdd();
+        $req = $bdd->getBdd()->prepare('SELECT * FROM participer WHERE REF_UTILISATEUR = :ref_utilisateur AND REF_EVENEMENT = :ref_evenement');
+        $req->execute(array(
+            'ref_utilisateur'=>$idUtilisateur,
+            'ref_evenement'=>$this->getIdEvenement()
+        ));
+        $res = $req->fetch();
+        if (empty($res)){
+            $participer = $bdd->getBdd()->prepare('INSERT INTO participer VALUES (:ref_utilisateur, :ref_evenement);');
+            $participer->execute(array(
+                'ref_utilisateur'=>$idUtilisateur,
+                'ref_evenement'=>$this->getIdEvenement()
+            ));
             return true;
         } else {
             return false;

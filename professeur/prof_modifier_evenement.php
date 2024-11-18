@@ -283,7 +283,7 @@ session_start();
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <button type="submit">Envoyer pour validation</button>
+                            <button type="submit" name="modifierProf">Envoyer pour validation</button>
                         </td>
                     </tr>
                 </table>

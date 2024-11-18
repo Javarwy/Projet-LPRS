@@ -22,7 +22,7 @@ if (!isset($_POST['nomEvenement']) || !isset($_POST['type']) || !isset($_POST['d
                 $organisateurs[] = $organisateurId;
             }
         }
-        $verif = $evenement->creerEvenement($evenement, $organisateurs);
+        $verif = $evenement->creerEvenement($organisateurs);
         if ($verif){
             header('Location: ../../professeur/prof_publication_evenements.php?ok=1');
         } else {

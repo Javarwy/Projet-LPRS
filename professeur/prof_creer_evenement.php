@@ -343,7 +343,7 @@ $res = $req->fetchAll();
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <button type="submit">Envoyer pour validation</button>
+                            <button type="submit" name="creerProf">Envoyer pour validation</button>
                         </td>
                     </tr>
                 </table>
