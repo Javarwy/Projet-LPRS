@@ -1,86 +1,211 @@
+<?php
+session_start();
+include '../PHP/bdd/Bdd.php';
+$bdd = new Bdd;
+$req = $bdd->getBdd()->query('SELECT o.nom as titre, o.description, o.cible_formation, o.image, u.nom, u.prenom, e.nom as entreprise FROM offre as o INNER JOIN partenaire as p ON o.REF_PARTENAIRE = p.REF_UTILISATEUR INNER JOIN utilisateur as u ON p.REF_UTILISATEUR = u.id_utilisateur INNER JOIN entreprise as e ON p.REF_ENTREPRISE = e.id_entreprise;');
+$res = $req->fetchAll();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Opportunités d'Emploi et de Stage</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Vous pouvez lier un fichier CSS externe -->
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- font awesome style -->
+    <link href="../css/font-awesome.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="../css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="../css/responsive.css" rel="stylesheet" />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        .job-list {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 5px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .job-item {
-            border-bottom: 1px solid #eee;
-            padding: 15px 0;
-        }
-        .job-item:last-child {
-            border-bottom: none;
-        }
-        .job-title {
-            font-size: 1.5em;
-            color: #007BFF;
-        }
-        .job-company {
-            font-size: 1.2em;
-            color: #555;
-        }
-        .apply-button {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 15px;
-            background-color: #28a745;
+        .dropbtn {
+            font-size: 16px;
+            border: none;
+            outline: none;
             color: white;
-            text-decoration: none;
-            border-radius: 5px;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
         }
-        .apply-button:hover {
-            background-color: #218838;
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
         }
     </style>
 </head>
 <body>
+<div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg custom_nav-container ">
+                <a class="navbar-brand" href="../index.php">
+            <span>
+              <img src="../images/RobertSchuman.webp" alt="" width="150" height="100" />
+            </span>
+                </a>
 
-<h1>Opportunités d'Emploi et de Stage</h1>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class=""> </span>
+                </button>
 
-<div class="job-list">
-    <div class="job-item">
-        <h2 class="job-title">Développeur Web - Stage</h2>
-        <p class="job-company">Société XYZ</p>
-        <p>Nous recherchons un stagiaire passionné pour rejoindre notre équipe de développement web. Vous aurez l'occasion de travailler sur des projets innovants.</p>
-        <a href="postuler.html" class="apply-button">Postuler</a>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav  ">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.php">Accueil</a>
+                            <div class="dropdown-content">
+                                <a href="#">Annuaire des anciens élèves</a>
+                                <a href="#">Forum de discussion</a>
+                                <a href="#">Oportunités d'emploi et de stage</a>
+                                <a href="#">Participation des évènements</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <button class="nav-link dropbtn">Etudiant
+                                </button>
+                                <div class="dropdown-content">
+                                    <a href="#">Profils des anciens élèves</a>
+                                    <a href="#">Profils des étudiants actuels</a>
+                                    <a href="#">Publication d'événements</a>
+                                    <a href="#">Section d'offres</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <button class="nav-link dropbtn">Alumni
+                                </button>
+                                <div class="dropdown-content">
+                                    <a href="#">Profils des anciens élèves</a>
+                                    <a href="#">Profils des étudiants actuels</a>
+                                    <a href="#">Publication d'événements</a>
+                                    <a href="#">Section d'offres</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <button class="nav-link dropbtn">Entreprise
+                                </button>
+                                <div class="dropdown-content">
+                                    <a href="#">Profils des anciens élèves</a>
+                                    <a href="#">Profils des étudiants actuels</a>
+                                    <a href="#">Publication d'événements</a>
+                                    <a href="#">Section d'offres</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <a href="../professeur/professeur.php">
+                                    <button class="nav-link dropbtn">Professeur
+                                    </button>
+                                </a>
+                                <div class="dropdown-content">
+                                    <a href="../professeur/prof_profils_anciens_eleves.php">Profils des anciens élèves</a>
+                                    <a href="../professeur/prof_profils_etudiants_actuels.php">Profils des étudiants actuels</a>
+                                    <a href="../professeur/prof_publication_evenements.php">Publication d'événements</a>
+                                    <a href="#">Section d'offres</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../contact.php">Contact</a>
+                        </li>
+                    </ul>
+                    <div class="user_optio_box">
+                        <a href="">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </a>
+                        <a href="">
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!-- end header section -->
+    <section class="service_section" style="text-align: center">
+        <div class="container-fluid">
+            <div class="row">
+                <div style="text-align: center; margin:auto;">
+                    <br>
+                    <h2>Opportunités d'Emploi et de Stage</h2>
+                    <br>
+                    <table border="1px" style="text-align: center; margin:auto;">
+                        <tr>
+                            <th>Nom</th>
+                            <th>Description</th>
+                            <th>Formation cible</th>
+                            <th>Image</th>
+                            <th>Partenaire</th>
+                            <th>Entreprise</th>
+                        </tr>
+                        <?php
+                        if (empty($res)) {
+                        ?>
+                        <tr>
+                            <td colspan="6">Aucune offre trouvée.</td>
+                        </tr>
+                        <?php
+                        } else {
+                            foreach($res as $offre) {
+                        ?>
+                        <tr>
+                            <td><?php echo $offre['titre'] ?></td>
+                            <td><?php echo $offre['description'] ?></td>
+                            <td><?php echo $offre['cible_formation'] ?></td>
+                            <td>
+                                <?php
+                                $pdfData = base64_encode($offre['image']);
+                                echo '<embed src="data:application/pdf;base64,'.$pdfData.'"width=100" height="100" />';
+                                ?>
+                            </td>
+                            <td><?php echo $offre['prenom'].' '.$offre['nom'] ?></td>
+                            <td><?php echo $offre['entreprise'] ?></td>
+                            <td><a href="postuler.html" class="apply-button">Postuler</a></td>
+                        </tr>
+                        <?php
+                            }
+                        }
+                        ?>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="job-item">
-        <h2 class="job-title">Ingénieur Réseau - Alternance</h2>
-        <p class="job-company">Entreprise ABC</p>
-        <p>Participez à la gestion et l'optimisation de notre infrastructure réseau. Une excellente opportunité pour apprendre aux côtés d'experts.</p>
-        <a href="postuler.html" class="apply-button">Postuler</a>
-    </div>
-
-    <div class="job-item">
-        <h2 class="job-title">Assistant Marketing - Stage</h2>
-        <p class="job-company">Startup DEF</p>
-        <p>Rejoignez notre équipe marketing pour aider à la mise en œuvre de campagnes et à l'analyse des résultats.</p>
-        <a href="postuler.html" class="apply-button">Postuler</a>
-    </div>
-
-    <!-- Ajoutez d'autres offres d'emploi/stage ici -->
-</div>
+    </section>
 
 </body>
 </html>
