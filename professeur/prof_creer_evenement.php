@@ -1,5 +1,12 @@
 <?php
 session_start();
+include '../PHP/bdd/Bdd.php';
+$bdd = new Bdd;
+$req = $bdd->getBdd()->prepare('SELECT id_utilisateur, nom, prenom, role FROM utilisateur WHERE active = 1 AND role != "gestionnaire" AND id_utilisateur != :id');
+$req->execute(array(
+        'id' => $_SESSION['id']
+));
+$res = $req->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -70,6 +77,37 @@ session_start();
             display: block;
         }
     </style>
+
+    <script>
+        let nbOrgas = 1;
+        function ajoutOrga(){
+            nbOrgas++;
+            const selectDiv = document.createElement("div");
+            selectDiv.id = "orga"+nbOrgas;
+
+            const select = document.createElement("select");
+            select.name = "orga"+nbOrgas;
+
+            const utilisateurs = <?php echo json_encode($res) ?>;
+            utilisateurs.forEach(utilisateur => {
+                const option = document.createElement("option");
+                option.value = utilisateur.id_utilisateur;
+                option.text = `${utilisateur.nom} ${utilisateur.prenom}`;
+                select.appendChild(option);
+            });
+
+            const retirerOrga = document.createElement("button");
+            retirerOrga.textContent = "Retirer";
+            retirerOrga.onclick = () => {
+                selectDiv.remove();
+                nbOrgas = Math.max(1, nbOrgas - 1);
+            }
+
+            selectDiv.appendChild(select);
+            selectDiv.appendChild(document.createElement("small")).appendChild(retirerOrga);
+            document.getElementById("organisateurs").appendChild(selectDiv);
+        }
+    </script>
 
 </head>
 
@@ -224,7 +262,7 @@ session_start();
         <?php
                 }
             }
-            if (isset($_SESSION['id']) && $_SESSION['role'] == "professeur"){
+            if (isset($_SESSION['id']) && $_SESSION['role'] == "prof"){
         ?>
         <h1>Créer un événement</h1>
         <br>
@@ -254,8 +292,7 @@ session_start();
                             <label for="description">Description :</label>
                         </td>
                         <td>
-                            <textarea id="description" name="descriptionEvenement" form="creer" required>
-                            </textarea>
+                            <textarea id="description" name="descriptionEvenement" required="required"></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -283,12 +320,33 @@ session_start();
                         </td>
                     </tr>
                     <tr>
+                        <td>
+                            <label for="organisateurs">Organisateur(s) :</label>
+                        </td>
+                        <td id="organisateurs">
+                            <div id="orga1">
+                                <select name="orga1" readonly="">
+                                    <option value="<?php echo $_SESSION['id'] ?>"><?php echo $_SESSION['nom']." ".$_SESSION['prenom'] ?></option>
+                                </select>
+                            </div>
+                            <?php
+                                foreach($res as $orga){
+
+                                }
+                            ?>
+                        </td>
+                        <td>
+                            <small>
+                                <button id="ajout1" type="button" onclick="ajoutOrga();">Ajouter</button>
+                            </small>
+                        </td>
+                    </tr>
+                    <tr>
                         <td colspan="2">
                             <button type="submit">Envoyer pour validation</button>
                         </td>
                     </tr>
                 </table>
-                <input type="hidden" name="id_utilisateur" value="<?php echo $_SESSION['id'] ?>">
             </form>
         </div>
         <?php

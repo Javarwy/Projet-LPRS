@@ -2,8 +2,32 @@
 session_start();
 include '../PHP/bdd/Bdd.php';
 $bdd = new Bdd;
-$req = $bdd->getBdd()->query('SELECT e.id_evenement, e.nom_evenement, e.type, e.description_evenement, e.adresse, e.nb_de_places-COUNT(p.REF_UTILISATEUR) as "nb_de_places", e.date_evenement, u.nom, u.prenom, u.id_utilisateur FROM creer as c INNER JOIN utilisateur as u ON u.id_utilisateur = c.REF_UTILISATEUR INNER JOIN evenement as e ON e.id_evenement = c.REF_EVENEMENT LEFT JOIN participer as p ON p.REF_EVENEMENT = e.id_evenement WHERE e.verification = 1 GROUP BY c.REF_UTILISATEUR ORDER BY c.REF_EVENEMENT;');
+$req = $bdd->getBdd()->query('SELECT e.id_evenement, e.nom_evenement, e.type, e.description_evenement, e.adresse, e.nb_de_places-COUNT(p.REF_UTILISATEUR) as "nb_de_places", e.date_evenement, u.nom, u.prenom, u.id_utilisateur FROM evenement as e LEFT JOIN participer as p ON e.id_evenement = p.REF_EVENEMENT LEFT JOIN creer as c ON e.id_evenement = c.REF_EVENEMENT LEFT JOIN utilisateur as u ON c.REF_UTILISATEUR = u.id_utilisateur WHERE e.verification = 1 GROUP BY e.id_evenement, u.id_utilisateur ORDER BY e.date_evenement;');
 $res = $req->fetchAll();
+$evenements = [];
+foreach ($res as $evenement){
+    $id_evenement = $evenement['id_evenement'];
+    if (!isset($evenements[$id_evenement])) {
+        $evenements[$id_evenement] = [
+            'nom_evenement' => $evenement['nom_evenement'],
+            'type' => $evenement['type'],
+            'description_evenement' => $evenement['description_evenement'],
+            'date_evenement' => $evenement['date_evenement'],
+            'adresse' => $evenement['adresse'],
+            'nb_de_places' => $evenement['nb_de_places'],
+            'organisateurs' => [],
+            'est_organisateur' => false
+        ];
+    }
+    $evenements[$id_evenement]['organisateurs'][] = [
+        'id_utilisateur' => $evenement['id_utilisateur'],
+        'nom' => $evenement['nom'],
+        'prenom' => $evenement['prenom']
+    ];
+    if ($evenement['id_utilisateur'] == $_SESSION['id']) {
+        $evenements[$id_evenement]['est_organisateur'] = true;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -177,7 +201,7 @@ $res = $req->fetchAll();
                             <?php
                         }
                     }
-                    if (isset($_SESSION['id']) && $_SESSION['role'] == "professeur") {
+                    if (isset($_SESSION['id']) && $_SESSION['role'] == "prof") {
                     ?>
                     <h2 style="color: #19c880">Publication d'événements</h2>
                     <br>
@@ -208,7 +232,7 @@ $res = $req->fetchAll();
                         </tr>
                         <?php
                         } else {
-                            foreach($res as $evenement){
+                            foreach($evenements as $id_evenement => $evenement) {
                                 ?>
                                 <tr>
                                     <td><?php echo $evenement['nom_evenement'] ?></td>
@@ -223,34 +247,40 @@ $res = $req->fetchAll();
                                     </td>
                                     <td><?php echo $evenement['adresse'] ?></td>
                                     <td><?php echo $evenement['nb_de_places'] ?></td>
-                                    <td><?php echo $evenement['prenom']." ".$evenement['nom'] ?></td>
+                                    <td>
+                                        <?php
+                                            foreach($evenement['organisateurs'] as $organisateur) {
+                                                echo $organisateur['nom']." ".$organisateur['prenom']."<br>";
+                                            }
+                                        ?>
+                                    </td>
                                     <?php
-                                    if ($evenement['id_utilisateur'] == $_SESSION['id']){
+                                    if ($evenement['est_organisateur']){
                                     ?>
                                         <td>
                                             <form method="post" action="prof_modifier_evenement.php">
-                                                <input type="hidden" name="id_evenement" value="<?php echo $evenement['id_evenement'] ?>">
+                                                <input type="hidden" name="id_evenement" value="<?php echo $id_evenement ?>">
                                                 <input type="hidden" name="nom_evenement" value="<?php echo $evenement['nom_evenement'] ?>">
                                                 <input type="hidden" name="type" value="<?php echo $evenement['type'] ?>">
                                                 <input type="hidden" name="description_evenement" value="<?php echo $evenement['description_evenement'] ?>">
                                                 <input type="hidden" name="adresse" value="<?php echo $evenement['adresse'] ?>">
                                                 <input type="hidden" name="nb_de_places" value="<?php echo $evenement['nb_de_places'] ?>">
                                                 <input type="hidden" name="date_evenement" value="<?php echo $evenement['date_evenement'] ?>">
-                                                <button type="submit">Modifier</button>
+                                                <button type="submit" name="modification">Modifier</button>
                                             </form>
                                         </td>
                                         <td>
                                             <form method="post" action="../PHP/controleur/SupprimerEvenementController.php" id="supprimer">
-                                                <input type="hidden" name="id_evenement" value="<?php echo $evenement['id_evenement'] ?>">
-                                                <button type="button" onclick="confirmerSuppression()">Supprimer</button>
+                                                <input type="hidden" name="id_evenement" value="<?php echo $id_evenement ?>">
+                                                <button type="button" onclick="confirmerSuppression()" name="suppression">Supprimer</button>
                                             </form>
                                         </td>
                                     <?php
                                     } else {
                                     ?>
-                                      <td>
+                                      <td colspan="2">
                                           <form method="post" action="#">
-                                              <input type="hidden" name="id_evenement" value="<?php echo $evenement['id_evenement'] ?>">
+                                              <input type="hidden" name="id_evenement" value="<?php echo $id_evenement ?>">
                                               <button type="submit">Réserver</button>
                                           </form>
                                       </td>
