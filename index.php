@@ -95,10 +95,10 @@ session_start();
               <li class="nav-item">
                 <a class="nav-link" href="../index.php">Accueil</a>
                 <div class="dropdown-content">
-                          <a href="#">Annuaire des anciens élèves</a>
-                          <a href="#">Forum de discussion</a>
-                          <a href="#">Oportunités d'emploi et de stage</a>
-                          <a href="#">Participation des évènements</a>
+                          <a href="Alumni/annuaire_ancien_eleve">Annuaire des anciens élèves</a>
+                          <a href="Alumni\forum_discussion_ancien_eleve">Forum de discussion</a>
+                          <a href="Alumni\Opportnuites_emploi_stages.php">Oportunités d'emploi et de stage</a>
+                          <a href="Alumni\evenement_ancien_eleve.php">Participation des évènements</a>
                       </div>
               </li>
               <li class="nav-item">
@@ -106,10 +106,10 @@ session_start();
                       <button class="nav-link dropbtn">Etudiant
                       </button>
                       <div class="dropdown-content">
-                          <a href="#">Profils des anciens élèves</a>
-                          <a href="#">Profils des étudiants actuels</a>
-                          <a href="#">Publication d'événements</a>
-                          <a href="#">Section d'offres</a>
+                          <a href="Alumni/annuaire_ancien_eleve">Annuaire des anciens élèves</a>
+                          <a href="Alumni/forum_discussion_ancien_eleve">Forum de discussion</a>
+                          <a href="Alumni/Opportnuites_emploi_stages.php">Oportunités d'emploi et de stage</a>
+                          <a href="Alumni/evenement_ancien_eleve.php">Participation des évènements</a>
                       </div>
                   </div>
               </li>
@@ -118,10 +118,10 @@ session_start();
                       <button class="nav-link dropbtn">Alumni
                       </button>
                       <div class="dropdown-content">
-                          <a href="#">Profils des anciens élèves</a>
-                          <a href="#">Profils des étudiants actuels</a>
-                          <a href="#">Publication d'événements</a>
-                          <a href="#">Section d'offres</a>
+                          <a href="Alumni/annuaire_ancien_eleve">Annuaire des anciens élèves</a>
+                          <a href="Alumni/forum_discussion_ancien_eleve">Forum de discussion</a>
+                          <a href="Alumni/Opportnuites_emploi_stages.php">Oportunités d'emploi et de stage</a>
+                          <a href="Alumni/evenement_ancien_eleve.php">Participation des évènements</a>
                       </div>
                   </div>
               </li>
@@ -130,10 +130,10 @@ session_start();
                       <button class="nav-link dropbtn">Entreprise
                       </button>
                       <div class="dropdown-content">
-                          <a href="#">Profils des anciens élèves</a>
-                          <a href="#">Profils des étudiants actuels</a>
-                          <a href="#">Publication d'événements</a>
-                          <a href="#">Section d'offres</a>
+                          <a href="Alumni/annuaire_ancien_eleve">Annuaire des anciens élèves</a>
+                          <a href="Alumni/forum_discussion_ancien_eleve">Forum de discussion</a>
+                          <a href="Alumni/Opportnuites_emploi_stages.php">Oportunités d'emploi et de stage</a>
+                          <a href="Alumni/evenement_ancien_eleve.php">Participation des évènements</a>
                       </div>
                   </div>
               </li>
@@ -156,11 +156,9 @@ session_start();
               </li>
             </ul>
             <div class="user_optio_box">
-              <a href="">
+              <a href="inscription_global.php">
                 <i class="fa fa-user" aria-hidden="true"></i>
               </a>
-              <a href="">
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
               </a>
             </div>
           </div>

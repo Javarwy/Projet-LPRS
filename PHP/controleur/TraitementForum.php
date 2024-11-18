@@ -7,7 +7,7 @@ if (array_key_exists("send_message",$_POST)) {
         "canal" => $_POST['canal'],
         "titre" => $_POST['titre'],
         "message" =>$_POST['message'],
-        "ref"=>$_POST['REF_UTILISATEUR'],
+        "ref"=>$_SESSION['id_utilisateur'],
     ]);
     header("Location: ../../forum_main.php");
     $msg->redaction();
