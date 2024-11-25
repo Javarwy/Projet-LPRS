@@ -18,12 +18,9 @@ try {
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;          
     $mail->Port       = 465;                                   
 
-    $mail->setFrom('from@example.com', 'Mailer');
-    $mail->addAddress('schumanair@gmail.com');     
-    $mail->addReplyTo('info@example.com', 'Information');
-
-    $mail->addAttachment('/var/tmp/file.tar.gz');        
-    $mail->addAttachment('/tmp/image.jpg', 'new.jpg');   
+    $mail->setFrom('schumanair@gmail.com', 'Schuman');
+    $mail->addAddress($_POST["email_support"]);
+    #*---$mail->addReplyTo('info@example.com', 'Information'); 
 
     $mail->isHTML(true);                                  
     $mail->Subject = 'Here is the subject';
@@ -31,6 +28,7 @@ try {
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
     echo 'Message has been sent';
+    echo var_dump($mail);
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }

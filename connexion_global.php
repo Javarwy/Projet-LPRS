@@ -171,7 +171,7 @@
     <!-- end header section -->
     <br>
      <center>
-     <b><h1>Inscription</h1></b>
+     <b><h1>Connexion</h1></b>
      <br>
      <h5>Veuillez nous donner quelques informations suplémentaires : </h5>
        <br>
@@ -196,7 +196,7 @@
     <br>
     <br>
    <h5>
-  (Une véfication manuelle sera effectuée.)</h5>
+  <a href="oublie_mot_de_passe.php">Reset mot de passe</a></h5>
   </div>
 
   <div>
