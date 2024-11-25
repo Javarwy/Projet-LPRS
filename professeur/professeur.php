@@ -15,7 +15,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>LPRS - Lycée Privé Robert Schuman</title>
+    <title>LPRS - Professeur</title>
 
 
     <!-- bootstrap core css -->
@@ -95,13 +95,46 @@
                             <a class="nav-link" href="../index.php">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="etudiant.php">Etudiant</a>
+                            <div class="dropdown">
+                                <a href="#">
+                                    <button class="nav-link dropbtn">Etudiant
+                                    </button>
+                                </a>
+                                <div class="dropdown-content">
+                                    <a href="../annuaire_etudiant.php">Annuaire des anciens élèves</a>
+                                    <a href="../forum_etudiant.php">Forum de discussion</a>
+                                    <a href="../publication_offre.php">Opportunités d'emploi et de stage</a>
+                                    <a href="../evenement_etudiants.php">Participation à des événements</a>
+                                </div>
+                            </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="alumni.php">Alumni</a>
+                            <div class="dropdown">
+                                <a href="#">
+                                    <button class="nav-link dropbtn">Alumni
+                                    </button>
+                                </a>
+                                <div class="dropdown-content">
+                                    <a href="../Alumni/annuaire_ancien_eleve.php">Annuaire des anciens élèves</a>
+                                    <a href="../Alumni/forum_discussion_ancien_eleve.php">Forum de discussion</a>
+                                    <a href="../Alumni/Opportnuites_emploi_stages.php">Opportunités d'emploi et de stage</a>
+                                    <a href="../Alumni/evenement_ancien_eleve.php">Participation à des événements</a>
+                                </div>
+                            </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="entreprises.php">Entreprises</a>
+                            <div class="dropdown">
+                                <a href="#">
+                                    <button class="nav-link dropbtn">Entreprises
+                                    </button>
+                                </a>
+                                <div class="dropdown-content">
+                                    <a href="../profil_entreprise.php">Profil des entreprises</a>
+                                    <a href="../publication_offre.php">Publication d'offres</a>
+                                    <a href="../Alumni/Opportnuites_emploi_stages.php">Accès aux profils des anciens élèves</a>
+                                    <a href="../evenement_affiche.php">Publication d'événements</a>
+                                </div>
+                            </div>
                         </li>
                         <li class="nav-item">
                             <div class="dropdown">
@@ -113,7 +146,7 @@
                                     <a href="prof_profils_anciens_eleves.php">Profils des anciens élèves</a>
                                     <a href="prof_profils_etudiants_actuels.php">Profils des étudiants actuels</a>
                                     <a href="prof_publication_evenements.php">Publication d'événements</a>
-                                    <a href="#">Section d'offres</a>
+                                    <a href="prof_section_offres.php">Section d'offres</a>
                                 </div>
                             </div>
                         </li>
@@ -122,11 +155,8 @@
                         </li>
                     </ul>
                     <div class="user_optio_box">
-                        <a href="">
+                        <a href="../connexion_global.php">
                             <i class="fa fa-user" aria-hidden="true"></i>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                         </a>
                     </div>
                 </div>
@@ -188,145 +218,6 @@
     </section>
 
     <!-- end service section -->
-
-    <!-- info section -->
-    <section class="info_section layout_padding2">
-        <div class="container">
-            <div class="info_logo">
-                <h2>
-                    HandTime
-                </h2>
-            </div>
-            <div class="row">
-
-                <div class="col-md-3">
-                    <div class="info_contact">
-                        <h5>
-                            About Shop
-                        </h5>
-                        <div>
-                            <div class="img-box">
-                                <img src="../images/location-white.png" width="18px" alt="">
-                            </div>
-                            <p>
-                                Address
-                            </p>
-                        </div>
-                        <div>
-                            <div class="img-box">
-                                <img src="../images/telephone-white.png" width="12px" alt="">
-                            </div>
-                            <p>
-                                +01 1234567890
-                            </p>
-                        </div>
-                        <div>
-                            <div class="img-box">
-                                <img src="../images/envelope-white.png" width="18px" alt="">
-                            </div>
-                            <p>
-                                demo@gmail.com
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="info_info">
-                        <h5>
-                            Informations
-                        </h5>
-                        <p>
-                            ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="info_insta">
-                        <h5>
-                            Instagram
-                        </h5>
-                        <div class="insta_container">
-                            <div class="row m-0">
-                                <div class="col-4 px-0">
-                                    <a href="">
-                                        <div class="insta-box b-1">
-                                            <img src="../images/w1.png" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-4 px-0">
-                                    <a href="">
-                                        <div class="insta-box b-1">
-                                            <img src="../images/w2.png" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-4 px-0">
-                                    <a href="">
-                                        <div class="insta-box b-1">
-                                            <img src="../images/w3.png" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-4 px-0">
-                                    <a href="">
-                                        <div class="insta-box b-1">
-                                            <img src="../images/w4.png" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-4 px-0">
-                                    <a href="">
-                                        <div class="insta-box b-1">
-                                            <img src="../images/w5.png" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-4 px-0">
-                                    <a href="">
-                                        <div class="insta-box b-1">
-                                            <img src="../images/w6.png" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="info_form ">
-                        <h5>
-                            Newsletter
-                        </h5>
-                        <form action="">
-                            <input type="email" placeholder="Enter your email">
-                            <button>
-                                Subscribe
-                            </button>
-                        </form>
-                        <div class="social_box">
-                            <a href="">
-                                <img src="../images/fb.png" alt="">
-                            </a>
-                            <a href="">
-                                <img src="../images/twitter.png" alt="">
-                            </a>
-                            <a href="">
-                                <img src="../images/linkedin.png" alt="">
-                            </a>
-                            <a href="">
-                                <img src="../images/youtube.png" alt="">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- end info_section -->
 
     <!-- footer section -->
     <section class="footer_section">

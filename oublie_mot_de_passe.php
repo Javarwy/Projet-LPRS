@@ -173,22 +173,17 @@
     <div class="container">
       <div class="heading_container">
         <h2>
-          Contactez nous
+          Reset Mot De Passe
         </h2>
       </div>
       <div class="row">
         <div class="col-md-6">
           <div class="form_container">
-            <form action="mail.php">
+            <form action="mail_motDePasseOubli.php" method="post">
               <div>
-                <input type="text" placeholder="Nom" />
+                <input type="email" placeholder="Email" name="email_support" required/>
               </div>
               <div>
-                <input type="email" placeholder="Email" name="email_support"/>
-              </div>
-              <div>
-                <input type="text" class="message-box" placeholder="Message" name="message_box_support"/>
-              </div>
               <div class="btn_box">
                 <button>
                   Envoyer
@@ -198,11 +193,6 @@
           </div>
         </div>
         <div class="col-md-6 ">
-          <div class="map_container">
-            <div class="map">
-              <div id="googleMap"></div>
-            </div>
-          </div>
         </div>
       </div>
     </div>

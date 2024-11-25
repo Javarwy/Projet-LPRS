@@ -1,4 +1,5 @@
 <?php
+session_start();
 include '../PHP/bdd/Bdd.php';
 $bdd = new Bdd;
 $req = $bdd->getBdd()->query('SELECT e.id_evenement, e.nom_evenement, e.type, e.description_evenement, e.adresse, e.nb_de_places, e.date_evenement FROM evenement as e');
@@ -145,6 +146,9 @@ $res = $req->fetchAll();
             <div class="row">
                 <div style="text-align: center; margin: auto;">
                     <br>
+                    <?php
+                    if (isset($_SESSION['id']) && $_SESSION['role'] == "alumni"){
+                    ?>
                     <h2 style="color: #19c880">Reservation d'evenement pour Alumni</h2>
                     <br>
 
@@ -155,20 +159,19 @@ $res = $req->fetchAll();
                             <th>Type</th>
                             <th>Description</th>
                             <th>adresse</th>
-                            <th>nombres de places</th>
+                            <th>Nombre de places</th>
                             <th>Date</th>
                         </tr>
                         <?php
                         if (empty($res)) {
                             ?>
                             <tr>
-                                <td colspan="6">Aucun étudiant trouvé.</td>
+                                <td colspan="6">Aucun événement trouvé.</td>
                             </tr>
                             <?php
                         } else {
                             foreach($res as $evenement){
                                 ?>
-                                <form action="">
                                     <tr>
                                         <td hidden="hidden"><?php echo $evenement['id_evenement'] ?></td>
                                         <td><?php echo $evenement['nom_evenement'] ?></td>
@@ -176,9 +179,22 @@ $res = $req->fetchAll();
                                         <td><?php echo $evenement['description_evenement'] ?></td>
                                         <td><?php echo $evenement['adresse'] ?></td>
                                         <td><?php echo $evenement['nb_de_places'] ?></td>
-                                        <td><?php echo $evenement['date_evenement'] ?></td>
                                         <td>
-                                            <input type="submit" value="Reserver" name="reserver"></form>
+                                            <?php
+                                                $date = new DateTime($evenement['date_evenement']);
+                                                $dateString = date_format($date, 'd/m/Y H:i');
+                                                echo $dateString;
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <form action="" method="post">
+                                            <input type="hidden" name="id_evenement" value="<?php echo $evenement['id_evenement'] ?>">
+                                            <input type="hidden" name="nb_de_places" value="<?php echo $evenement['nb_de_places'] ?>">
+                                            <input type="hidden" name="date_evenement" value="<?php echo $evenement['date_evenement'] ?>">
+                                            <input type="hidden" name ="participant" value="<?php echo $_SESSION['id'] ?>">
+                                            <input type="submit" value="Reserver" name="reserver">
+                                            </form>
+                                        </td>
 
                                 </tr>
                                 <?php
@@ -187,6 +203,13 @@ $res = $req->fetchAll();
                         ?>
 
                     </table>
+                    <?php
+                    } else {
+                    ?>
+                        <h1>Vous n'avez pas accès à cette page.</h1>
+                    <?php
+                    }
+                    ?>
                     <br>
                 </div>
             </div>
@@ -194,145 +217,6 @@ $res = $req->fetchAll();
     </section>
 
     <!-- end service section -->
-
-    <!-- info section -->
-    <section class="info_section layout_padding2">
-        <div class="container">
-            <div class="info_logo">
-                <h2>
-                    HandTime
-                </h2>
-            </div>
-            <div class="row">
-
-                <div class="col-md-3">
-                    <div class="info_contact">
-                        <h5>
-                            About Shop
-                        </h5>
-                        <div>
-                            <div class="img-box">
-                                <img src="../images/location-white.png" width="18px" alt="">
-                            </div>
-                            <p>
-                                Address
-                            </p>
-                        </div>
-                        <div>
-                            <div class="img-box">
-                                <img src="../images/telephone-white.png" width="12px" alt="">
-                            </div>
-                            <p>
-                                +01 1234567890
-                            </p>
-                        </div>
-                        <div>
-                            <div class="img-box">
-                                <img src="../images/envelope-white.png" width="18px" alt="">
-                            </div>
-                            <p>
-                                demo@gmail.com
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="info_info">
-                        <h5>
-                            Informations
-                        </h5>
-                        <p>
-                            ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="info_insta">
-                        <h5>
-                            Instagram
-                        </h5>
-                        <div class="insta_container">
-                            <div class="row m-0">
-                                <div class="col-4 px-0">
-                                    <a href="">
-                                        <div class="insta-box b-1">
-                                            <img src="../images/w1.png" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-4 px-0">
-                                    <a href="">
-                                        <div class="insta-box b-1">
-                                            <img src="../images/w2.png" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-4 px-0">
-                                    <a href="">
-                                        <div class="insta-box b-1">
-                                            <img src="../images/w3.png" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-4 px-0">
-                                    <a href="">
-                                        <div class="insta-box b-1">
-                                            <img src="../images/w4.png" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-4 px-0">
-                                    <a href="">
-                                        <div class="insta-box b-1">
-                                            <img src="../images/w5.png" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-4 px-0">
-                                    <a href="">
-                                        <div class="insta-box b-1">
-                                            <img src="../images/w6.png" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="info_form ">
-                        <h5>
-                            Newsletter
-                        </h5>
-                        <form action="">
-                            <input type="email" placeholder="Enter your email">
-                            <button>
-                                Subscribe
-                            </button>
-                        </form>
-                        <div class="social_box">
-                            <a href="">
-                                <img src="../images/fb.png" alt="">
-                            </a>
-                            <a href="">
-                                <img src="../images/twitter.png" alt="">
-                            </a>
-                            <a href="">
-                                <img src="../images/linkedin.png" alt="">
-                            </a>
-                            <a href="">
-                                <img src="../images/youtube.png" alt="">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- end info_section -->
 
     <!-- footer section -->
     <section class="footer_section">
