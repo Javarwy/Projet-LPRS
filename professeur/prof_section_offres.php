@@ -2,7 +2,7 @@
 session_start();
 include '../PHP/bdd/Bdd.php';
 $bdd = new Bdd;
-$req = $bdd->getBdd()->query('SELECT a.REF_UTILISATEUR as id, u.nom, u.prenom, u.email, e.nom as entreprise FROM utilisateur as u INNER JOIN alumni as a ON u.id_utilisateur = a.REF_UTILISATEUR INNER JOIN entreprise as e ON e.id_entreprise = a.REF_ENTREPRISE;');
+$req = $bdd->getBdd()->query('SELECT o.nom as titre, o.description, o.cible_formation, o.image, u.nom, u.prenom, e.nom as entreprise FROM offre as o INNER JOIN partenaire as p ON o.REF_PARTENAIRE = p.REF_UTILISATEUR INNER JOIN utilisateur as u ON p.REF_UTILISATEUR = u.id_utilisateur INNER JOIN entreprise as e ON p.REF_ENTREPRISE = e.id_entreprise;');
 $res = $req->fetchAll();
 ?>
 <!DOCTYPE html>
@@ -20,7 +20,7 @@ $res = $req->fetchAll();
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>Professeur - Profils des anciens élèves=</title>
+  <title>Professeur - Section des offres</title>
 
 
   <!-- bootstrap core css -->
@@ -179,33 +179,41 @@ $res = $req->fetchAll();
               <?php
               if (isset($_SESSION['id']) && $_SESSION['role'] == "prof"){
               ?>
-              <h2 style="color: #19c880">Profils des anciens élèves</h2>
+              <h2 style="color: #19c880">Section des offres</h2>
               <br>
-              <h5>Annuaire des alumni</h5>
+              <h5>Offres d'emploi et de stage</h5>
               <table border="1px" style="text-align: center; margin:auto;">
                   <tr>
                       <th hidden="hidden">Id</th>
-                      <th>Nom</th>
-                      <th>Prénom</th>
-                      <th>Email</th>
+                      <th>Titre</th>
+                      <th>Description</th>
+                      <th>Formation cible</th>
+                      <th>Image</th>
+                      <th>Partenaire</th>
                       <th>Entreprise</th>
                   </tr>
                   <?php
                   if (empty($res)) {
                   ?>
                       <tr>
-                          <td colspan="5">Aucun alumni trouvé.</td>
+                          <td colspan="6">Aucune offre trouvée.</td>
                       </tr>
                   <?php
                   } else {
-                      foreach($res as $alumni){
+                      foreach($res as $offre){
                   ?>
                     <tr>
-                        <td hidden="hidden"><?php echo $alumni['id'] ?></td>
-                        <td><?php echo $alumni['nom'] ?></td>
-                        <td><?php echo $alumni['prenom'] ?></td>
-                        <td><?php echo $alumni['email'] ?></td>
-                        <td><?php echo $alumni['entreprise'] ?></td>
+                        <td><?php echo $offre['titre'] ?></td>
+                        <td><?php echo $offre['description'] ?></td>
+                        <td><?php echo $offre['cible_formation'] ?></td>
+                        <td>
+                            <?php
+                            $pdfData = base64_encode($offre['image']);
+                            echo '<embed src="data:application/pdf;base64,'.$pdfData.'"width="300" height="400" />'
+                            ?>
+                        </td>
+                        <td><?php echo $offre['prenom'].' '.$offre['nom'] ?></td>
+                        <td><?php echo $offre['entreprise'] ?></td>
                     </tr>
                   <?php
                       }
