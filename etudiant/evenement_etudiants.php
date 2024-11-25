@@ -1,5 +1,5 @@
 <?php
-include 'PHP/bdd/Bdd.php';
+include '../PHP/bdd/Bdd.php';
 $bdd = new Bdd;
 $req = $bdd->getBdd()->query('SELECT e.id_evenement, e.nom_evenement, e.type, e.description_evenement, e.adresse, e.nb_de_places, e.date_evenement FROM evenement as e');
 $res = $req->fetchAll();

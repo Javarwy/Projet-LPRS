@@ -1,5 +1,5 @@
 <?php
-include 'PHP/bdd/Bdd.php';
+include '../PHP/bdd/Bdd.php';
 $bdd = new Bdd;
 $reponse = $bdd->getBdd()->query('SELECT etudiant.REF_UTILISATEUR as id_utilisateur, utilisateur.nom, utilisateur.prenom, utilisateur.email, utilisateur.info_sup, etudiant.annee_promo, etudiant.nom_promo, etudiant.cv, etudiant.formation
                                  FROM utilisateur
@@ -17,7 +17,7 @@ $resultat = $reponse ->fetchAll();
   <!-- Mobile Metas -->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <!-- Site Metas -->
-  <link rel="icon" href="images/fevicon/new_favicon.jpg" type="image/gif" />
+  <link rel="icon" href="../images/fevicon/new_favicon.jpg" type="image/gif" />
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta name="author" content="" />
@@ -26,18 +26,18 @@ $resultat = $reponse ->fetchAll();
 
 
   <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
 
   <!-- fonts style -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 
   <!-- font awesome style -->
-  <link href="css/font-awesome.min.css" rel="stylesheet" />
+  <link href="../css/font-awesome.min.css" rel="stylesheet" />
 
   <!-- Custom styles for this template -->
-  <link href="css/style.css" rel="stylesheet" />
+  <link href="../css/style.css" rel="stylesheet" />
   <!-- responsive style -->
-  <link href="css/responsive.css" rel="stylesheet" />
+  <link href="../css/responsive.css" rel="stylesheet" />
 
     <style>
         .dropbtn {
@@ -88,7 +88,7 @@ $resultat = $reponse ->fetchAll();
         <nav class="navbar navbar-expand-lg custom_nav-container ">
           <a class="navbar-brand" href="index.html">
             <span>
-              <img src="images/RobertSchuman.webp" alt="" width="150" height="100" />
+              <img src="../images/RobertSchuman.webp" alt="" width="150" height="100" />
             </span>
           </a>
 
@@ -98,14 +98,14 @@ $resultat = $reponse ->fetchAll();
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav  ">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php">Accueil</a>
+                        <a class="nav-link" href="../index.php">Accueil</a>
                     </li>
                     <li class="nav-item">
                         <div class="dropdown">
                         <button class="nav-link" href="etudiant.php">Etudiant</button>
 
                             <div class="dropdown-content">
-                                <a href="#">Annuaire des anciens élèves</a>
+                                <a href="#">Annuaire des élèves</a>
                                 <a href="#">Forum de discussion</a>
                                 <a href="#">Opportunités d'emploi et de stage</a>
                                 <a href="#">Participation à événements</a>
@@ -148,7 +148,7 @@ $resultat = $reponse ->fetchAll();
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contact.php">Contact</a>
+                        <a class="nav-link" href="../contact.php">Contact</a>
                     </li>
                 </ul>
                 <div class="user_optio_box">
