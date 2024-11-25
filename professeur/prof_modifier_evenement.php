@@ -151,7 +151,7 @@ session_start();
                                     <a href="prof_profils_anciens_eleves.php">Profils des anciens élèves</a>
                                     <a href="prof_profils_etudiants_actuels.php">Profils des étudiants actuels</a>
                                     <a href="prof_publication_evenements.php">Publication d'événements</a>
-                                    <a href="#">Section d'offres</a>
+                                    <a href="prof_section_offres.php">Section d'offres</a>
                                 </div>
                             </div>
                         </li>
@@ -162,9 +162,6 @@ session_start();
                     <div class="user_optio_box">
                         <a href="../connexion_global.php">
                             <i class="fa fa-user" aria-hidden="true"></i>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                         </a>
                     </div>
                 </div>
