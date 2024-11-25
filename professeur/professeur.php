@@ -95,13 +95,46 @@
                             <a class="nav-link" href="../index.php">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="etudiant.php">Etudiant</a>
+                            <div class="dropdown">
+                                <a href="#">
+                                    <button class="nav-link dropbtn">Etudiant
+                                    </button>
+                                </a>
+                                <div class="dropdown-content">
+                                    <a href="../annuaire_etudiant.php">Annuaire des anciens élèves</a>
+                                    <a href="../forum_etudiant.php">Forum de discussion</a>
+                                    <a href="../publication_offre.php">Opportunités d'emploi et de stage</a>
+                                    <a href="../evenement_etudiants.php">Participation à des événements</a>
+                                </div>
+                            </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="alumni.php">Alumni</a>
+                            <div class="dropdown">
+                                <a href="#">
+                                    <button class="nav-link dropbtn">Alumni
+                                    </button>
+                                </a>
+                                <div class="dropdown-content">
+                                    <a href="../Alumni/annuaire_ancien_eleve.php">Annuaire des anciens élèves</a>
+                                    <a href="../Alumni/forum_discussion_ancien_eleve.php">Forum de discussion</a>
+                                    <a href="../Alumni/Opportnuites_emploi_stages.php">Opportunités d'emploi et de stage</a>
+                                    <a href="../Alumni/evenement_ancien_eleve.php">Participation à des événements</a>
+                                </div>
+                            </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="entreprises.php">Entreprises</a>
+                            <div class="dropdown">
+                                <a href="#">
+                                    <button class="nav-link dropbtn">Entreprises
+                                    </button>
+                                </a>
+                                <div class="dropdown-content">
+                                    <a href="../profil_entreprise.php">Profil des entreprises</a>
+                                    <a href="../publication_offre.php">Publication d'offres</a>
+                                    <a href="../Alumni/Opportnuites_emploi_stages.php">Accès aux profils des anciens élèves</a>
+                                    <a href="../evenement_affiche.php">Publication d'événements</a>
+                                </div>
+                            </div>
                         </li>
                         <li class="nav-item">
                             <div class="dropdown">
@@ -122,7 +155,7 @@
                         </li>
                     </ul>
                     <div class="user_optio_box">
-                        <a href="">
+                        <a href="../connexion_global.php">
                             <i class="fa fa-user" aria-hidden="true"></i>
                         </a>
                         <a href="">
