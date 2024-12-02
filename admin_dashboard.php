@@ -1,7 +1,17 @@
+<?php include 'PHP/bdd/Bdd.php';
+
+$bdd = new Bdd;
+$res_uti = $bdd->getBdd()->query('SELECT * FROM utilisateur');
+$res_ev = $bdd->getBdd()->query('SELECT * FROM evenement');
+$res_of = $bdd->getBdd()->query('SELECT * FROM offre');
+
+?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
+    
   <!-- Basic -->
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -13,7 +23,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>Connexion - Lycée Privé Robert Schuman</title>
+  <title>Administrateur - Lycée Privé Robert Schuman</title>
 
 
   <!-- bootstrap core css -->
@@ -171,31 +181,117 @@
     <!-- end header section -->
     <br>
      <center>
-     <b><h1>Panneau d'administrateur</h1></b>
+     <b><h1></h1></b>
      <br>
        <br>
        <div class="main-block">
             <h5>Bienvenue, <?php echo $_SESSION['prenom']." ".$_SESSION['nom'] ?>, vous êtes actuellement connecté en temps qu'administrateur</h5>
+            <b><h1>Panneau d'administrateur</h1></b>
+
+        <b><h4>Utilisateurs</h4></b>
             <table style="text-align: center" border="1px">
                 <tr>
                     <th>Nom</th>
                     <th>Prénom</th>
                     <th>Email</th>
                     <th>Role</th>
+                    <th>Info Suplémentaires</th>
+                    <th>Valide</th>
                 </tr>
                 <?php
-                foreach($res as $element){
+                foreach($res_uti as $element){
                     ?>
                     <tr>
                         <td><?php echo $element['nom']?></td>
                         <td><?php echo $element['prenom']?></td>
                         <td><?php echo $element['email']?></td>
                         <td><?php echo $element['role']?></td>
+                        <td><?php echo $element['info_sup']?></td>
+                        <td><?php
+                        if ($element['active'] == 0) {
+                            echo "Non";
+                        } else if ($element['active'] == 1) {
+                            echo "Oui";
+                        } else {
+                            echo "Euhh";     
+                        }
+                        ?></td>
+                        <td><button type="button">Valider</button></td>
+                        <td><button type="button">Modifier</button></td>
+                        <td><button type="button">Supprimer</button></td>
                     </tr>
                     <?php
                 }
                 ?>
             </table>
+
+            </div>
+
+            <div>
+
+            <b><h4>Evenements</h4></b>
+            <table style="text-align: center" border="1px">
+                <tr>
+                    <th>Nom</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Adresse</th>
+                    <th>Nombre de places</th>
+                    <th>Date</th>
+                    <th>Vérification</th>
+                </tr>
+                <?php
+                foreach($res_ev as $element){
+                    ?>
+                    <tr>
+                        <td><?php echo $element['nom_evenement']?></td>
+                        <td><?php echo $element['type']?></td>
+                        <td><?php echo $element['description_evenement']?></td>
+                        <td><?php echo $element['adresse']?></td>
+                        <td><?php echo $element['nb_place']?></td>
+                        <td><?php echo $element['date_evenement']?></td>
+                        <td><?php
+                        if ($element['verification'] == false) {
+                            echo "Non";
+                        } else {
+                            echo "Oui";
+                        }
+                        ?></td>
+                        <td><button type="button">Valider</button></td>
+                        <td><button type="button">Modifier</button></td>
+                        <td><button type="button">Supprimer</button></td>
+                    </tr>
+                    <?php
+                }
+                ?>
+            </table>
+
+            </div>
+
+            <div>
+
+            <b><h4>Offres d'emplois</h4></b>
+            <table style="text-align: center" border="1px">
+                <tr>
+                    <th>Nom</th>
+                    <th>Cible</th>
+                </tr>
+                <?php
+                foreach($res_of as $element){
+                    ?>
+                    <tr>
+                        <td><?php echo $element['nom']?></td>
+                        <td><?php echo $element['cible_formation']?></td>
+                        <td><button type="button">Modifier</button></td>
+                        <td><button type="button">Supprimer</button></td>
+                    </tr>
+                    <?php
+                }
+                ?>
+            </table>
+
+            </div>
+
             <a href="modification.php"><button>Modifier mes informations de compte</button></a>
             <a href="vols.php"><button type="button">Déconnexion</button></a>
         </div>
