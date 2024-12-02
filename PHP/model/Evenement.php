@@ -24,14 +24,21 @@ class Evenement {
 
     public function creerEvenement(array $organisateurs) : bool {
         $bdd = new Bdd();
-        $req = $bdd->getBdd()->prepare('INSERT INTO evenement (nom_evenement, type, description_evenement, adresse, nb_de_places, verification, date_evenement) VALUES (:nom_evenement, :type, :description_evenement, :adresse, :nb_de_places, 0, :date_evenement)');
+        $req = $bdd->getBdd()->prepare('INSERT INTO evenement (nom_evenement, type, description_evenement, adresse, nb_de_places, verification, date_evenement) VALUES (:nom_evenement, :type, :description_evenement, :adresse, :nb_de_places, :verification, :date_evenement)');
+        $premier = $organisateurs[0];
+        if ($premier['role'] == "prof" ||  $premier['role'] == "partenaire") {
+            $this->setVerification(1);
+        } else {
+            $this->setVerification(0);
+        }
         $req->execute(array(
             'nom_evenement'=>$this->getNomEvenement(),
             'type'=>$this->getType(),
             'description_evenement'=>$this->getDescriptionEvenement(),
             'adresse'=>$this->getAdresse(),
             'nb_de_places'=>$this->getNbDePlaces(),
-            'date_evenement'=>$this->dateEvenement
+            'verification'=>$this->getVerification(),
+            'date_evenement'=>$this->getDateEvenement()
         ));
         $verif = $this->getEvenementByName($this->getNomEvenement());
         foreach($verif as $element){
@@ -41,7 +48,7 @@ class Evenement {
             $creer = $bdd->getBdd()->prepare('INSERT INTO creer VALUES (:ref_utilisateur, :ref_evenement)');
             foreach($organisateurs as $organisateur){
                 $creer->execute(array(
-                    'ref_utilisateur'=>$organisateur,
+                    'ref_utilisateur'=>$organisateur['id'],
                     'ref_evenement'=>$id_evenement,
                 ));
             }

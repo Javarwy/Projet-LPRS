@@ -93,7 +93,7 @@ if (isset($_SESSION['id'])) {
             const utilisateurs = <?php echo json_encode($res) ?>;
             utilisateurs.forEach(utilisateur => {
                 const option = document.createElement("option");
-                option.value = utilisateur.id_utilisateur;
+                option.value = `${utilisateur.id_utilisateur}-${utilisateur.role}`;
                 option.text = `${utilisateur.nom} ${utilisateur.prenom}`;
                 select.appendChild(option);
             });
@@ -283,7 +283,7 @@ if (isset($_SESSION['id'])) {
                         <td id="organisateurs">
                             <div id="orga1">
                                 <select name="orga1" readonly="">
-                                    <option value="<?php echo $_SESSION['id'] ?>"><?php echo $_SESSION['nom']." ".$_SESSION['prenom'] ?></option>
+                                    <option value="<?php echo $_SESSION['id'].'-'.$_SESSION['role'] ?>"><?php echo $_SESSION['nom']." ".$_SESSION['prenom'] ?></option>
                                 </select>
                             </div>
                             <?php
