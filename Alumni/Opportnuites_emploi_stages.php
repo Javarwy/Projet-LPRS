@@ -174,29 +174,29 @@ $res = $req->fetchAll();
                         </tr>
                         <?php
                         if (empty($res)) {
-                        ?>
-                        <tr>
-                            <td colspan="6">Aucune offre trouvée.</td>
-                        </tr>
-                        <?php
+                            ?>
+                            <tr>
+                                <td colspan="6">Aucune offre trouvée.</td>
+                            </tr>
+                            <?php
                         } else {
                             foreach($res as $offre) {
-                        ?>
-                        <tr>
-                            <td><?php echo $offre['titre'] ?></td>
-                            <td><?php echo $offre['description'] ?></td>
-                            <td><?php echo $offre['cible_formation'] ?></td>
-                            <td>
-                                <?php
-                                $pdfData = base64_encode($offre['image']);
-                                echo '<embed src="data:application/pdf;base64,'.$pdfData.'"width=100" height="100" />';
                                 ?>
-                            </td>
-                            <td><?php echo $offre['prenom'].' '.$offre['nom'] ?></td>
-                            <td><?php echo $offre['entreprise'] ?></td>
-                            <td><a href="postuler.html" class="apply-button">Postuler</a></td>
-                        </tr>
-                        <?php
+                                <tr>
+                                    <td><?php echo $offre['titre'] ?></td>
+                                    <td><?php echo $offre['description'] ?></td>
+                                    <td><?php echo $offre['cible_formation'] ?></td>
+                                    <td>
+                                        <?php
+                                        $pdfData = base64_encode($offre['image']);
+                                        echo '<embed src="data:application/pdf;base64,'.$pdfData.'"width=100" height="100" />';
+                                        ?>
+                                    </td>
+                                    <td><?php echo $offre['prenom'].' '.$offre['nom'] ?></td>
+                                    <td><?php echo $offre['entreprise'] ?></td>
+                                    <td><a href="postuler.html" class="apply-button">Postuler</a></td>
+                                </tr>
+                                <?php
                             }
                         }
                         ?>
@@ -204,9 +204,8 @@ $res = $req->fetchAll();
                 </div>
             </div>
         </div>
-    </div>
-    </section>
+</div>
+</section>
 
 </body>
 </html>
-
