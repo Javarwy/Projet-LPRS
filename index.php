@@ -106,10 +106,10 @@ session_start();
                       <button class="nav-link dropbtn">Etudiant
                       </button>
                       <div class="dropdown-content">
-                          <a href="Alumni/annuaire_ancien_eleve">Annuaire des anciens élèves</a>
-                          <a href="Alumni/forum_discussion_ancien_eleve">Forum de discussion</a>
-                          <a href="Alumni/Opportnuites_emploi_stages.php">Oportunités d'emploi et de stage</a>
-                          <a href="Alumni/evenement_ancien_eleve.php">Participation des évènements</a>
+                          <a href="etudiant/annuaire_ancien_eleve">Annuaire des anciens élèves</a>
+                          <a href="etudiant/forum_discussion_ancien_eleve">Forum de discussion</a>
+                          <a href="etudiant/Opportnuites_emploi_stages.php">Oportunités d'emploi et de stage</a>
+                          <a href="etudiant/etudiant_publication_evenements.php">Participation des évènements</a>
                       </div>
                   </div>
               </li>
