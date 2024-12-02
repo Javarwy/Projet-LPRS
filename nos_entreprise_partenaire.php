@@ -1,8 +1,5 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 
 <head>
   <!-- Basic -->
@@ -16,7 +13,7 @@ session_start();
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>LPRS - Lycée Privé Robert Schuman</title>
+  <title>Nos Entreprises Partenaires - Lycée Privé Robert Schuman</title>
 
 
   <!-- bootstrap core css -->
@@ -35,44 +32,6 @@ session_start();
 
 </head>
 
-  <style>
-      .dropbtn {
-          font-size: 16px;
-          border: none;
-          outline: none;
-          color: white;
-          padding: 14px 16px;
-          background-color: inherit;
-          font-family: inherit;
-          margin: 0;
-      }
-      .dropdown-content {
-          display: none;
-          position: absolute;
-          background-color: #f9f9f9;
-          min-width: 160px;
-          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-          z-index: 1;
-      }
-
-      .dropdown-content a {
-          float: none;
-          color: black;
-          padding: 12px 16px;
-          text-decoration: none;
-          display: block;
-          text-align: left;
-      }
-
-      .dropdown-content a:hover {
-          background-color: #ddd;
-      }
-
-      .dropdown:hover .dropdown-content {
-          display: block;
-      }
-  </style>
-
 <body>
 
   <div class="hero_area">
@@ -80,7 +39,7 @@ session_start();
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="../index.php">
+          <a class="navbar-brand" href="index.html">
             <span>
               <img src="images/RobertSchuman.webp" alt="" width="150" height="100" />
             </span>
@@ -92,73 +51,28 @@ session_start();
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  ">
-              <li class="nav-item">
-                <a class="nav-link" href="../index.php">Accueil</a>
-                <div class="dropdown-content">
-                          <a href="Alumni/annuaire_ancien_eleve">Annuaire des anciens élèves</a>
-                          <a href="Alumni\forum_discussion_ancien_eleve">Forum de discussion</a>
-                          <a href="Alumni\Opportnuites_emploi_stages.php">Oportunités d'emploi et de stage</a>
-                          <a href="Alumni\evenement_ancien_eleve.php">Participation des évènements</a>
-                      </div>
+              <li class="nav-item active">
+                <a class="nav-link" href="index.html">Accueil<span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                  <div class="dropdown">
-                      <button class="nav-link dropbtn">Etudiant
-                      </button>
-                      <div class="dropdown-content">
-                          <a href="Alumni/annuaire_ancien_eleve">Annuaire des anciens élèves</a>
-                          <a href="Alumni/forum_discussion_ancien_eleve">Forum de discussion</a>
-                          <a href="Alumni/Opportnuites_emploi_stages.php">Oportunités d'emploi et de stage</a>
-                          <a href="Alumni/evenement_ancien_eleve.php">Participation des évènements</a>
-                      </div>
-                  </div>
+                <a class="nav-link" href="about.html">Formations</a>
               </li>
               <li class="nav-item">
-                  <div class="dropdown">
-                      <button class="nav-link dropbtn">Alumni
-                      </button>
-                      <div class="dropdown-content">
-                          <a href="Alumni/annuaire_ancien_eleve">Annuaire des anciens élèves</a>
-                          <a href="Alumni/forum_discussion_ancien_eleve">Forum de discussion</a>
-                          <a href="Alumni/Opportnuites_emploi_stages.php">Oportunités d'emploi et de stage</a>
-                          <a href="Alumni/evenement_ancien_eleve.php">Participation des évènements</a>
-                      </div>
-                  </div>
+                <a class="nav-link" href="product.html">Evenements</a>
               </li>
               <li class="nav-item">
-                  <div class="dropdown">
-                      <button class="nav-link dropbtn">Entreprise
-                      </button>
-                      <div class="dropdown-content">
-                          <a href="Alumni/annuaire_ancien_eleve">Annuaire des anciens élèves</a>
-                          <a href="Alumni/forum_discussion_ancien_eleve">Forum de discussion</a>
-                          <a href="Alumni/Opportnuites_emploi_stages.php">Oportunités d'emploi et de stage</a>
-                          <a href="Alumni/evenement_ancien_eleve.php">Participation des évènements</a>
-                      </div>
-                  </div>
+                <a class="nav-link" href="testimonial.html">Contacts</a>
               </li>
               <li class="nav-item">
-                  <div class="dropdown">
-                      <a href="professeur/professeur.php">
-                          <button class="nav-link dropbtn">Professeur
-                          </button>
-                      </a>
-                      <div class="dropdown-content">
-                          <a href="professeur/prof_profils_anciens_eleves.php">Profils des anciens élèves</a>
-                          <a href="professeur/prof_profils_etudiants_actuels.php">Profils des étudiants actuels</a>
-                          <a href="professeur/prof_publication_evenements.php">Publication d'événements</a>
-                          <a href="#">Section d'offres</a>
-                      </div>
-                  </div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="../contact.php">Contact</a>
+                <a class="nav-link" href="contact.html">Forums</a>
               </li>
             </ul>
             <div class="user_optio_box">
               <a href="inscription_global.php">
                 <i class="fa fa-user" aria-hidden="true"></i>
               </a>
+              <a href="">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
               </a>
             </div>
           </div>

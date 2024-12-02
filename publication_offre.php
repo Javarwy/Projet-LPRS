@@ -1,8 +1,5 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 
 <head>
   <!-- Basic -->
@@ -16,7 +13,7 @@ session_start();
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>LPRS - Lycée Privé Robert Schuman</title>
+  <title>Offres - Lycée Privé Robert Schuman</title>
 
 
   <!-- bootstrap core css -->
@@ -127,7 +124,7 @@ session_start();
               </li>
               <li class="nav-item">
                   <div class="dropdown">
-                      <button class="nav-link dropbtn">Entreprise
+                      <button class="nav-link dropbtn">Professeur
                       </button>
                       <div class="dropdown-content">
                           <a href="Alumni/annuaire_ancien_eleve">Annuaire des anciens élèves</a>
@@ -139,15 +136,13 @@ session_start();
               </li>
               <li class="nav-item">
                   <div class="dropdown">
-                      <a href="professeur/professeur.php">
-                          <button class="nav-link dropbtn">Professeur
-                          </button>
-                      </a>
+                      <button class="nav-link dropbtn">Entreprise
+                      </button>
                       <div class="dropdown-content">
-                          <a href="professeur/prof_profils_anciens_eleves.php">Profils des anciens élèves</a>
-                          <a href="professeur/prof_profils_etudiants_actuels.php">Profils des étudiants actuels</a>
-                          <a href="professeur/prof_publication_evenements.php">Publication d'événements</a>
-                          <a href="#">Section d'offres</a>
+                          <a href="Alumni/annuaire_ancien_eleve">Annuaire des anciens élèves</a>
+                          <a href="Alumni/forum_discussion_ancien_eleve">Forum de discussion</a>
+                          <a href="Alumni/Opportnuites_emploi_stages.php">Oportunités d'emploi et de stage</a>
+                          <a href="Alumni/evenement_ancien_eleve.php">Participation des évènements</a>
                       </div>
                   </div>
               </li>
@@ -159,6 +154,8 @@ session_start();
               <a href="inscription_global.php">
                 <i class="fa fa-user" aria-hidden="true"></i>
               </a>
+              <a href="">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
               </a>
             </div>
           </div>
