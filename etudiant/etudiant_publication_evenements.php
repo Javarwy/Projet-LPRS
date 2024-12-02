@@ -1,31 +1,33 @@
 <?php
 session_start();
-include '../PHP/bdd/Bdd.php';
-$bdd = new Bdd;
-$req = $bdd->getBdd()->query('SELECT e.id_evenement, e.nom_evenement, e.type, e.description_evenement, e.adresse, e.nb_de_places-COUNT(p.REF_UTILISATEUR) as "nb_de_places", e.date_evenement, u.nom, u.prenom, u.id_utilisateur FROM evenement as e LEFT JOIN participer as p ON e.id_evenement = p.REF_EVENEMENT LEFT JOIN creer as c ON e.id_evenement = c.REF_EVENEMENT LEFT JOIN utilisateur as u ON c.REF_UTILISATEUR = u.id_utilisateur WHERE e.verification = 1 GROUP BY e.id_evenement, u.id_utilisateur ORDER BY e.date_evenement;');
-$res = $req->fetchAll();
-$evenements = [];
-foreach ($res as $evenement){
-    $id_evenement = $evenement['id_evenement'];
-    if (!isset($evenements[$id_evenement])) {
-        $evenements[$id_evenement] = [
-            'nom_evenement' => $evenement['nom_evenement'],
-            'type' => $evenement['type'],
-            'description_evenement' => $evenement['description_evenement'],
-            'date_evenement' => $evenement['date_evenement'],
-            'adresse' => $evenement['adresse'],
-            'nb_de_places' => $evenement['nb_de_places'],
-            'organisateurs' => [],
-            'est_organisateur' => false
+if (isset($_SESSION['id'])){
+    include '../PHP/bdd/Bdd.php';
+    $bdd = new Bdd;
+    $req = $bdd->getBdd()->query('SELECT e.id_evenement, e.nom_evenement, e.type, e.description_evenement, e.adresse, e.nb_de_places-COUNT(p.REF_UTILISATEUR) as "nb_de_places", e.date_evenement, u.nom, u.prenom, u.id_utilisateur FROM evenement as e LEFT JOIN participer as p ON e.id_evenement = p.REF_EVENEMENT LEFT JOIN creer as c ON e.id_evenement = c.REF_EVENEMENT LEFT JOIN utilisateur as u ON c.REF_UTILISATEUR = u.id_utilisateur WHERE e.verification = 1 GROUP BY e.id_evenement, u.id_utilisateur ORDER BY e.date_evenement;');
+    $res = $req->fetchAll();
+    $evenements = [];
+    foreach ($res as $evenement){
+        $id_evenement = $evenement['id_evenement'];
+        if (!isset($evenements[$id_evenement])) {
+            $evenements[$id_evenement] = [
+                'nom_evenement' => $evenement['nom_evenement'],
+                'type' => $evenement['type'],
+                'description_evenement' => $evenement['description_evenement'],
+                'date_evenement' => $evenement['date_evenement'],
+                'adresse' => $evenement['adresse'],
+                'nb_de_places' => $evenement['nb_de_places'],
+                'organisateurs' => [],
+                'est_organisateur' => false
+            ];
+        }
+        $evenements[$id_evenement]['organisateurs'][] = [
+            'id_utilisateur' => $evenement['id_utilisateur'],
+            'nom' => $evenement['nom'],
+            'prenom' => $evenement['prenom']
         ];
-    }
-    $evenements[$id_evenement]['organisateurs'][] = [
-        'id_utilisateur' => $evenement['id_utilisateur'],
-        'nom' => $evenement['nom'],
-        'prenom' => $evenement['prenom']
-    ];
-    if ($evenement['id_utilisateur'] == $_SESSION['id']) {
-        $evenements[$id_evenement]['est_organisateur'] = true;
+        if ($evenement['id_utilisateur'] == $_SESSION['id']) {
+            $evenements[$id_evenement]['est_organisateur'] = true;
+        }
     }
 }
 ?>
@@ -44,7 +46,7 @@ foreach ($res as $evenement){
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>LPRS - Lycée Privé Robert Schuman</title>
+    <title>Professeur - Publication d'événements</title>
 
 
     <!-- bootstrap core css -->
@@ -133,23 +135,45 @@ foreach ($res as $evenement){
                         </li>
                         <li class="nav-item">
                             <div class="dropdown">
-                                <a href="etudiant.php">
+                                <a href="#">
                                     <button class="nav-link dropbtn">Etudiant
                                     </button>
                                 </a>
                                 <div class="dropdown-content">
-                                    <a href="prof_profils_anciens_eleves.php">Profils des anciens élèves</a>
-                                    <a href="prof_profils_etudiants_actuels.php">Profils des étudiants actuels</a>
-                                    <a href="prof_publication_evenements.php">Publication d'événements</a>
-                                    <a href="#">Section d'offres</a>
-                            </div>
+                                    <a href="annuaire_etudiant.php">Annuaire des anciens élèves</a>
+                                    <a href="forum_etudiant.php">Forum de discussion</a>
+                                    <a href="publication_offre.php">Opportunités d'emploi et de stage</a>
+                                    <a href="evenement_etudiants.php">Participation à des événements</a>
+                                </div>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="alumni.php">Alumni</a>
+                            <div class="dropdown">
+                                <a href="#">
+                                    <button class="nav-link dropbtn">Alumni
+                                    </button>
+                                </a>
+                                <div class="dropdown-content">
+                                    <a href="../Alumni/annuaire_ancien_eleve.php">Annuaire des anciens élèves</a>
+                                    <a href="../Alumni/forum_discussion_ancien_eleve.php">Forum de discussion</a>
+                                    <a href="../Alumni/Opportnuites_emploi_stages.php">Opportunités d'emploi et de stage</a>
+                                    <a href="../Alumni/evenement_ancien_eleve.php">Participation à des événements</a>
+                                </div>
+                            </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="entreprises.php">Entreprises</a>
+                            <div class="dropdown">
+                                <a href="#">
+                                    <button class="nav-link dropbtn">Entreprises
+                                    </button>
+                                </a>
+                                <div class="dropdown-content">
+                                    <a href="../profil_entreprise.php">Profil des entreprises</a>
+                                    <a href="../publication_offre.php">Publication d'offres</a>
+                                    <a href="../Alumni/Opportnuites_emploi_stages.php">Accès aux profils des anciens élèves</a>
+                                    <a href="../evenement_affiche.php">Publication d'événements</a>
+                                </div>
+                            </div>
                         </li>
                         <li class="nav-item">
                             <div class="dropdown">
@@ -158,10 +182,10 @@ foreach ($res as $evenement){
                                     </button>
                                 </a>
                                 <div class="dropdown-content">
-                                    <a href="../etudiant/annuaire_etudiant.php.php">Annuaire des elèves</a>
-                                    <a href="../etudiant/.php">Forum de discussion</a>
-                                    <a href="prof_publication_evenements.php">Opportunités d'emploi et de stage</a>
-                                    <a href="#">Participation à événements</a>
+                                    <a href="../professeur/prof_profils_anciens_eleves.php">Profils des anciens élèves</a>
+                                    <a href="../professeur/prof_profils_etudiants_actuels.php">Profils des étudiants actuels</a>
+                                    <a href="../professeur/rof_publication_evenements.php">Publication d'événements</a>
+                                    <a href="../professeur/prof_section_offres.php">Section d'offres</a>
                                 </div>
                             </div>
                         </li>
@@ -170,11 +194,8 @@ foreach ($res as $evenement){
                         </li>
                     </ul>
                     <div class="user_optio_box">
-                        <a href="">
+                        <a href="../connexion_global.php">
                             <i class="fa fa-user" aria-hidden="true"></i>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                         </a>
                     </div>
                 </div>
@@ -232,11 +253,11 @@ foreach ($res as $evenement){
                             <?php
                         }
                     }
-                    if (isset($_SESSION['id']) && $_SESSION['role'] == "prof") {
+                    if (isset($_SESSION['id']) && $_SESSION['role'] == "etudiant") {
                         ?>
                         <h2 style="color: #19c880">Publication d'événements</h2>
                         <br>
-                        <a href="prof_creer_evenement.php">
+                        <a href="etudiant_creer_evenement.php">
                             <button type="button">Créer un événement</button>
                         </a>
                         <br><br>
@@ -289,7 +310,7 @@ foreach ($res as $evenement){
                                         if ($evenement['est_organisateur']){
                                             ?>
                                             <td>
-                                                <form method="post" action="prof_modifier_evenement.php">
+                                                <form method="post" action="etudiant_modifier_evenement.php">
                                                     <input type="hidden" name="id_evenement" value="<?php echo $id_evenement ?>">
                                                     <input type="hidden" name="nom_evenement" value="<?php echo $evenement['nom_evenement'] ?>">
                                                     <input type="hidden" name="type" value="<?php echo $evenement['type'] ?>">
@@ -301,21 +322,21 @@ foreach ($res as $evenement){
                                                 </form>
                                             </td>
                                             <td>
-                                                <form method="post" action="../PHP/controleur/EvenementsController.php" id="supprimer">
+                                                <form method="post" action="../PHP/controleur/EvenementsEtudiantController.php" id="supprimer">
                                                     <input type="hidden" name="id_evenement" value="<?php echo $id_evenement ?>">
-                                                    <button type="submit" onclick="confirmerSuppression()" name="supprimerProf">Supprimer</button>
+                                                    <button type="submit" onclick="confirmerSuppression()" name="supprimerEtudiant">Supprimer</button>
                                                 </form>
                                             </td>
                                             <?php
                                         } else {
                                             ?>
                                             <td colspan="2">
-                                                <form method="post" action="../PHP/controleur/EvenementsController.php">
+                                                <form method="post" action="../PHP/controleur/EvenementsEtudiantController.php">
                                                     <input type="hidden" name="id_evenement" value="<?php echo $id_evenement ?>">
                                                     <input type="hidden" name="nb_de_places" value="<?php echo $evenement['nb_de_places'] ?>">
                                                     <input type="hidden" name="date_evenement" value="<?php echo $evenement['date_evenement'] ?>">
                                                     <input type="hidden" name="participant" value="<?php echo $_SESSION['id'] ?>">
-                                                    <button type="submit" name="reserverProf">Réserver</button>
+                                                    <button type="submit" name="reserverEtudiant">Réserver</button>
                                                 </form>
                                             </td>
                                             <?php
@@ -341,145 +362,6 @@ foreach ($res as $evenement){
     </section>
 
     <!-- end service section -->
-
-    <!-- info section -->
-    <section class="info_section layout_padding2">
-        <div class="container">
-            <div class="info_logo">
-                <h2>
-                    HandTime
-                </h2>
-            </div>
-            <div class="row">
-
-                <div class="col-md-3">
-                    <div class="info_contact">
-                        <h5>
-                            About Shop
-                        </h5>
-                        <div>
-                            <div class="img-box">
-                                <img src="../images/location-white.png" width="18px" alt="">
-                            </div>
-                            <p>
-                                Address
-                            </p>
-                        </div>
-                        <div>
-                            <div class="img-box">
-                                <img src="../images/telephone-white.png" width="12px" alt="">
-                            </div>
-                            <p>
-                                +01 1234567890
-                            </p>
-                        </div>
-                        <div>
-                            <div class="img-box">
-                                <img src="../images/envelope-white.png" width="18px" alt="">
-                            </div>
-                            <p>
-                                demo@gmail.com
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="info_info">
-                        <h5>
-                            Informations
-                        </h5>
-                        <p>
-                            ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="info_insta">
-                        <h5>
-                            Instagram
-                        </h5>
-                        <div class="insta_container">
-                            <div class="row m-0">
-                                <div class="col-4 px-0">
-                                    <a href="">
-                                        <div class="insta-box b-1">
-                                            <img src="../images/w1.png" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-4 px-0">
-                                    <a href="">
-                                        <div class="insta-box b-1">
-                                            <img src="../images/w2.png" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-4 px-0">
-                                    <a href="">
-                                        <div class="insta-box b-1">
-                                            <img src="../images/w3.png" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-4 px-0">
-                                    <a href="">
-                                        <div class="insta-box b-1">
-                                            <img src="../images/w4.png" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-4 px-0">
-                                    <a href="">
-                                        <div class="insta-box b-1">
-                                            <img src="../images/w5.png" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-4 px-0">
-                                    <a href="">
-                                        <div class="insta-box b-1">
-                                            <img src="../images/w6.png" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="info_form ">
-                        <h5>
-                            Newsletter
-                        </h5>
-                        <form action="">
-                            <input type="email" placeholder="Enter your email">
-                            <button>
-                                Subscribe
-                            </button>
-                        </form>
-                        <div class="social_box">
-                            <a href="">
-                                <img src="../images/fb.png" alt="">
-                            </a>
-                            <a href="">
-                                <img src="../images/twitter.png" alt="">
-                            </a>
-                            <a href="">
-                                <img src="../images/linkedin.png" alt="">
-                            </a>
-                            <a href="">
-                                <img src="../images/youtube.png" alt="">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- end info_section -->
 
     <!-- footer section -->
     <section class="footer_section">
