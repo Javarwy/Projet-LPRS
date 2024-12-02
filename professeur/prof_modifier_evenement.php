@@ -229,7 +229,7 @@ session_start();
                             <label for="nb_de_places">Nombre de places :</label>
                         </td>
                         <td>
-                            <input id="nb_de_places" name="nbDePlaces" type="number" value="<?php echo $_POST['nb_de_places'] ?>" required>
+                            <?php echo $_POST['nb_de_places'] ?>
                         </td>
                     </tr>
                     <tr>
@@ -237,7 +237,10 @@ session_start();
                             <label for="date_evenement">Date et heure :</label>
                         </td>
                         <td>
-                            <input id="date_evenement" name="dateEvenement" type="datetime-local" value="<?php echo $_POST['date_evenement'] ?>" required>
+                            <?php
+                            $datetime = date("Y-m-d\TH:i", strtotime($_POST['date_evenement']));
+                            ?>
+                            <input id="date_evenement" name="dateEvenement" type="datetime-local" value="<?php echo $datetime ?>" required>
                         </td>
                     </tr>
                     <tr>
@@ -247,6 +250,7 @@ session_start();
                     </tr>
                 </table>
                 <input type="hidden" name="id_evenement" value="<?php echo $_POST['id_evenement']?>">
+                <input type="hidden" name="role" value="<?php echo $_SESSION['role'] ?>">
             </form>
         </div>
         <?php

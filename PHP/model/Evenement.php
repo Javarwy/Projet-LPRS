@@ -58,7 +58,7 @@ class Evenement {
         }
     }
 
-    public function modifierEvenement(Evenement $evenement) : bool{
+    public function modifierEvenement(Evenement $evenement, $role) : bool{
         $bdd = new Bdd();
         $verif = $this->getEvenementById($this->getIdEvenement());
         foreach($verif as $element){
@@ -67,18 +67,22 @@ class Evenement {
                 'type' => $element['type'],
                 'descriptionEvenement' => $element['description_evenement'],
                 'adresse' => $element['adresse'],
-                'nbDePlaces' => $element['nb_de_places'],
                 'dateEvenement' => $element['date_evenement']
             ]);
         }
-        $req = $bdd->getBdd()->prepare('UPDATE evenement SET nom_evenement = :nom_evenement, type = :type, description_evenement = :description_evenement, adresse = :adresse, nb_de_places = :nb_de_places, date_evenement = :date_evenement, verification = 0 WHERE id_evenement = :id_evenement');
+        $req = $bdd->getBdd()->prepare('UPDATE evenement SET nom_evenement = :nom_evenement, type = :type, description_evenement = :description_evenement, adresse = :adresse, date_evenement = :date_evenement, verification = :verification WHERE id_evenement = :id_evenement');
+        if ($role == 'prof' || $role == 'partenaire') {
+            $this->setVerification(1);
+        } else {
+            $this->setVerification(0);
+        }
         $req->execute(array(
             'nom_evenement'=>$this->getNomEvenement(),
             'type'=>$this->getType(),
             'description_evenement'=>$this->getDescriptionEvenement(),
             'adresse'=>$this->getAdresse(),
-            'nb_de_places'=>$this->getNbDePlaces(),
             'date_evenement'=>$this->getDateEvenement(),
+            'verification'=>$this->getVerification(),
             'id_evenement'=>$this->getIdEvenement()
         ));
         if ($evenement === $old){
