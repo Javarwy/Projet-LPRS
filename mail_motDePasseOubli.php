@@ -15,11 +15,11 @@ try {
     $mail->SMTPAuth   = true;                                   
     $mail->Username   = 'schumanair@gmail.com';                    
     $mail->Password   = 'pfmrcghbuttxmjlg ';                             
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;          
-    $mail->Port       = 465;                                   
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;          
+    $mail->Port       = 587;                                   
 
     $mail->setFrom('schumanair@gmail.com', 'Schuman');
-    $mail->addAddress($_POST["email_support"]);
+    $mail->addAddress("r.cazin@lprs.fr");
     #*---$mail->addReplyTo('info@example.com', 'Information'); 
 
     $mail->isHTML(true);                                  
@@ -28,7 +28,6 @@ try {
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
     echo 'Message has been sent';
-    echo var_dump($mail);
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
