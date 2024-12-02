@@ -93,7 +93,7 @@ if (isset($_SESSION['id'])) {
             const utilisateurs = <?php echo json_encode($res) ?>;
             utilisateurs.forEach(utilisateur => {
                 const option = document.createElement("option");
-                option.value = utilisateur.id_utilisateur;
+                option.value = `${utilisateur.id_utilisateur}-${utilisateur.role}`;
                 option.text = `${utilisateur.nom} ${utilisateur.prenom}`;
                 select.appendChild(option);
             });
@@ -219,14 +219,14 @@ if (isset($_SESSION['id'])) {
                 <?php
             }
         }
-        if (isset($_SESSION['id']) && $_SESSION['role'] == "prof"){
+        if (isset($_SESSION['id']) && $_SESSION['role'] == "etudiant"){
             ?>
             <h1>Créer un événement</h1>
             <br>
             <h5>Veuillez renseigner les informations suivantes : </h5>
             <br>
             <div>
-                <form method="post" action="../PHP/controleur/CreerEvenementController.php" id="creer" class="form_inscription">
+                <form method="post" action="../PHP/controleur/CreerEvenementEtudiantController.php" id="creer" class="form_inscription">
                     <table style="text-align: center; margin:auto;">
                         <tr>
                             <td>
@@ -283,7 +283,7 @@ if (isset($_SESSION['id'])) {
                             <td id="organisateurs">
                                 <div id="orga1">
                                     <select name="orga1" readonly="">
-                                        <option value="<?php echo $_SESSION['id'] ?>"><?php echo $_SESSION['nom']." ".$_SESSION['prenom'] ?></option>
+                                        <option value="<?php echo $_SESSION['id'].'-'.$_SESSION['role'] ?>"><?php echo $_SESSION['nom']." ".$_SESSION['prenom'] ?></option>
                                     </select>
                                 </div>
                                 <?php

@@ -17,9 +17,10 @@ if (!isset($_POST['nomEvenement']) || !isset($_POST['type']) || !isset($_POST['d
             'dateEvenement' => $_POST['dateEvenement']
         ]);
         $organisateurs = [];
-        foreach ($_POST as $key => $organisateurId) {
-            if (strpos($key, 'orga') === 0 && !empty($organisateurId)) {
-                $organisateurs[] = $organisateurId;
+        foreach ($_POST as $key => $organisateur) {
+            if (strpos($key, 'orga') === 0 && !empty($organisateur)) {
+                list($id, $role) = explode('-',$organisateur);
+                $organisateurs[] = ['id'=>$id,'role'=>$role];
             }
         }
         $verif = $evenement->creerEvenement($organisateurs);
