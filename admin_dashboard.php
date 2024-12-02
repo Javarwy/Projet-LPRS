@@ -248,7 +248,7 @@ $res_of = $bdd->getBdd()->query('SELECT * FROM offre');
                         <td><?php echo $element['type']?></td>
                         <td><?php echo $element['description_evenement']?></td>
                         <td><?php echo $element['adresse']?></td>
-                        <td><?php echo $element['nb_place']?></td>
+                        <td><?php echo $element['nb_de_places']?></td>
                         <td><?php echo $element['date_evenement']?></td>
                         <td><?php
                         if ($element['verification'] == false) {
