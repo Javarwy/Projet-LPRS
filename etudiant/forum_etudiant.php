@@ -278,7 +278,7 @@ $messages = [];
                                     <td><?php echo $message['canal'] ?></td>
                                     <td><?php echo $message['titre'] ?></td>
                                     <td><?php echo $message['message'] ?></td>
-                                    <td><?php echo $message['date'] ?></td>
+                                    <td><?php echo $message['date_Message'] ?></td>
                                     <td><input type="submit" value="Répondre" name="Answer"></form></td>
 
                             <td>
@@ -352,7 +352,7 @@ $messages = [];
                                                 <tr>
                                                     <th>Commentaire</th>
                                                     <th>Date</th>
-                                                    <th>Heure</th>
+
                                                     <th>Nom</th>
                                                     <th>Prenom</th>
                                                 </tr>
