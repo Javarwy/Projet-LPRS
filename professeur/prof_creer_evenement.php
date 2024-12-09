@@ -137,43 +137,37 @@ if (isset($_SESSION['id'])) {
                         </li>
                         <li class="nav-item">
                             <div class="dropdown">
-                                <a href="#">
-                                    <button class="nav-link dropbtn">Etudiant
-                                    </button>
-                                </a>
+                                <button class="nav-link dropbtn">Etudiant
+                                </button>
                                 <div class="dropdown-content">
-                                    <a href="../annuaire_etudiant.php">Annuaire des anciens élèves</a>
-                                    <a href="../forum_etudiant.php">Forum de discussion</a>
-                                    <a href="../publication_offre.php">Opportunités d'emploi et de stage</a>
-                                    <a href="../evenement_etudiants.php">Participation à des événements</a>
+                                    <a href="../etudiant/annuaire_etudiant.php">Annuaire des anciens élèves</a>
+                                    <a href="../etudiant/forum_etudiant.php">Forum de discussion</a>
+                                    <a href="../etudiant/opportunites_emploi_stages.php">Opportunités d'emploi et de stage</a>
+                                    <a href="../etudiant/evenement_etudiants.php">Participation des évènements</a>
                                 </div>
                             </div>
                         </li>
                         <li class="nav-item">
                             <div class="dropdown">
-                                <a href="#">
-                                    <button class="nav-link dropbtn">Alumni
-                                    </button>
-                                </a>
+                                <button class="nav-link dropbtn">Alumni
+                                </button>
                                 <div class="dropdown-content">
-                                    <a href="../Alumni/annuaire_ancien_eleve.php">Annuaire des anciens élèves</a>
-                                    <a href="../Alumni/forum_discussion_ancien_eleve.php">Forum de discussion</a>
+                                    <a href="../Alumni/annuaire_ancien_eleve">Annuaire des anciens élèves</a>
+                                    <a href="../Alumni/forum_discussion_ancien_eleve">Forum de discussion</a>
                                     <a href="../Alumni/Opportnuites_emploi_stages.php">Opportunités d'emploi et de stage</a>
-                                    <a href="../Alumni/evenement_ancien_eleve.php">Participation à des événements</a>
+                                    <a href="../Alumni/evenement_ancien_eleve.php">Participation des évènements</a>
                                 </div>
                             </div>
                         </li>
                         <li class="nav-item">
                             <div class="dropdown">
-                                <a href="#">
-                                    <button class="nav-link dropbtn">Entreprises
-                                    </button>
-                                </a>
+                                <button class="nav-link dropbtn">Entreprises
+                                </button>
                                 <div class="dropdown-content">
                                     <a href="../profil_entreprise.php">Profil des entreprises</a>
                                     <a href="../publication_offre.php">Publication d'offres</a>
-                                    <a href="../Alumni/Opportnuites_emploi_stages.php">Accès aux profils des anciens élèves</a>
-                                    <a href="../evenement_affiche.php">Publication d'événements</a>
+                                    <a href="../recherche_alumni.php">Profils des anciens élèves</a>
+                                    <a href="../index.php">Publication d'événements</a>
                                 </div>
                             </div>
                         </li>
@@ -196,7 +190,7 @@ if (isset($_SESSION['id'])) {
                         </li>
                     </ul>
                     <div class="user_optio_box">
-                        <a href="../connexion_global.php">
+                        <a href="../profile.php">
                             <i class="fa fa-user" aria-hidden="true"></i>
                         </a>
                     </div>

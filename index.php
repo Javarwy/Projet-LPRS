@@ -141,7 +141,7 @@ session_start();
                           <a href="professeur/prof_profils_anciens_eleves.php">Profils des anciens élèves</a>
                           <a href="professeur/prof_profils_etudiants_actuels.php">Profils des étudiants actuels</a>
                           <a href="professeur/prof_publication_evenements.php">Publication d'événements</a>
-                          <a href="#">Section d'offres</a>
+                          <a href="professeur/prof_section_offres.php">Section d'offres</a>
                       </div>
                   </div>
               </li>
