@@ -6,13 +6,6 @@ $res_uti = $bdd->getBdd()->query('SELECT * FROM utilisateur');
 $res_ev = $bdd->getBdd()->query('SELECT * FROM evenement');
 $res_of = $bdd->getBdd()->query('SELECT * FROM offre');
 
-$del_uti = $bdd->getBdd()->query('DELETE FROM utilisateur WHERE id_utilisateur = ["id_utilisateur"]');
-$del_uti = $bdd->getBdd()->query('DELETE FROM evenement WHERE id_evenement = ["id_evenement"]');
-$del_of = $bdd->getBdd()->query('DELETE FROM offre WHERE id_offre = ["id_offre"]');
-
-$val_uti = $bdd->getBdd()->query('UPDATE utilisateur SET active = 1 WHERE id_utilisateur = ["id_utilisateur"]');
-$val_ev = $bdd->getBdd()->query('UPDATE evenement SET verification = 1 WHERE id_offre = ["id_offre"]');
-
 ?>
 
 <!DOCTYPE html>
@@ -210,6 +203,7 @@ $val_ev = $bdd->getBdd()->query('UPDATE evenement SET verification = 1 WHERE id_
             <b><h1>Panneau d'administrateur</h1></b>
 
         <b><h4>Utilisateurs</h4></b>
+        <form action="PHP/controleur/TraitementAdmin.php" method="POST">
             <table style="text-align: center" border="1px">
                 <tr>
                     <th>Nom</th>
@@ -218,7 +212,7 @@ $val_ev = $bdd->getBdd()->query('UPDATE evenement SET verification = 1 WHERE id_
                     <th>Role</th>
                     <th>Info Suplémentaires</th>
                     <th>Valide</th>
-                </tr>
+               </tr>
                 <?php
                 foreach($res_uti as $element){
                     ?>
@@ -237,14 +231,14 @@ $val_ev = $bdd->getBdd()->query('UPDATE evenement SET verification = 1 WHERE id_
                             echo "Euhh";     
                         }
                         ?></td>
-                        <td><button type="button">Valider</button></td>
-                        <td><button type="button">Supprimer</button></td>
+                        <td><button type="submit" formaction="PHP/controleur/TraitementAdmin.php" name="ValiderUtilisateur" value="supprimer">Valider</button></td>
+                        <td><button type="submit" formaction="PHP/controleur/TraitementAdmin.php" name="DeleteUtilisateur" value="supprimer">Supprimer</button></td>
                     </tr>
                     <?php
                 }
                 ?>
             </table>
-
+          </form>
             </div>
 
             <div>
