@@ -80,30 +80,31 @@ class Utilisateur {
 
     public function modification(){
         $bdd = new Bdd();
-        $req = $bdd->getBdd()->prepare('UPDATE `utilisateur` SET `nom`=:nom,`prenom`=:prenom,`date_naissance`=:ddn,`ville`=:ville,`email`=:email,`mdp`=:mdp WHERE id_utilisateur =:id');
-        $res = $req->execute(array(
+        $req = $bdd->getBdd()->prepare('UPDATE `utilisateur` SET `nom`=:nom,`prenom`=:prenom,`email`=:email,`mdp`=:mdp, `info_sup`=:info_sup, `role`=:role, `active`=:active WHERE id_utilisateur =:id');
+        $req->execute(array(
             'nom' => $this->getNom(),
             'prenom' => $this->getPrenom(),
             'email' => $this->getEmail(),
             'mdp' => $this->getMdp(),
             'info_sup' => $this->getInfo_sup(),
             'role' => $this->getRole(),
-            'active' => $this->getActive()
+            'active' => $this->getActive(),
+            'id' => $this->getIdUtilisateur()
         ));
 
-        if ($res){
-            $_SESSION["id"] = $this->getIdUtilisateur();
-            $_SESSION["nom"] = $this->getNom();
-            $_SESSION["prenom"] = $this->getPrenom();;
-            $_SESSION["email"] = $this->getEmail();
-            $_SESSION["mdp"] = $this->getMdp();
-            $_SESSION["info_sup"] = $this->getInfo_sup();;
-            $_SESSION["role"] = $this->getRole();
-            $_SESSION["active"] = $this->getActive();
-            header("Location: ../../profil.php?success");
+        if ($req){
+            $_SESSION['id'] = $this->getIdUtilisateur();
+            $_SESSION['nom'] = $this->getNom();
+            $_SESSION['prenom'] = $this->getPrenom();
+            $_SESSION['email'] = $this->getEmail();
+            $_SESSION['mdp'] = $this->getMdp();
+            $_SESSION['info_sup'] = $this->getInfo_sup();
+            $_SESSION['role'] = $this->getRole();
+            $_SESSION['active'] = $this->getActive();
+            header("Location: ../../profile.php?success");
         }
         else{
-            header("Location: ../../profil.php?id_utilisateur=".$this->getIdUtilisateur()."&erreur");
+            header("Location: ../../profile.php?id_utilisateur=".$this->getIdUtilisateur()."&erreur");
         }
     }
 

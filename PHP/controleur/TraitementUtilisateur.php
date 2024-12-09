@@ -28,13 +28,14 @@ if (array_key_exists("inscription",$_POST)) {
 
 if (array_key_exists("modification",$_POST)){
     $user = new Utilisateur([
+        "idUtilisateur" => $_POST['id'],
         "nom" => $_POST['nom'],
         "prenom" => $_POST['prenom'],
         "email" =>$_POST['email'],
-        "mdp"=>$_POST['mdp'],
+        "mdp"=>$_POST['mdp_sure'],
         "info_sup" => $_POST['info_sup'],
-        "role"=>$_POST['role']
+        "role"=>$_POST['role'],
+        "active" => 1
     ]);
-    header("Location: ../../profile.html");
     $user->modification();
 }

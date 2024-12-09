@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -13,7 +16,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>Inscription - Lycée Privé Robert Schuman</title>
+  <title>Modification - Lycée Privé Robert Schuman</title>
 
 
   <!-- bootstrap core css -->
@@ -83,7 +86,7 @@
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="../index.php">
+          <a class="navbar-brand" href="index.php">
             <span>
               <img src="images/RobertSchuman.webp" alt="" width="150" height="100" />
             </span>
@@ -94,76 +97,81 @@
           </button>
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav  ">
-              <li class="nav-item">
-                <a class="nav-link" href="../index.php">Accueil</a>
-                <div class="dropdown-content">
-                          <a href="Alumni/annuaire_ancien_eleve">Annuaire des anciens élèves</a>
-                          <a href="Alumni\forum_discussion_ancien_eleve">Forum de discussion</a>
-                          <a href="Alumni\Opportnuites_emploi_stages.php">Oportunités d'emploi et de stage</a>
-                          <a href="Alumni\evenement_ancien_eleve.php">Participation des évènements</a>
+              <ul class="navbar-nav  ">
+                  <li class="nav-item">
+                      <a class="nav-link" href="index.php">Accueil</a>
+                  </li>
+                  <li class="nav-item">
+                      <div class="dropdown">
+                          <button class="nav-link dropbtn">Etudiant
+                          </button>
+                          <div class="dropdown-content">
+                              <a href="etudiant/annuaire_etudiant.php">Annuaire des anciens élèves</a>
+                              <a href="etudiant/forum_etudiant.php">Forum de discussion</a>
+                              <a href="etudiant/opportunites_emploi_stages.php">Opportunités d'emploi et de stage</a>
+                              <a href="etudiant/evenement_etudiants.php">Participation des évènements</a>
+                          </div>
                       </div>
-              </li>
-              <li class="nav-item">
-                  <div class="dropdown">
-                      <button class="nav-link dropbtn">Etudiant
-                      </button>
-                      <div class="dropdown-content">
-                          <a href="Alumni/annuaire_ancien_eleve">Annuaire des anciens élèves</a>
-                          <a href="Alumni/forum_discussion_ancien_eleve">Forum de discussion</a>
-                          <a href="Alumni/Opportnuites_emploi_stages.php">Oportunités d'emploi et de stage</a>
-                          <a href="Alumni/evenement_ancien_eleve.php">Participation des évènements</a>
+                  </li>
+                  <li class="nav-item">
+                      <div class="dropdown">
+                          <button class="nav-link dropbtn">Alumni
+                          </button>
+                          <div class="dropdown-content">
+                              <a href="Alumni/annuaire_ancien_eleve">Annuaire des anciens élèves</a>
+                              <a href="Alumni/forum_discussion_ancien_eleve">Forum de discussion</a>
+                              <a href="Alumni/Opportnuites_emploi_stages.php">Opportunités d'emploi et de stage</a>
+                              <a href="Alumni/evenement_ancien_eleve.php">Participation des évènements</a>
+                          </div>
                       </div>
-                  </div>
-              </li>
-              <li class="nav-item">
-                  <div class="dropdown">
-                      <button class="nav-link dropbtn">Alumni
-                      </button>
-                      <div class="dropdown-content">
-                          <a href="Alumni/annuaire_ancien_eleve">Annuaire des anciens élèves</a>
-                          <a href="Alumni/forum_discussion_ancien_eleve">Forum de discussion</a>
-                          <a href="Alumni/Opportnuites_emploi_stages.php">Oportunités d'emploi et de stage</a>
-                          <a href="Alumni/evenement_ancien_eleve.php">Participation des évènements</a>
+                  </li>
+                  <li class="nav-item">
+                      <div class="dropdown">
+                          <button class="nav-link dropbtn">Entreprises
+                          </button>
+                          <div class="dropdown-content">
+                              <a href="profil_entreprise.php">Profil des entreprises</a>
+                              <a href="publication_offre.php">Publication d'offres</a>
+                              <a href="recherche_alumni.php">Profils des anciens élèves</a>
+                              <a href="#">Publication d'événements</a>
+                          </div>
                       </div>
-                  </div>
-              </li>
-              <li class="nav-item">
-                  <div class="dropdown">
-                      <button class="nav-link dropbtn">Professeur
-                      </button>
-                      <div class="dropdown-content">
-                          <a href="Alumni/annuaire_ancien_eleve">Annuaire des anciens élèves</a>
-                          <a href="Alumni/forum_discussion_ancien_eleve">Forum de discussion</a>
-                          <a href="Alumni/Opportnuites_emploi_stages.php">Oportunités d'emploi et de stage</a>
-                          <a href="Alumni/evenement_ancien_eleve.php">Participation des évènements</a>
+                  </li>
+                  <li class="nav-item">
+                      <div class="dropdown">
+                          <a href="professeur/professeur.php">
+                              <button class="nav-link dropbtn">Professeur
+                              </button>
+                          </a>
+                          <div class="dropdown-content">
+                              <a href="professeur/prof_profils_anciens_eleves.php">Profils des anciens élèves</a>
+                              <a href="professeur/prof_profils_etudiants_actuels.php">Profils des étudiants actuels</a>
+                              <a href="professeur/prof_publication_evenements.php">Publication d'événements</a>
+                              <a href="professeur/prof_section_offres.php">Section d'offres</a>
+                          </div>
                       </div>
-                  </div>
-              </li>
-              <li class="nav-item">
-                  <div class="dropdown">
-                      <button class="nav-link dropbtn">Entreprise
-                      </button>
-                      <div class="dropdown-content">
-                          <a href="Alumni/annuaire_ancien_eleve">Annuaire des anciens élèves</a>
-                          <a href="Alumni/forum_discussion_ancien_eleve">Forum de discussion</a>
-                          <a href="Alumni/Opportnuites_emploi_stages.php">Oportunités d'emploi et de stage</a>
-                          <a href="Alumni/evenement_ancien_eleve.php">Participation des évènements</a>
-                      </div>
-                  </div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="../contact.php">Contact</a>
-              </li>
-            </ul>
-            <div class="user_optio_box">
-              <a href="connexion_global.php">
-                <i class="fa fa-user" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-              </a>
-            </div>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="contact.php">Contact</a>
+                  </li>
+              </ul>
+              <div class="user_optio_box">
+                  <?php
+                  if (isset($_SESSION['id'])) {
+                      ?>
+                      <a href="profile.php">
+                          <i class="fa fa-user" aria-hidden="true"></i>
+                      </a>
+                      <?php
+                  } else {
+                      ?>
+                      <a href="connexion_global.php">
+                          <i class="fa fa-user" aria-hidden="true"></i>
+                      </a>
+                      <?php
+                  }
+                  ?>
+              </div>
           </div>
         </nav>
       </div>
@@ -180,66 +188,81 @@
   <form action="PHP\controleur\TraitementUtilisateur.php" method="post" class="form_inscription">
   <h3>
    Nom :</h3>
-   <input type="text" id="name" name="nom" required minlength="3" maxlength="25" size="10" required />
+   <input type="text" id="name" name="nom" value="<?php echo $_SESSION['nom'] ?>" required minlength="3" maxlength="25" size="10" required />
    </div>
    <div>
    <br>
    <br>
-  <h3>
   <div>
   <h3>
    Prénom :</h3>
-   <input type="text" id="surname" name="prenom" required minlength="3" maxlength="25" size="10" required />
+   <input type="text" id="surname" name="prenom" value="<?php echo $_SESSION['prenom'] ?>" required minlength="3" maxlength="25" size="10" required />
    </div>
    <div>
    <br>
    <br>
   <h3>
    Email :</h3>
-   <input type="text" id="email" name="email" required minlength="3" maxlength="25" size="10" required />
+   <input type="text" id="email" name="email" value="<?php echo $_SESSION['email'] ?>" required minlength="3" maxlength="25" size="10" required />
    </div>
    <div>
     <br>
     <br>
     <h3>
    Mot de passe :</h3>
-   <input type="password" id="pswd" name="mdp" required minlength="3" maxlength="25" size="10" required />
+   <input type="password" id="pswd" name="mdp" value="<?php echo $_SESSION['mdp'] ?>" required minlength="3" maxlength="25" size="10" required />
    </div>
    <div>
     <br>
     <br>
     <h3>
-   Confirmation du Mot de passe :</h3>
-   <input type="password" id="pswd_sure" name="mdp" required minlength="3" maxlength="25" size="10" required />
+   Confirmation du mot de passe :</h3>
+   <input type="password" id="pswd_sure" name="mdp_sure" onchange="verifPswd()" required minlength="3" maxlength="25" size="10" required />
    </div>
    <br>
    <br>
    <div>
    <h3>
    Information supplémentaires : </h3>
-   <input type="text" id="sup_info" name="info_sup " required minlength="3" maxlength="60" size="50" />
+   <input type="text" id="sup_info" name="info_sup" value="<?php echo $_SESSION['info_sup'] ?>" minlength="3" maxlength="60" size="50" />
    </div>
    <div>
-    <br>
-    <br>
-    <br>
+   <input type="hidden" name="role" value="<?php echo $_SESSION['role'] ?>">
+   </div>
+   <div>
+   <input type="hidden" name="id" value="<?php echo $_SESSION['id'] ?>">
+   </div>
+   <div>
     <br>
    <h5>
   </div>
   <div>
-    <br>
     <br>
     <h3>
    </div>
    <div>
     <br>
-    <br>
    <h5>
-  (Une vérification manuelle sera effectuée.)</h5>
+       <small>
+           (Une vérification manuelle sera effectuée.)
+       </small>
+   </h5>
   </div>
 
+  <script>
+      function verifPswd(){
+          const pswd = document.getElementById("pswd");
+          const pswd_sure = document.getElementById("pswd_sure");
+          if (pswd.value === pswd_sure.value){
+              document.getElementById("modif").disabled = false;
+          } else {
+              document.getElementById("modif").disabled = true;
+          }
+      }
+  </script>
+
   <div>
-  <input type="submit" value="Modifier" name = "modification">
+  <input id="modif" type="submit" value="Modifier" name="modification" disabled="disabled">
   </div>
   </form>
 
