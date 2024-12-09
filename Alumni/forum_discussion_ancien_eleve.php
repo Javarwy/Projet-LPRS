@@ -117,35 +117,6 @@
 </div>
 </body>
 </html>
-
-
-<div class="topic">
-    <h2>Mentorat</h2>
-    <p>Description du sujet</p>
-    <div class="post">
-        <p>Lorem Ipsum</p>
-        <p class="author">Lorem Ipsum</p>
-        <p class="date">Lorem Ipsum</p>
-    </div>
-    <div class="post">
-        <p>Lorem Ipsum</p>
-        <p class="author">Lorem Ipsum
-    </div>
-</div>
-
-<div class="topic">
-    <h2>Entrepreneuriat</h2>
-    <p>Description du sujet</p>
-    <div class="post">
-        <p>Lorem Ipsum</p>
-        <p class="author">Lorem Ipsum</p>
-        <p class="date">Lorem Ipsum</p>
-    </div>
-    <div class="post">
-        <p>Message 6</p>
-        <p class="author">Lorem Ipsum</p>
-        <p class="date">Lorem Ipsum</p>
-    </div>
 </div>
 </div>
 </body>

@@ -11,19 +11,19 @@ $res = $req->fetchAll();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Opportunités d'Emploi et de Stage</title>
-    <!-- bootstrap core css -->
+    <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
 
-    <!-- fonts style -->
+    <!-- Fonts Style -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 
-    <!-- font awesome style -->
+    <!-- Font Awesome Style -->
     <link href="../css/font-awesome.min.css" rel="stylesheet" />
 
-    <!-- Custom styles for this template -->
+    <!-- Custom Styles -->
     <link href="../css/style.css" rel="stylesheet" />
-    <!-- responsive style -->
     <link href="../css/responsive.css" rel="stylesheet" />
+
     <style>
         .dropbtn {
             font-size: 16px;
@@ -35,6 +35,7 @@ $res = $req->fetchAll();
             font-family: inherit;
             margin: 0;
         }
+
         .dropdown-content {
             display: none;
             position: absolute;
@@ -64,14 +65,12 @@ $res = $req->fetchAll();
 </head>
 <body>
 <div class="hero_area">
-    <!-- header section strats -->
+    <!-- Header Section -->
     <header class="header_section">
         <div class="container-fluid">
             <nav class="navbar navbar-expand-lg custom_nav-container ">
                 <a class="navbar-brand" href="../index.php">
-            <span>
-              <img src="../images/RobertSchuman.webp" alt="" width="150" height="100" />
-            </span>
+                    <span><img src="../images/RobertSchuman.webp" alt="" width="150" height="100" /></span>
                 </a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,83 +78,21 @@ $res = $req->fetchAll();
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav  ">
+                    <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link" href="../index.php">Accueil</a>
-                            <div class="dropdown-content">
-                                <a href="#">Annuaire des anciens élèves</a>
-                                <a href="#">Forum de discussion</a>
-                                <a href="#">Oportunités d'emploi et de stage</a>
-                                <a href="#">Participation des évènements</a>
-                            </div>
                         </li>
                         <li class="nav-item">
-                            <div class="dropdown">
-                                <button class="nav-link dropbtn">Etudiant
-                                </button>
-                                <div class="dropdown-content">
-                                    <a href="#">Profils des anciens élèves</a>
-                                    <a href="#">Profils des étudiants actuels</a>
-                                    <a href="#">Publication d'événements</a>
-                                    <a href="#">Section d'offres</a>
-                                </div>
-                            </div>
+                            <a class="nav-link" href="../opportunites.php">Opportunités d'emploi et de stage</a>
                         </li>
-                        <li class="nav-item">
-                            <div class="dropdown">
-                                <button class="nav-link dropbtn">Alumni
-                                </button>
-                                <div class="dropdown-content">
-                                    <a href="#">Profils des anciens élèves</a>
-                                    <a href="#">Profils des étudiants actuels</a>
-                                    <a href="#">Publication d'événements</a>
-                                    <a href="#">Section d'offres</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <div class="dropdown">
-                                <button class="nav-link dropbtn">Entreprise
-                                </button>
-                                <div class="dropdown-content">
-                                    <a href="#">Profils des anciens élèves</a>
-                                    <a href="#">Profils des étudiants actuels</a>
-                                    <a href="#">Publication d'événements</a>
-                                    <a href="#">Section d'offres</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <div class="dropdown">
-                                <a href="../professeur/professeur.php">
-                                    <button class="nav-link dropbtn">Professeur
-                                    </button>
-                                </a>
-                                <div class="dropdown-content">
-                                    <a href="../professeur/prof_profils_anciens_eleves.php">Profils des anciens élèves</a>
-                                    <a href="../professeur/prof_profils_etudiants_actuels.php">Profils des étudiants actuels</a>
-                                    <a href="../professeur/prof_publication_evenements.php">Publication d'événements</a>
-                                    <a href="#">Section d'offres</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../contact.php">Contact</a>
-                        </li>
+                        <!-- Add other menu items here -->
                     </ul>
-                    <div class="user_optio_box">
-                        <a href="">
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                        </a>
-                    </div>
                 </div>
             </nav>
         </div>
     </header>
-    <!-- end header section -->
+    <!-- End Header Section -->
+
     <section class="service_section" style="text-align: center">
         <div class="container-fluid">
             <div class="row">
@@ -163,7 +100,8 @@ $res = $req->fetchAll();
                     <br>
                     <h2>Opportunités d'Emploi et de Stage</h2>
                     <br>
-                    <table border="1px" style="text-align: center; margin:auto;">
+                    <table class="table table-bordered" style="text-align: center; margin:auto;">
+                        <thead>
                         <tr>
                             <th>Nom</th>
                             <th>Description</th>
@@ -171,41 +109,97 @@ $res = $req->fetchAll();
                             <th>Image</th>
                             <th>Partenaire</th>
                             <th>Entreprise</th>
+                            <th>Action</th>
                         </tr>
+                        </thead>
+                        <tbody>
                         <?php
                         if (empty($res)) {
-                            ?>
-                            <tr>
-                                <td colspan="6">Aucune offre trouvée.</td>
-                            </tr>
-                            <?php
+                            echo '<tr><td colspan="7">Aucune offre trouvée.</td></tr>';
                         } else {
                             foreach($res as $offre) {
-                                ?>
-                                <tr>
-                                    <td><?php echo $offre['titre'] ?></td>
-                                    <td><?php echo $offre['description'] ?></td>
-                                    <td><?php echo $offre['cible_formation'] ?></td>
-                                    <td>
-                                        <?php
-                                        $pdfData = base64_encode($offre['image']);
-                                        echo '<embed src="data:application/pdf;base64,'.$pdfData.'"width=100" height="100" />';
-                                        ?>
-                                    </td>
-                                    <td><?php echo $offre['prenom'].' '.$offre['nom'] ?></td>
-                                    <td><?php echo $offre['entreprise'] ?></td>
-                                    <td><a href="postuler.html" class="apply-button">Postuler</a></td>
-                                </tr>
-                                <?php
+                                echo '<tr>';
+                                echo '<td>' . $offre['titre'] . '</td>';
+                                echo '<td>' . $offre['description'] . '</td>';
+                                echo '<td>' . $offre['cible_formation'] . '</td>';
+                                echo '<td><img src="data:image/jpeg;base64,' . base64_encode($offre['image']) . '" width="100" height="100"></td>';
+                                echo '<td>' . $offre['prenom'] . ' ' . $offre['nom'] . '</td>';
+                                echo '<td>' . $offre['entreprise'] . '</td>';
+                                echo '<td><a href="postuler.html" class="btn btn-primary">Postuler</a></td>';
+                                echo '</tr>';
                             }
                         }
                         ?>
+                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
+    </section>
+    ```
+
+    Remplace cette section par le deuxième code HTML que tu as fourni, **sans inclure de nouveau les balises `<html>`, `<head>`, et `<body>`** (puisqu'elles sont déjà présentes dans le premier fichier).
+
+    Voici à quoi cela ressemblerait une fois modifié :
+
+    ```php
+    <section class="service_section" style="text-align: center">
+        <div class="container">
+            <h2 class="text-center">Opportunités d'Emploi et de Stage</h2>
+            <table class="table table-bordered text-center">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Formation cible</th>
+                    <th>Image</th>
+                    <th>Partenaire</th>
+                    <th>Entreprise</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                if (empty($res)) {
+                    echo '<tr><td colspan="7">Aucune offre trouvée.</td></tr>';
+                } else {
+                    foreach ($res as $offre) {
+                        echo '<tr>';
+                        echo '<td>' . htmlspecialchars($offre['titre']) . '</td>';
+                        echo '<td>' . htmlspecialchars($offre['description']) . '</td>';
+                        echo '<td>' . htmlspecialchars($offre['cible_formation']) . '</td>';
+                        echo '<td><img src="data:image/jpeg;base64,' . base64_encode($offre['image']) . '" width="100" height="100"></td>';
+                        echo '<td>' . htmlspecialchars($offre['prenom']) . ' ' . htmlspecialchars($offre['nom']) . '</td>';
+                        echo '<td>' . htmlspecialchars($offre['entreprise']) . '</td>';
+                        echo '<td><a href="opportunites_emploi_de_stage_postuler.php" class="btn btn-primary">Postuler</a></td>';
+                        echo '</tr>';
+                    }
+                }
+                ?>
+                </tbody>
+            </table>
+            <div class="text-center">
+                <a href="creer_offre.php" class="btn btn-success">Créer une Offre</a>
+            </div>
+        </div>
+    </section>
+    ```
+
+    Cela remplacera l'ancien tableau par le nouveau design. Si tu as d'autres questions, n'hésite pas ! 😊
+
+    <section class="service_section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col text-center">
+                    <a href="creer_offre.php" class="btn btn-success">Créer une Offre</a>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
-</section>
+
+<!-- Include Bootstrap JS -->
+<script src="../js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
