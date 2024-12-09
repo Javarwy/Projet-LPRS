@@ -80,7 +80,7 @@ session_start();
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="../index.php">
+          <a class="navbar-brand" href="index.php">
             <span>
               <img src="images/RobertSchuman.webp" alt="" width="150" height="100" />
             </span>
@@ -93,23 +93,17 @@ session_start();
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  ">
               <li class="nav-item">
-                <a class="nav-link" href="../index.php">Accueil</a>
-                <div class="dropdown-content">
-                          <a href="Alumni/annuaire_ancien_eleve">Annuaire des anciens élèves</a>
-                          <a href="Alumni\forum_discussion_ancien_eleve">Forum de discussion</a>
-                          <a href="Alumni\Opportnuites_emploi_stages.php">Oportunités d'emploi et de stage</a>
-                          <a href="Alumni\evenement_ancien_eleve.php">Participation des évènements</a>
-                      </div>
+                <a class="nav-link" href="index.php">Accueil</a>
               </li>
               <li class="nav-item">
                   <div class="dropdown">
                       <button class="nav-link dropbtn">Etudiant
                       </button>
                       <div class="dropdown-content">
-                          <a href="etudiant/annuaire_ancien_eleve">Annuaire des anciens élèves</a>
-                          <a href="etudiant/forum_discussion_ancien_eleve">Forum de discussion</a>
-                          <a href="etudiant/Opportnuites_emploi_stages.php">Oportunités d'emploi et de stage</a>
-                          <a href="etudiant/etudiant_publication_evenements.php">Participation des évènements</a>
+                          <a href="etudiant/annuaire_etudiant.php">Annuaire des anciens élèves</a>
+                          <a href="etudiant/forum_etudiant.php">Forum de discussion</a>
+                          <a href="etudiant/opportunites_emploi_stages.php">Opportunités d'emploi et de stage</a>
+                          <a href="etudiant/evenement_etudiants.php">Participation des évènements</a>
                       </div>
                   </div>
               </li>
@@ -120,20 +114,20 @@ session_start();
                       <div class="dropdown-content">
                           <a href="Alumni/annuaire_ancien_eleve">Annuaire des anciens élèves</a>
                           <a href="Alumni/forum_discussion_ancien_eleve">Forum de discussion</a>
-                          <a href="Alumni/Opportnuites_emploi_stages.php">Oportunités d'emploi et de stage</a>
+                          <a href="Alumni/Opportnuites_emploi_stages.php">Opportunités d'emploi et de stage</a>
                           <a href="Alumni/evenement_ancien_eleve.php">Participation des évènements</a>
                       </div>
                   </div>
               </li>
               <li class="nav-item">
                   <div class="dropdown">
-                      <button class="nav-link dropbtn">Entreprise
+                      <button class="nav-link dropbtn">Entreprises
                       </button>
                       <div class="dropdown-content">
-                          <a href="Alumni/annuaire_ancien_eleve">Annuaire des anciens élèves</a>
-                          <a href="Alumni/forum_discussion_ancien_eleve">Forum de discussion</a>
-                          <a href="Alumni/Opportnuites_emploi_stages.php">Oportunités d'emploi et de stage</a>
-                          <a href="Alumni/evenement_ancien_eleve.php">Participation des évènements</a>
+                          <a href="profil_entreprise.php">Profil des entreprises</a>
+                          <a href="publication_offre.php">Publication d'offres</a>
+                          <a href="recherche_alumni.php">Profils des anciens élèves</a>
+                          <a href="#">Publication d'événements</a>
                       </div>
                   </div>
               </li>
@@ -152,13 +146,12 @@ session_start();
                   </div>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="../contact.php">Contact</a>
+                <a class="nav-link" href="contact.php">Contact</a>
               </li>
             </ul>
             <div class="user_optio_box">
               <a href="inscription_global.php">
                 <i class="fa fa-user" aria-hidden="true"></i>
-              </a>
               </a>
             </div>
           </div>
