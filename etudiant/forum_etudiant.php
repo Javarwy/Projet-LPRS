@@ -1,14 +1,40 @@
-<!DOCTYPE html>
-<html>
+
 
 <?php
+session_start();
+if (isset($_SESSION['id'])){
+
 include '../PHP/bdd/Bdd.php';
 $bdd = new Bdd;
-$evenement = $bdd->getBdd()->query('SELECT * FROM message');
+$req = $bdd->getBdd()->query('SELECT m.id_message, m.canal, m.titre, m.message, m.date, m.REF_UTILISATEUR, u.nom, u.prenom, u.id_utilisateur FROM message as m INNER JOIN utilisateur as u ON u.id_utilisateur = m.REF_UTILISATEUR  ');
+$res = $req ->fetchAll();
+$messages = [];
+    foreach ($res as $message){
+        $id_message = $message['id_message'];
+        if (!isset($messages[$id_message])) {
+            $messages[$id_message] = [
+                'canal' => $message['canal'],
+                'titre' => $message['titre'],
+                'message' => $message['message'],
+                'date' => $message['date'],
+                'createurs' => [],
+                'est_createur' => false
+            ];
+        }
+        $messages[$id_message]['createurs'][] = [
+            'id_utilisateur' => $messages['id_utilisateur'],
+            'nom' => $message['nom'],
+            'prenom' => $message['prenom']
+        ];
+        if ($message['id_utilisateur'] == $_SESSION['id']) {
+            $messages[$id_message]['est_createur'] = true;
+        }
+    }
 
-$res = $evenement ->fetchAll();
+}
 ?>
-
+<!DOCTYPE html>
+<html>
 <head>
     <!-- Basic -->
     <meta charset="utf-8" />
@@ -222,8 +248,8 @@ $res = $evenement ->fetchAll();
     <h3>Bienvenue sur notre forum</h3>
     <br>
     <center>
-        <b><h1>Derniers messages</h1></b>
-        <a class="nav-link" href="../ecriture_de_message.php">Rédigez un message !</a>
+        <b><h1>LES CANAUX</h1></b>
+        <a class="nav-link" href="../etudiant/ecriture_de_message.php">Rédigez un message !</a>
         <br>
         <br>
         <div class="main-block">
@@ -245,20 +271,20 @@ $res = $evenement ->fetchAll();
                         </tr>
                         <?php
                     } else {
-                        foreach($res as $evenement){
+                        foreach($messages as $id_message=>$message){
                             ?>
                             <form action="">
                                 <tr>
-                                    <td><?php echo $evenement['canal'] ?></td>
-                                    <td><?php echo $evenement['titre'] ?></td>
-                                    <td><?php echo $evenement['message'] ?></td>
-                                    <td><?php echo $evenement['date'] ?></td>
+                                    <td><?php echo $message['canal'] ?></td>
+                                    <td><?php echo $message['titre'] ?></td>
+                                    <td><?php echo $message['message'] ?></td>
+                                    <td><?php echo $message['date'] ?></td>
                                     <td><input type="submit" value="Répondre" name="Answer"></form></td>
 
                             <td>
                                 <?php
 
-                                $reponse = $bdd->getBdd()->query('SELECT  reponse.id_reponse, reponse.contenu_reponse, reponse.date_reponse, reponse.heure_reponse, utilisateur.nom, utilisateur.prenom
+                                $reponse = $bdd->getBdd()->query('SELECT  reponse.id_reponse, reponse.contenu_reponse, reponse.date_reponse, utilisateur.nom, utilisateur.prenom
                                  FROM reponse
                                  INNER JOIN utilisateur ON utilisateur.id_utilisateur = reponse.REF_UTILISATEUR');
 
@@ -313,7 +339,7 @@ $res = $evenement ->fetchAll();
                                 <h2></h2>
 
                                 <!-- Trigger/Open The Modal -->
-                                <button id="myBtn">Voir commentaires</button>
+                                <button id="myBtn">Voir réponses</button>
 
                                 <!-- The Modal -->
                                 <div id="myModal" class="modal">
@@ -386,6 +412,14 @@ $res = $evenement ->fetchAll();
                                 </script>
 
                             </td>
+                            <td>
+                            <?php
+                                            foreach($message['createur'] as $createur) {
+                                                echo $createur['nom']." ".$createur['prenom']."<br>";
+                                            }
+                                            ?>
+                                        </td>
+
                             </tr>
                             <?php
                         }

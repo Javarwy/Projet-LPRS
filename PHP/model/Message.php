@@ -5,7 +5,6 @@ class Message {
     private $titre;
     private $message;
     private $date;
-    private $heure;
     private $RefUtilisateur;
     public function __construct(array $donnee){
         $this->hydrate($donnee);
@@ -28,12 +27,11 @@ class Message {
             "titre" => $this->getTitre(),
             "message" => $this->getMessage(),
             "date" => $this->getDate(),
-            "heure" => $this->getHeure(),
             "REF_UTILISATEUR" => $this->getRefUtilisateur(),
         ));
         $res = $req->fetch();
         if (is_array($res)) {
-            header("Location: ../../forum_main.php?erreur=0");
+            header("Location: ../../forum_etudiant.php?erreur=0");
         } else {
         $req = $bdd->getBdd()->prepare('SELECT * FROM `message` WHERE titre=:titre, message=:message, REF_UTILISATEUR=:REF_UTILISATEUR');
         $req->execute(array(
@@ -42,10 +40,9 @@ class Message {
             "titre" => $this->getTitre(),
             "message" => $this->getMessage(),
             "date" => $this->getDate(),
-            "heure" => $this->getHeure(),
             "REF_UTILISATEUR" => $this->getRefUtilisateur()
             ));
-            header("Location: ../../forum_main.php");
+            header("Location: ../../forum_etudiant.php");
         }
     }
 
@@ -134,10 +131,7 @@ class Message {
     return $this->date;
 }
 
-   public function getHeure()
-{
-        return $this->heure;
-}
+
 
 
 }

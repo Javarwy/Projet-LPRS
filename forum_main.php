@@ -223,7 +223,7 @@ td {
     <br>
      <center>
      <b><h1>Derniers messages</h1></b>
-     <a class="nav-link" href="ecriture_de_message.php">Rédigez un message !</a>
+     <a class="nav-link" href="etudiant/ecriture_de_message.php">Rédigez un message !</a>
      <br>
        <br>
        <div class="main-block">
