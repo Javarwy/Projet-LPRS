@@ -92,59 +92,13 @@ $res = $req->fetchAll();
         </div>
     </header>
     <!-- End Header Section -->
-
-    <section class="service_section" style="text-align: center">
-        <div class="container-fluid">
-            <div class="row">
-                <div style="text-align: center; margin:auto;">
-                    <br>
-                    <h2>Opportunités d'Emploi et de Stage</h2>
-                    <br>
-                    <table class="table table-bordered" style="text-align: center; margin:auto;">
-                        <thead>
-                        <tr>
-                            <th>Nom</th>
-                            <th>Description</th>
-                            <th>Formation cible</th>
-                            <th>Image</th>
-                            <th>Partenaire</th>
-                            <th>Entreprise</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                        if (empty($res)) {
-                            echo '<tr><td colspan="7">Aucune offre trouvée.</td></tr>';
-                        } else {
-                            foreach($res as $offre) {
-                                echo '<tr>';
-                                echo '<td>' . $offre['titre'] . '</td>';
-                                echo '<td>' . $offre['description'] . '</td>';
-                                echo '<td>' . $offre['cible_formation'] . '</td>';
-                                echo '<td><img src="data:image/jpeg;base64,' . base64_encode($offre['image']) . '" width="100" height="100"></td>';
-                                echo '<td>' . $offre['prenom'] . ' ' . $offre['nom'] . '</td>';
-                                echo '<td>' . $offre['entreprise'] . '</td>';
-                                echo '<td><a href="postuler.html" class="btn btn-primary">Postuler</a></td>';
-                                echo '</tr>';
-                            }
-                        }
-                        ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </section>
-    ```
-
     <section class="service_section" style="text-align: center">
         <div class="container">
             <h2 class="text-center">Opportunités d'Emploi et de Stage</h2>
             <table class="table table-bordered text-center">
                 <thead>
                 <tr>
-                    <th>Nom</th>
+                    <th>Nm</th>
                     <th>Description</th>
                     <th>Formation cible</th>
                     <th>Image</th>
@@ -173,11 +127,6 @@ $res = $req->fetchAll();
                 ?>
                 </tbody>
             </table>
-            <div class="text-center">
-                <a href="creer_offre.php" class="btn btn-success">Créer une Offre</a>
-            </div>
-        </div>
-    </section>
 
     <section class="service_section">
         <div class="container-fluid">
