@@ -138,11 +138,6 @@ $res = $req->fetchAll();
     </section>
     ```
 
-    Remplace cette section par le deuxième code HTML que tu as fourni, **sans inclure de nouveau les balises `<html>`, `<head>`, et `<body>`** (puisqu'elles sont déjà présentes dans le premier fichier).
-
-    Voici à quoi cela ressemblerait une fois modifié :
-
-    ```php
     <section class="service_section" style="text-align: center">
         <div class="container">
             <h2 class="text-center">Opportunités d'Emploi et de Stage</h2>
@@ -183,9 +178,6 @@ $res = $req->fetchAll();
             </div>
         </div>
     </section>
-    ```
-
-    Cela remplacera l'ancien tableau par le nouveau design. Si tu as d'autres questions, n'hésite pas ! 😊
 
     <section class="service_section">
         <div class="container-fluid">
