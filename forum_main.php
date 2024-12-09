@@ -204,7 +204,7 @@ td {
               </li>
             </ul>
             <div class="user_optio_box">
-              <a href="inscription_global.php">
+              <a href="connexion_global.php">
                 <i class="fa fa-user" aria-hidden="true"></i>
               </a>
               <a href="">

@@ -50,7 +50,7 @@ class Utilisateur {
             $_SESSION["info_sup"] = $res['info_sup'];
             $_SESSION["role"] = $res['role'];
             $_SESSION["active"] = $res['active'];
-            header("Location: ../../index.php");
+            header("Location: ../../profile.php");
         } else {
             header("Location: ../../index.php");
         }

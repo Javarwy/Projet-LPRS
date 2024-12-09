@@ -1,9 +1,17 @@
 <?php include 'PHP/bdd/Bdd.php';
+session_start();
 
 $bdd = new Bdd;
 $res_uti = $bdd->getBdd()->query('SELECT * FROM utilisateur');
 $res_ev = $bdd->getBdd()->query('SELECT * FROM evenement');
 $res_of = $bdd->getBdd()->query('SELECT * FROM offre');
+
+$del_uti = $bdd->getBdd()->query('DELETE FROM utilisateur WHERE id_utilisateur = ["id_utilisateur"]');
+$del_uti = $bdd->getBdd()->query('DELETE FROM evenement WHERE id_evenement = ["id_evenement"]');
+$del_of = $bdd->getBdd()->query('DELETE FROM offre WHERE id_offre = ["id_offre"]');
+
+$val_uti = $bdd->getBdd()->query('UPDATE utilisateur SET active = 1 WHERE id_utilisateur = ["id_utilisateur"]');
+$val_ev = $bdd->getBdd()->query('UPDATE evenement SET verification = 1 WHERE id_offre = ["id_offre"]');
 
 ?>
 
@@ -167,9 +175,22 @@ $res_of = $bdd->getBdd()->query('SELECT * FROM offre');
               </li>
             </ul>
             <div class="user_optio_box">
-              <a href="inscription_global.php">
+              <a href="connexion_global.php">
                 <i class="fa fa-user" aria-hidden="true"></i>
               </a>
+              <?php
+              if (isset($_SESSION['role']) == 'admin') {
+                ?>
+                <div class="user_optio_box">
+                <a href="admin_dashboard.php">
+                  <i class="fa fa-user" aria-hidden="true"> Admin</i>
+                </a>
+                <?php
+              } else {
+                ?>
+              <?php
+              }
+                 ?>
               <a href="">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
               </a>
@@ -217,7 +238,6 @@ $res_of = $bdd->getBdd()->query('SELECT * FROM offre');
                         }
                         ?></td>
                         <td><button type="button">Valider</button></td>
-                        <td><button type="button">Modifier</button></td>
                         <td><button type="button">Supprimer</button></td>
                     </tr>
                     <?php
@@ -228,7 +248,7 @@ $res_of = $bdd->getBdd()->query('SELECT * FROM offre');
             </div>
 
             <div>
-
+            <br> 
             <b><h4>Evenements</h4></b>
             <table style="text-align: center" border="1px">
                 <tr>
@@ -258,7 +278,6 @@ $res_of = $bdd->getBdd()->query('SELECT * FROM offre');
                         }
                         ?></td>
                         <td><button type="button">Valider</button></td>
-                        <td><button type="button">Modifier</button></td>
                         <td><button type="button">Supprimer</button></td>
                     </tr>
                     <?php
@@ -269,7 +288,7 @@ $res_of = $bdd->getBdd()->query('SELECT * FROM offre');
             </div>
 
             <div>
-
+           <br> 
             <b><h4>Offres d'emplois</h4></b>
             <table style="text-align: center" border="1px">
                 <tr>
@@ -282,7 +301,6 @@ $res_of = $bdd->getBdd()->query('SELECT * FROM offre');
                     <tr>
                         <td><?php echo $element['nom']?></td>
                         <td><?php echo $element['cible_formation']?></td>
-                        <td><button type="button">Modifier</button></td>
                         <td><button type="button">Supprimer</button></td>
                     </tr>
                     <?php
@@ -292,8 +310,6 @@ $res_of = $bdd->getBdd()->query('SELECT * FROM offre');
 
             </div>
 
-            <a href="modification.php"><button>Modifier mes informations de compte</button></a>
-            <a href="vols.php"><button type="button">Déconnexion</button></a>
         </div>
      <br>
   <div>
