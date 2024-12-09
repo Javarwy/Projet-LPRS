@@ -150,9 +150,21 @@ session_start();
               </li>
             </ul>
             <div class="user_optio_box">
-              <a href="inscription_global.php">
+            <?php
+                if (isset($_SESSION['id'])) {
+            ?>
+              <a href="profile.php">
                 <i class="fa fa-user" aria-hidden="true"></i>
               </a>
+              <?php
+                } else {
+              ?>
+                <a href="connexion_global.php">
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                </a>
+              <?php
+                }
+              ?>
             </div>
           </div>
         </nav>

@@ -83,7 +83,7 @@
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="../index.php">
+          <a class="navbar-brand" href="index.php">
             <span>
               <img src="images/RobertSchuman.webp" alt="" width="150" height="100" />
             </span>
@@ -94,74 +94,67 @@
           </button>
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="../index.php">Accueil</a>
-                <div class="dropdown-content">
-                          <a href="Alumni/annuaire_ancien_eleve">Annuaire des anciens élèves</a>
-                          <a href="Alumni\forum_discussion_ancien_eleve">Forum de discussion</a>
-                          <a href="Alumni\Opportnuites_emploi_stages.php">Oportunités d'emploi et de stage</a>
-                          <a href="Alumni\evenement_ancien_eleve.php">Participation des évènements</a>
+              <ul class="navbar-nav  ">
+                  <li class="nav-item">
+                      <a class="nav-link" href="index.php">Accueil</a>
+                  </li>
+                  <li class="nav-item">
+                      <div class="dropdown">
+                          <button class="nav-link dropbtn">Etudiant
+                          </button>
+                          <div class="dropdown-content">
+                              <a href="etudiant/annuaire_etudiant.php">Annuaire des anciens élèves</a>
+                              <a href="etudiant/forum_etudiant.php">Forum de discussion</a>
+                              <a href="etudiant/opportunites_emploi_stages.php">Opportunités d'emploi et de stage</a>
+                              <a href="etudiant/evenement_etudiants.php">Participation des évènements</a>
+                          </div>
                       </div>
-              </li>
-              <li class="nav-item">
-                  <div class="dropdown">
-                      <button class="nav-link dropbtn">Etudiant
-                      </button>
-                      <div class="dropdown-content">
-                          <a href="Alumni/annuaire_ancien_eleve">Annuaire des anciens élèves</a>
-                          <a href="Alumni/forum_discussion_ancien_eleve">Forum de discussion</a>
-                          <a href="Alumni/Opportnuites_emploi_stages.php">Oportunités d'emploi et de stage</a>
-                          <a href="Alumni/evenement_ancien_eleve.php">Participation des évènements</a>
+                  </li>
+                  <li class="nav-item">
+                      <div class="dropdown">
+                          <button class="nav-link dropbtn">Alumni
+                          </button>
+                          <div class="dropdown-content">
+                              <a href="Alumni/annuaire_ancien_eleve">Annuaire des anciens élèves</a>
+                              <a href="Alumni/forum_discussion_ancien_eleve">Forum de discussion</a>
+                              <a href="Alumni/Opportnuites_emploi_stages.php">Opportunités d'emploi et de stage</a>
+                              <a href="Alumni/evenement_ancien_eleve.php">Participation des évènements</a>
+                          </div>
                       </div>
-                  </div>
-              </li>
-              <li class="nav-item">
-                  <div class="dropdown">
-                      <button class="nav-link dropbtn">Alumni
-                      </button>
-                      <div class="dropdown-content">
-                          <a href="Alumni/annuaire_ancien_eleve">Annuaire des anciens élèves</a>
-                          <a href="Alumni/forum_discussion_ancien_eleve">Forum de discussion</a>
-                          <a href="Alumni/Opportnuites_emploi_stages.php">Oportunités d'emploi et de stage</a>
-                          <a href="Alumni/evenement_ancien_eleve.php">Participation des évènements</a>
+                  </li>
+                  <li class="nav-item">
+                      <div class="dropdown">
+                          <button class="nav-link dropbtn">Entreprises
+                          </button>
+                          <div class="dropdown-content">
+                              <a href="profil_entreprise.php">Profil des entreprises</a>
+                              <a href="publication_offre.php">Publication d'offres</a>
+                              <a href="recherche_alumni.php">Profils des anciens élèves</a>
+                              <a href="#">Publication d'événements</a>
+                          </div>
                       </div>
-                  </div>
-              </li>
-              <li class="nav-item">
-                  <div class="dropdown">
-                      <button class="nav-link dropbtn">Professeur
-                      </button>
-                      <div class="dropdown-content">
-                          <a href="Alumni/annuaire_ancien_eleve">Annuaire des anciens élèves</a>
-                          <a href="Alumni/forum_discussion_ancien_eleve">Forum de discussion</a>
-                          <a href="Alumni/Opportnuites_emploi_stages.php">Oportunités d'emploi et de stage</a>
-                          <a href="Alumni/evenement_ancien_eleve.php">Participation des évènements</a>
+                  </li>
+                  <li class="nav-item">
+                      <div class="dropdown">
+                          <a href="professeur/professeur.php">
+                              <button class="nav-link dropbtn">Professeur
+                              </button>
+                          </a>
+                          <div class="dropdown-content">
+                              <a href="professeur/prof_profils_anciens_eleves.php">Profils des anciens élèves</a>
+                              <a href="professeur/prof_profils_etudiants_actuels.php">Profils des étudiants actuels</a>
+                              <a href="professeur/prof_publication_evenements.php">Publication d'événements</a>
+                              <a href="professeur/prof_section_offres.php">Section d'offres</a>
+                          </div>
                       </div>
-                  </div>
-              </li>
-              <li class="nav-item">
-                  <div class="dropdown">
-                      <button class="nav-link dropbtn">Entreprise
-                      </button>
-                      <div class="dropdown-content">
-                          <a href="Alumni/annuaire_ancien_eleve">Annuaire des anciens élèves</a>
-                          <a href="Alumni/forum_discussion_ancien_eleve">Forum de discussion</a>
-                          <a href="Alumni/Opportnuites_emploi_stages.php">Oportunités d'emploi et de stage</a>
-                          <a href="Alumni/evenement_ancien_eleve.php">Participation des évènements</a>
-                      </div>
-                  </div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="../contact.php">Contact</a>
-              </li>
-            </ul>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="contact.php">Contact</a>
+                  </li>
+              </ul>
             <div class="user_optio_box">
               <a href="connexion_global.php">
                 <i class="fa fa-user" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
               </a>
             </div>
           </div>
@@ -173,7 +166,7 @@
      <center>
      <b><h1>Connexion</h1></b>
      <br>
-     <h5>Veuillez nous donner quelques informations suplémentaires : </h5>
+     <h5>Veuillez nous donner quelques informations supplémentaires : </h5>
        <br>
      <br>
   <div>
@@ -194,15 +187,26 @@
    </div>
    <div>
     <br>
+       <div>
+           <input type="submit" value="Connexion" name="connexion">
+       </div>
     <br>
    <h5>
-  <a href="oublie_mot_de_passe.php">Reset mot de passe</a></h5>
+       <small>
+           <a href="oublie_mot_de_passe.php">Réinitialiser votre mot de passe</a>
+       </small>
+  </h5>
   </div>
 
-  <div>
-  <input type="submit" value="connexion" name="connexion">
-  </div>
   </form>
+
+  <br>
+
+  <div>
+      Pas de compte ? Inscrivez-vous en cliquant sur le bouton ->
+      <a href="inscription_global.php"><input type="button" value="Inscription"></a>
+  </div>
+
 
     <!-- slider section -->
     </section>
