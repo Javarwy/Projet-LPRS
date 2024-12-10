@@ -16,13 +16,12 @@ $messages = [];
                 'canal' => $message['canal'],
                 'titre' => $message['titre'],
                 'message' => $message['message'],
-                'date' => $message['date'],
+                'date_Message' => $message['date_Message'],
                 'createurs' => [],
                 'est_createur' => false
             ];
         }
         $messages[$id_message]['createurs'][] = [
-            'id_utilisateur' => $messages['id_utilisateur'],
             'nom' => $message['nom'],
             'prenom' => $message['prenom']
         ];
@@ -413,12 +412,8 @@ $messages = [];
 
                             </td>
                             <td>
-                            <?php
-                                            foreach($message['createur'] as $createur) {
-                                                echo $createur['nom']." ".$createur['prenom']."<br>";
-                                            }
-                                            ?>
-                                        </td>
+                           <?php echo $_SESSION['nom']." ".$_SESSION['prenom'] ?>
+                             </td>
 
                             </tr>
                             <?php

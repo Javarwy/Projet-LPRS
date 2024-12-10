@@ -272,17 +272,13 @@ if (isset($_SESSION['id'])) {
                                         <option value="<?php echo $_SESSION['id'].'-'.$_SESSION['role'] ?>"><?php echo $_SESSION['nom']." ".$_SESSION['prenom'] ?></option>
                                     </select>
                                 </div>
-                                <?php
-                                foreach($res as $crea){
 
-                                }
-                                ?>
                             </td>
 
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <button type="submit" name="creerProf">Envoyer pour validation</button>
+                                <button type="submit" name="creerMessage">Envoyer pour validation</button>
                             </td>
                         </tr>
                     </table>

@@ -1,55 +1,61 @@
 <?php
-class Message {
+class Message
+{
     private $idMessage;
     private $canal;
     private $titre;
     private $message;
-    private $date;
+    private $dateMessage;
 
-    public function __construct(array $donnee){
+    public function __construct(array $donnee)
+    {
         $this->hydrate($donnee);
     }
 
-    public function hydrate(array $donnee){
-        foreach($donnee as $key => $value){
-            $method = 'set'.ucfirst($key);
-            if(method_exists($this,$method)){
+    public function hydrate(array $donnee)
+    {
+        foreach ($donnee as $key => $value) {
+            $method = 'set' . ucfirst($key);
+            if (method_exists($this, $method)) {
                 $this->$method($value);
             }
         }
     }
-    public function creerEvenement(array $createurs) :bool {
+
+    public function creerMessage(array $createurs): bool
+    {
         $bdd = new Bdd();
-        $req = $bdd->getBdd()->prepare('INSERT INTO evenement (nom_evenement, type, description_evenement, adresse, nb_de_places, verification, date_evenement) VALUES (:nom_evenement, :type, :description_evenement, :adresse, :nb_de_places, :verification, :date_evenement)');
+        $req = $bdd->getBdd()->prepare('INSERT INTO evenement (canal, titre, message, date_message) VALUES (:canal, :titre, :message, :date_message)');
         $premier = $createurs[0];
-        if($premier['role'] == "prof" || $premier['role'] == "partenaire"){
+        if ($premier['role'] == "prof" || $premier['role'] == "partenaire") {
             $this->setVerification(1);
-        }else{
+        } else {
             $this->setVerification(0);
         }
         $req->execute(array(
-            'canal'=>$this->getCanal(),
-            'titre'=>$this->getTitre(),
-            'message'=>$this->getMessage(),
-            'date_message'=>$this->getDateMessage()
+            'canal' => $this->getCanal(),
+            'titre' => $this->getTitre(),
+            'message' => $this->getMessage(),
+            'date_message' => $this->getDateMessage()
         ));
-        $verif = $this->getMessageByName($this->getNomEvenement());
-        foreach($verif as $element){
-            $id_evenement = $element['id_evenement'];
+        $verif = $this->getMessageByName($this->getCanal());
+        foreach ($verif as $element) {
+            $id_message = $element['id_message'];
         }
-        if ($verif){
-            $creer = $bdd->getBdd()->prepare('INSERT INTO creer VALUES (:ref_utilisateur, :ref_evenement)');
-            foreach($createurs as $createur){
+        if ($verif) {
+            $creer = $bdd->getBdd()->prepare('INSERT INTO creer VALUES (:ref_utilisateur, :id_evenement)');
+            foreach ($createurs as $createur) {
                 $creer->execute(array(
-                    'ref_utilisateur'=>$createur['id'],
-                    'ref_evenement'=>$id_evenement,
+                    'ref_utilisateur' => $createur['id'],
+                    'id_message' => $id_message,
                 ));
             }
             return true;
-        } else{
+        } else {
             return false;
         }
     }
+
     public function getIdMessage()
     {
         return $this->idMessage;
@@ -57,7 +63,7 @@ class Message {
 
     public function setIdMessage($idMessage)
     {
-        $this->idMessage= $idMessage;
+        $this->idMessage = $idMessage;
     }
 
     public function getCanal()
@@ -90,25 +96,17 @@ class Message {
         $this->message = $message;
     }
 
-    public function getAdresse()
+    public function getDateMessage()
     {
-        return $this->adresse;
+        return $this->dateMessage;
     }
 
-    public function setAdresse($adresse)
+
+    public function setDateMessage($dateMessage)
     {
-        $this->adresse = $adresse;
+        $this->message = $dateMessage;
     }
 
-    public function getNbDePlaces()
-    {
-        return $this->nbDePlaces;
-    }
-
-    public function setNbDePlaces($nbDePlaces)
-    {
-        $this->nbDePlaces = $nbDePlaces;
-    }
 
     public function getVerification()
     {
@@ -120,18 +118,9 @@ class Message {
         $this->verification = $verification;
     }
 
-    public function getDateEvenement()
-    {
-        return $this->dateEvenement;
-    }
-
-    public function setDateEvenement($dateEvenement)
-    {
-        $this->dateEvenement = $dateEvenement;
-    }
+}
 
 
-    }
 
 
 
