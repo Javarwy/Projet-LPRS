@@ -93,6 +93,7 @@ class Utilisateur {
         ));
 
         if ($req){
+            session_start();
             $_SESSION['id'] = $this->getIdUtilisateur();
             $_SESSION['nom'] = $this->getNom();
             $_SESSION['prenom'] = $this->getPrenom();
