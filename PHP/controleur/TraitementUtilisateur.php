@@ -22,7 +22,6 @@ if (array_key_exists("inscription",$_POST)) {
         "info_sup" => $_POST['info_sup'],
         "role"=>$_POST['role']
     ]);
-    header("Location: ../../index.html");
     $user->inscription();
 }
 
@@ -38,4 +37,10 @@ if (array_key_exists("modification",$_POST)){
         "active" => 1
     ]);
     $user->modification();
+}
+
+if (array_key_exists("deconnexion", $_POST)){
+    session_start();
+    session_destroy();
+    header("Location: ../../index.php");
 }
