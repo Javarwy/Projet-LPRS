@@ -231,11 +231,11 @@ foreach ($res as $evenement){
                     if (isset($_GET['ok'])){
                         if ($_GET['ok'] == 1){
                             ?>
-                            <h7 style="color: blue">Votre événement a bien été créé. Il est en cours de validation par un gestionnaire et apparaîtra après celle-ci.</h7><br><br>
+                            <h7 style="color: blue">Votre événement a bien été créé.</h7><br><br>
                             <?php
                         } else if ($_GET['ok'] == 2){
                             ?>
-                            <h7 style="color: blue">Votre événement a bien été modifié. Il est en cours de validation par un gestionnaire et apparaîtra après celle-ci.</h7><br><br>
+                            <h7 style="color: blue">Votre événement a bien été modifié.</h7><br><br>
                             <?php
                         } else if ($_GET['ok'] == 3){
                             ?>

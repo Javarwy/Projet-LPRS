@@ -746,7 +746,7 @@ a:focus {
   margin-right: 15px;
 }
 
-.contact_section .form_container input, select {
+.contact_section .form_container input, .contact_section .form_container select {
   width: 100%;
   border: none;
   height: 50px;
