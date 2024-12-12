@@ -1,5 +1,32 @@
 <?php
 session_start();
+include '../PHP/bdd/Bdd.php';
+$bdd = new Bdd;
+if (isset($_POST['id_evenement'])){
+    $req = $bdd->getBdd()->prepare('SELECT nom_evenement, type, description_evenement, adresse, date_evenement FROM Evenement WHERE id_evenement = :id_evenement');
+    $req->execute(array(
+        'id_evenement' => $_POST['id_evenement']
+    ));
+    $res = $req->fetchAll();
+
+    $reqParticipants = $bdd->getBdd()->prepare('SELECT u.id_utilisateur, u.nom, u.prenom, u.role, u.info_sup FROM participer as p INNER JOIN utilisateur as u ON p.REF_UTILISATEUR = u.id_utilisateur WHERE p.ref_evenement = :id_evenement');
+    $reqParticipants->execute(array(
+        'id_evenement' => $_POST['id_evenement']
+    ));
+    $resParticipants = $reqParticipants->fetchAll();
+} else if (isset($_SESSION['id_evenement'])){
+    $req = $bdd->getBdd()->prepare('SELECT nom_evenement, type, description_evenement, adresse, date_evenement FROM Evenement WHERE id_evenement = :id_evenement');
+    $req->execute(array(
+        'id_evenement' => $_SESSION['id_evenement']
+    ));
+    $res = $req->fetchAll();
+
+    $reqParticipants = $bdd->getBdd()->prepare('SELECT u.id_utilisateur, u.nom, u.prenom, u.role, u.info_sup FROM participer as p INNER JOIN utilisateur as u ON p.REF_UTILISATEUR = u.id_utilisateur WHERE p.ref_evenement = :id_evenement');
+    $reqParticipants->execute(array(
+        'id_evenement' => $_SESSION['id_evenement']
+    ));
+    $resParticipants = $reqParticipants->fetchAll();
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -74,6 +101,54 @@ session_start();
             animation: fadeIn 5s;
         }
     </style>
+
+    <script>
+        function afficherParticipants(){
+            const afficherParticipants = document.getElementById("afficherParticipants");
+            const modifParticipants = document.getElementById("modifParticipants");
+            const masquerParticipants = document.getElementById("masquerParticipants");
+            modifParticipants.style.display = 'block';
+            modifParticipants.style.pointerEvents = 'auto';
+            afficherParticipants.style.display = 'none';
+            masquerParticipants.style.display = 'block';
+        }
+
+        function masquerParticipants(){
+            const afficherParticipants = document.getElementById("afficherParticipants");
+            const modifParticipants = document.getElementById("modifParticipants");
+            const masquerParticipants = document.getElementById("masquerParticipants");
+            modifParticipants.style.display = 'none';
+            modifParticipants.style.pointerEvents = 'none';
+            afficherParticipants.style.display = 'block';
+            masquerParticipants.style.display = 'none';
+        }
+
+        function afficherInfos(){
+            const afficherInfos = document.getElementById("afficherInfos");
+            const modifInfos = document.getElementById("modifInfos");
+            const masquerInfos = document.getElementById("masquerInfos");
+            modifInfos.style.display = 'block';
+            modifInfos.style.pointerEvents = 'auto';
+            afficherInfos.style.display = 'none';
+            masquerInfos.style.display = 'block';
+        }
+
+        function masquerInfos(){
+            const afficherInfos = document.getElementById("afficherInfos");
+            const modifInfos = document.getElementById("modifInfos");
+            const masquerInfos = document.getElementById("masquerInfos");
+            modifInfos.style.display = 'none';
+            modifInfos.style.pointerEvents = 'none';
+            afficherInfos.style.display = 'block';
+            masquerInfos.style.display = 'none';
+        }
+
+        function confirmerRefus(){
+            if(confirm("Souhaitez-vous réellement refuser la participation de cette personne à l'événement ?\n(Cette action est irréversible !)")){
+                document.getElementById("gestionParticipants").submit();
+            }
+        }
+    </script>
 
 </head>
 
@@ -175,23 +250,85 @@ session_start();
                 ?>
                     <h7 style="color: red">Erreur lors de la modification de votre événement. Veuillez réessayer.</h7><br><br>
         <?php
+                } else if ($_GET['erreur'] == 3){
+                ?>
+                    <h7 style="color: red">Erreur lors du refus de cet utilisateur. Veuillez réssayer.</h7><br><br>
+                <?php
                 }
             }
-            if (isset($_SESSION['id']) && $_SESSION['role'] == "prof" && isset($_POST['id_evenement'])){
+            if (isset($_GET['ok'])){
+                if ($_GET['ok'] == 1){
+                ?>
+                    <h7 style="color: blue">La participation de cet utilisateur a bien été refusée.</h7><br><br>
+                <?php
+                }
+            }
+            if (isset($_SESSION['id']) && $_SESSION['role'] == "prof" && isset($_POST['id_evenement']) || isset($_SESSION['id_evenement'])){
         ?>
         <h1>Modifier un événement</h1>
         <br>
-        <h5>Veuillez renseigner les informations suivantes : </h5>
-        <br>
-        <div>
+        <button id="afficherParticipants" type="button" onclick="afficherParticipants()">Afficher les participants <i class="fa fa-user" aria-hidden="true"></i></button>
+        <button id="masquerParticipants" type="button" onclick="masquerParticipants()" style="display: none;">Masquer les participants <i class="fa fa-user" aria-hidden="true"></i></button>
+        <div id="modifParticipants" style="display: none; pointer-events: none;">
+            <br>
+            <h5>Liste des participants :</h5>
+            <br>
+            <form method="post" action="../PHP/controleur/ModifierEvenementController.php" id="gestionParticipants">
+                <table border="1px" style="text-align: center;">
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Rôle</th>
+                        <th>Info. sup.</th>
+                    </tr>
+                    <?php
+                    foreach($resParticipants as $participant){
+                    ?>
+                    <tr>
+                        <td><?php echo $participant['nom'] ?></td>
+                        <td><?php echo $participant['prenom'] ?></td>
+                        <td><?php echo $participant['role'] ?></td>
+                        <td><?php echo $participant['info_sup'] ?></td>
+                        <td>
+                            <input type="hidden" name="id_utilisateur" value="<?php echo $participant['id_utilisateur'] ?>">
+                            <?php
+                            if (isset($_POST['id_evenement'])){
+                            ?>
+                            <input type="hidden" name="id_evenement" value="<?php echo $_POST['id_evenement'] ?>">
+                            <?php
+                            } else if (isset($_SESSION['id_evenement'])){
+                            ?>
+                            <input type="hidden" name="id_evenement" value="<?php echo $_SESSION['id_evenement'] ?>">
+                            <?php
+                            }
+                            ?>
+                            <button type="submit" name="refuserParticipant" onclick="confirmerRefus()">Refuser</button>
+                        </td>
+                    </tr>
+                    <?php
+                    }
+                    ?>
+                </table>
+            </form>
+        </div>
+        <br><br>
+        <button id="afficherInfos" type="button" onclick="afficherInfos()">Modifier les informations de l'événement</button>
+        <button id="masquerInfos" type="button" onclick="masquerInfos()" style="display: none;">Masquer les informations de l'événement</button>
+        <div id="modifInfos" style="display: none; pointer-events: none;">
+            <br>
+            <h5>Veuillez renseigner les informations suivantes : </h5>
+            <br>
             <form method="post" action="../PHP/controleur/ModifierEvenementController.php" id="modifier" class="form_inscription">
                 <table style="text-align: center;">
+                    <?php
+                    foreach($res as $evenement){
+                    ?>
                     <tr>
                         <td>
                             <label for="nom">Nom de l'événement :</label>
                         </td>
                         <td>
-                            <input id="nom" name="nomEvenement" type="text" value="<?php echo $_POST['nom_evenement'] ?>" required>
+                            <input id="nom" name="nomEvenement" type="text" value="<?php echo $evenement['nom_evenement'] ?>" required>
                         </td>
                     </tr>
                     <tr>
@@ -199,7 +336,7 @@ session_start();
                             <label for="type">Type :</label>
                         </td>
                         <td>
-                            <input id="type" name="type" type="text" value="<?php echo $_POST['type'] ?>" required>
+                            <input id="type" name="type" type="text" value="<?php echo $evenement['type'] ?>" required>
                         </td>
                     </tr>
                     <tr>
@@ -207,7 +344,7 @@ session_start();
                             <label for="description">Description :</label>
                         </td>
                         <td>
-                            <textarea id="description" name="descriptionEvenement" required="required"><?php echo $_POST['description_evenement']?></textarea>
+                            <textarea id="description" name="descriptionEvenement" required="required"><?php echo $evenement['description_evenement']?></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -215,15 +352,7 @@ session_start();
                             <label for="adresse">Adresse :</label>
                         </td>
                         <td>
-                            <input id="adresse" name="adresse" type="text" value="<?php echo $_POST['adresse'] ?>" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="nb_de_places">Nombre de places :</label>
-                        </td>
-                        <td>
-                            <?php echo $_POST['nb_de_places'] ?>
+                            <input id="adresse" name="adresse" type="text" value="<?php echo $evenement['adresse'] ?>" required>
                         </td>
                     </tr>
                     <tr>
@@ -232,7 +361,7 @@ session_start();
                         </td>
                         <td>
                             <?php
-                            $datetime = date("Y-m-d\TH:i", strtotime($_POST['date_evenement']));
+                            $datetime = date("Y-m-d\TH:i", strtotime($evenement['date_evenement']));
                             ?>
                             <input id="date_evenement" name="dateEvenement" type="datetime-local" value="<?php echo $datetime ?>" required>
                         </td>
@@ -242,10 +371,28 @@ session_start();
                             <button type="submit" name="modifierProf">Envoyer pour validation</button>
                         </td>
                     </tr>
+                    <?php
+                    }
+                    ?>
                 </table>
-                <input type="hidden" name="id_evenement" value="<?php echo $_POST['id_evenement']?>">
+                <?php
+                if (isset($_POST['id_evenement'])){
+                    ?>
+                    <input type="hidden" name="id_evenement" value="<?php echo $_POST['id_evenement'] ?>">
+                    <?php
+                } else if (isset($_SESSION['id_evenement'])){
+                    ?>
+                    <input type="hidden" name="id_evenement" value="<?php echo $_SESSION['id_evenement'] ?>">
+                    <?php
+                }
+                ?>
                 <input type="hidden" name="role" value="<?php echo $_SESSION['role'] ?>">
             </form>
+        </div>
+        <br>
+        <div>
+            <br>
+            <a href="prof_publication_evenements.php"><button type="button">Retour à la page des événements</button></a>
         </div>
         <?php
             } else {

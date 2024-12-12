@@ -29,6 +29,9 @@ foreach ($res as $evenement){
             $evenements[$id_evenement]['est_organisateur'] = true;
         }
     }
+if (isset($_SESSION['id_evenement'])){
+    unset($_SESSION['id_evenement']);
+}
 }
 ?>
 <!DOCTYPE html>
@@ -226,6 +229,10 @@ foreach ($res as $evenement){
                             ?>
                             <h7 style="color: red">Impossible de réserver cet événement : vous avez <b>déjà réservé</b> pour cet événement.</h7><br><br>
                             <?php
+                        } else if ($_GET['erreur'] == 6){
+                            ?>
+                            <h7 style="color: red">Erreur lors de la modification de votre événement. Veuillez réessayer.</h7><br><br>
+                            <?php
                         }
                     }
                     if (isset($_GET['ok'])){
@@ -306,12 +313,6 @@ foreach ($res as $evenement){
                                         <td>
                                             <form method="post" action="prof_modifier_evenement.php">
                                                 <input type="hidden" name="id_evenement" value="<?php echo $id_evenement ?>">
-                                                <input type="hidden" name="nom_evenement" value="<?php echo $evenement['nom_evenement'] ?>">
-                                                <input type="hidden" name="type" value="<?php echo $evenement['type'] ?>">
-                                                <input type="hidden" name="description_evenement" value="<?php echo $evenement['description_evenement'] ?>">
-                                                <input type="hidden" name="adresse" value="<?php echo $evenement['adresse'] ?>">
-                                                <input type="hidden" name="nb_de_places" value="<?php echo $evenement['nb_de_places'] ?>">
-                                                <input type="hidden" name="date_evenement" value="<?php echo $evenement['date_evenement'] ?>">
                                                 <button type="submit" name="modification">Modifier</button>
                                             </form>
                                         </td>

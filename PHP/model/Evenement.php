@@ -58,7 +58,7 @@ class Evenement {
         }
     }
 
-    public function modifierEvenement(Evenement $evenement, $role) : bool{
+    public function modifierEvenement(Evenement $evenement, string $role) : bool{
         $bdd = new Bdd();
         $verif = $this->getEvenementById($this->getIdEvenement());
         foreach($verif as $element){
@@ -110,7 +110,7 @@ class Evenement {
         }
     }
 
-    public function reserverEvenement($idUtilisateur) : bool{
+    public function reserverEvenement(int $idUtilisateur) : bool{
         $bdd = new Bdd();
         $req = $bdd->getBdd()->prepare('SELECT * FROM participer WHERE REF_UTILISATEUR = :ref_utilisateur AND REF_EVENEMENT = :ref_evenement');
         $req->execute(array(
@@ -130,7 +130,27 @@ class Evenement {
         }
     }
 
-    public function getEvenementById($idEvenement) : array {
+    public function refuserEvenement(int $idUtilisateur) : bool{
+        $bdd = new Bdd();
+        $req = $bdd->getBdd()->prepare('DELETE FROM participer WHERE REF_UTILISATEUR = :ref_utilisateur AND REF_EVENEMENT = :ref_evenement');
+        $req->execute(array(
+            'ref_utilisateur'=>$idUtilisateur,
+            'ref_evenement'=>$this->getIdEvenement()
+        ));
+        $req2 = $bdd->getBdd()->prepare('SELECT * FROM participer WHERE REF_UTILISATEUR = :ref_utilisateur AND REF_EVENEMENT = :ref_evenement');
+        $req2->execute(array(
+            'ref_utilisateur'=>$idUtilisateur,
+            'ref_evenement'=>$this->getIdEvenement()
+        ));
+        $verif = $req2->fetch();
+        if(empty($verif)){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getEvenementById(int $idEvenement) : array {
         $bdd = new Bdd();
         $req = $bdd->getBdd()->prepare('SELECT * FROM evenement WHERE id_evenement = :id_evenement');
         $req->execute(array(
@@ -139,7 +159,7 @@ class Evenement {
         return $req->fetchAll();
     }
 
-    public function getEvenementByName($nomEvenement) : array{
+    public function getEvenementByName(string $nomEvenement) : array{
         $bdd = new Bdd();
         $req = $bdd->getBdd()->prepare('SELECT * FROM evenement WHERE nom_evenement = :nom_evenement');
         $req->execute(array(
