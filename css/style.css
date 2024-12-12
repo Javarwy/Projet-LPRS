@@ -627,7 +627,7 @@ a:focus {
 .product_section .product_container .box .btn-box a {
   display: inline-block;
   padding: 10px 30px;
-  background-color: #199cc8;
+  background-color: #008AD3;
   color: #ffffff;
   border-radius: 5px;
   -webkit-transition: all 0.3s;
@@ -636,7 +636,7 @@ a:focus {
 }
 
 .product_section .product_container .box .btn-box a:hover {
-  background-color: #0bb0a5;
+  background-color: #19a5c8;
 }
 
 .client_section .box {

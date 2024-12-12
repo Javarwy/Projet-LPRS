@@ -1,5 +1,29 @@
 <?php
 session_start();
+include 'PHP/bdd/Bdd.php';
+$bdd = new Bdd();
+$req = $bdd->getBdd()->query('SELECT e.id_evenement, e.nom_evenement, e.type, e.description_evenement, e.adresse, e.nb_de_places-COUNT(p.REF_UTILISATEUR) as "nb_de_places", e.date_evenement, u.nom, u.prenom, u.id_utilisateur FROM evenement as e LEFT JOIN participer as p ON e.id_evenement = p.REF_EVENEMENT LEFT JOIN creer as c ON e.id_evenement = c.REF_EVENEMENT LEFT JOIN utilisateur as u ON c.REF_UTILISATEUR = u.id_utilisateur WHERE e.verification = 1 GROUP BY e.id_evenement, u.id_utilisateur ORDER BY e.date_evenement;');
+$res = $req->fetchAll();
+foreach ($res as $evenement) {
+    $id_evenement = $evenement['id_evenement'];
+    if (!isset($evenements[$id_evenement])) {
+        $evenements[$id_evenement] = [
+            'nom_evenement' => $evenement['nom_evenement'],
+            'type' => $evenement['type'],
+            'description_evenement' => $evenement['description_evenement'],
+            'date_evenement' => $evenement['date_evenement'],
+            'adresse' => $evenement['adresse'],
+            'nb_de_places' => $evenement['nb_de_places'],
+            'organisateurs' => [],
+            'est_organisateur' => false
+        ];
+    }
+    $evenements[$id_evenement]['organisateurs'][] = [
+        'id_utilisateur' => $evenement['id_utilisateur'],
+        'nom' => $evenement['nom'],
+        'prenom' => $evenement['prenom']
+    ];
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -230,10 +254,10 @@ session_start();
                       Événements
                     </h1>
                     <p>
-                      Consultez les événements se déroulant dans l'établissement.
+                      Consultez les événements de l'établissement.
                     </p>
                     <div class="btn-box">
-                      <a href="" class="btn2">
+                      <a href="#evenements" class="btn2">
                         Voir événements
                       </a>
                     </div>
@@ -338,7 +362,7 @@ session_start();
     <div class="container">
       <div class="product_heading">
         <h2>
-          Top Sale Watches
+          Actualités
         </h2>
       </div>
       <div class="product_container">
@@ -453,235 +477,123 @@ session_start();
 
   <!-- product section -->
 
-  <section class="product_section ">
+  <section class="product_section " id="evenements">
     <div class="container">
       <div class="product_heading">
         <h2>
-          Feature Watches
+          Événements
         </h2>
       </div>
       <div class="product_container">
         <div class="box">
           <div class="box-content">
-            <div class="img-box">
-              <img src="images/w4.png" alt="">
-            </div>
             <div class="detail-box">
-              <div class="text">
-                <h6>
-                  Men's Watch
-                </h6>
-                <h5>
-                  <span>$</span> 300
-                </h5>
-              </div>
-              <div class="like">
-                <h6>
-                  Like
-                </h6>
-                <div class="star_container">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                </div>
-              </div>
+                  <table border="1px" style="text-align: center; margin: auto;">
+                      <tr>
+                          <th>Nom</th>
+                          <th>Type</th>
+                          <th>Description</th>
+                          <th>Date et heure</th>
+                          <th>Adresse</th>
+                          <th>Nombre de places restantes</th>
+                          <th>Organisateur(s)</th>
+                      </tr>
+                      <tr>
+                          <?php
+                          if (empty($res)){
+                          ?>
+                      <tr>
+                          <td colspan="10">Pas d'événement disponible pour le moment.</td>
+                      </tr>
+                          <?php
+                          } else {
+                              foreach($evenements as $id_evenement => $evenement){
+                                  ?>
+                      <tr>
+                          <td><?php echo $evenement['nom_evenement'] ?></td>
+                          <td><?php echo $evenement['type'] ?></td>
+                          <td><?php echo $evenement['description_evenement'] ?></td>
+                          <td>
+                              <?php
+                              $date = new DateTime($evenement['date_evenement']);
+                              $dateString = date_format($date,'d/m/Y H:i');
+                              echo $dateString;
+                              ?>
+                          </td>
+                          <td><?php echo $evenement['adresse'] ?></td>
+                          <td><?php echo $evenement['nb_de_places'] ?></td>
+                          <td>
+                              <?php
+                              foreach($evenement['organisateurs'] as $organisateur) {
+                                  echo $organisateur['nom']." ".$organisateur['prenom']."<br>";
+                              }
+                              ?>
+                          </td>
+                      </tr>
+                      <?php
+                              }
+                          }
+                      ?>
+                  </table>
             </div>
           </div>
+            <?php
+            if (isset($_SESSION['id']) && $_SESSION['role'] == 'etudiant'){
+            ?>
+          <h5>Vous souhaitez réserver pour un de ces événements ou en créer ?</h5>
           <div class="btn-box">
-            <a href="">
-              Add To Cart
+            <a href="etudiant/evenement_etudiants.php">
+            Ma section événements
             </a>
           </div>
-        </div>
-        <div class="box">
-          <div class="box-content">
-            <div class="img-box">
-              <img src="images/w5.png" alt="">
-            </div>
-            <div class="detail-box">
-              <div class="text">
-                <h6>
-                  Men's Watch
-                </h6>
-                <h5>
-                  <span>$</span> 300
-                </h5>
-              </div>
-              <div class="like">
-                <h6>
-                  Like
-                </h6>
-                <div class="star_container">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                </div>
-              </div>
-            </div>
-          </div>
+          <?php
+            } elseif (isset($_SESSION['id']) && $_SESSION['role'] == 'alumni'){
+          ?>
+          <h5>Vous souhaitez réserver pour un de ces événements ou en créer ?</h5>
           <div class="btn-box">
-            <a href="">
-              Add To Cart
+            <a href="Alumni/evenement_ancien_eleve.php">
+             Ma section événements
             </a>
           </div>
-        </div>
-        <div class="box">
-          <div class="box-content">
-            <div class="img-box">
-              <img src="images/w6.png" alt="">
-            </div>
-            <div class="detail-box">
-              <div class="text">
-                <h6>
-                  Men's Watch
-                </h6>
-                <h5>
-                  <span>$</span> 300
-                </h5>
-              </div>
-              <div class="like">
-                <h6>
-                  Like
-                </h6>
-                <div class="star_container">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                </div>
-              </div>
-            </div>
-          </div>
+          <?php
+            } elseif (isset($_SESSION['id']) && $_SESSION['role'] == 'partenaire'){
+          ?>
+          <h5>Vous souhaitez réserver pour un de ces événements ou en créer ?</h5>
           <div class="btn-box">
-            <a href="">
-              Add To Cart
+            <a href="evenement_affiche.php">
+            Ma section événements
             </a>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- end product section -->
-
-
-  <!-- product section -->
-
-  <section class="product_section ">
-    <div class="container">
-      <div class="product_heading">
-        <h2>
-          New Arrivals
-        </h2>
-      </div>
-      <div class="product_container">
-        <div class="box">
-          <div class="box-content">
-            <div class="img-box">
-              <img src="images/w7.png" alt="">
-            </div>
-            <div class="detail-box">
-              <div class="text">
-                <h6>
-                  Men's Watch
-                </h6>
-                <h5>
-                  <span>$</span> 300
-                </h5>
-              </div>
-              <div class="like">
-                <h6>
-                  Like
-                </h6>
-                <div class="star_container">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="btn-box">
-            <a href="">
-              Add To Cart
-            </a>
-          </div>
-        </div>
-        <div class="box">
-          <div class="box-content">
-            <div class="img-box">
-              <img src="images/w8.png" alt="">
-            </div>
-            <div class="detail-box">
-              <div class="text">
-                <h6>
-                  Men's Watch
-                </h6>
-                <h5>
-                  <span>$</span> 300
-                </h5>
-              </div>
-              <div class="like">
-                <h6>
-                  Like
-                </h6>
-                <div class="star_container">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="btn-box">
-            <a href="">
-              Add To Cart
-            </a>
-          </div>
-        </div>
-        <div class="box">
-          <div class="box-content">
-            <div class="img-box">
-              <img src="images/w9.png" alt="">
-            </div>
-            <div class="detail-box">
-              <div class="text">
-                <h6>
-                  Men's Watch
-                </h6>
-                <h5>
-                  <span>$</span> 300
-                </h5>
-              </div>
-              <div class="like">
-                <h6>
-                  Like
-                </h6>
-                <div class="star_container">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="btn-box">
-            <a href="">
-              Add To Cart
-            </a>
-          </div>
+          <?php
+          } elseif (isset($_SESSION['id']) && $_SESSION['role'] == 'prof'){
+          ?>
+          <h5>Vous souhaitez réserver pour un de ces événements ou en créer ?</h5>
+           <div class="btn-box">
+             <a href="professeur/prof_publication_evenements.php">
+             Ma section événements
+             </a>
+           </div>
+          <?php
+           } elseif (isset($_SESSION['id']) && $_SESSION['role'] == 'gestionnaire'){
+          ?>
+          <h5>Vous souhaitez gérer les événements ?</h5>
+           <div class="btn-box">
+             <a href="admin_dashboard.php">
+             Mon tableau de bord
+             </a>
+           </div>
+          <?php
+          } else {
+          ?>
+          <h5>Connectez-vous pour interagir avec les événements</h5>
+           <div class="btn-box">
+             <a href="connexion_global.php">
+             Me connecter
+             </a>
+           </div>
+          <?php
+          }
+          ?>
         </div>
       </div>
     </div>
