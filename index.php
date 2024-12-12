@@ -184,17 +184,15 @@ session_start();
                 <div class="col-md-7">
                   <div class="detail-box">
                     <h1>
-                      Stylish Watches
+                      Bienvenue sur le site du
+                      <br>
+                      lycée et UFA Robert Schuman !
                     </h1>
                     <p>
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus quidem maiores perspiciatis, illo maxime voluptatem a itaque suscipit.
                     </p>
                     <div class="btn-box">
-                      <a href="" class="btn1">
-                        Contact Us
-                      </a>
-                      <a href="" class="btn2">
-                        About Us
+                      <a href="#presentation" class="btn2">
+                          Présentation
                       </a>
                     </div>
                   </div>
@@ -208,17 +206,14 @@ session_start();
                 <div class="col-md-7">
                   <div class="detail-box">
                     <h1>
-                      Stylish Watches
+                      Actualités
                     </h1>
                     <p>
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus quidem maiores perspiciatis, illo maxime voluptatem a itaque suscipit.
+                      Consultez les dernières actualités de l'établissement.
                     </p>
                     <div class="btn-box">
-                      <a href="" class="btn1">
-                        Contact Us
-                      </a>
                       <a href="" class="btn2">
-                        About Us
+                        Voir actualités
                       </a>
                     </div>
                   </div>
@@ -232,17 +227,14 @@ session_start();
                 <div class="col-md-7">
                   <div class="detail-box">
                     <h1>
-                      Stylish Watches
+                      Événements
                     </h1>
                     <p>
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus quidem maiores perspiciatis, illo maxime voluptatem a itaque suscipit.
+                      Consultez les événements se déroulant dans l'établissement.
                     </p>
                     <div class="btn-box">
-                      <a href="" class="btn1">
-                        Contact Us
-                      </a>
                       <a href="" class="btn2">
-                        About Us
+                        Voir événements
                       </a>
                     </div>
                   </div>
@@ -256,41 +248,14 @@ session_start();
                 <div class="col-md-7">
                   <div class="detail-box">
                     <h1>
-                      Stylish Watches
+                      Un problème ? Une question ?
                     </h1>
                     <p>
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus quidem maiores perspiciatis, illo maxime voluptatem a itaque suscipit.
+                      Accédez au formulaire de contact en cliquant sur le bouton ci-dessous.
                     </p>
                     <div class="btn-box">
-                      <a href="" class="btn1">
-                        Contact Us
-                      </a>
-                      <a href="" class="btn2">
-                        About Us
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="container ">
-              <div class="row">
-                <div class="col-md-7">
-                  <div class="detail-box">
-                    <h1>
-                      Stylish Watches
-                    </h1>
-                    <p>
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus quidem maiores perspiciatis, illo maxime voluptatem a itaque suscipit.
-                    </p>
-                    <div class="btn-box">
-                      <a href="" class="btn1">
-                        Contact Us
-                      </a>
-                      <a href="" class="btn2">
-                        About Us
+                      <a href="#contact" class="btn2">
+                        Contactez-nous
                       </a>
                     </div>
                   </div>
@@ -304,7 +269,6 @@ session_start();
           <li data-target="#customCarousel1" data-slide-to="1"></li>
           <li data-target="#customCarousel1" data-slide-to="2"></li>
           <li data-target="#customCarousel1" data-slide-to="3"></li>
-          <li data-target="#customCarousel1" data-slide-to="4"></li>
         </ol>
       </div>
 
@@ -312,109 +276,56 @@ session_start();
     <!-- end slider section -->
   </div>
 
-
-  <!-- service section -->
-
-  <section class="service_section">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-6 col-lg-3">
-          <div class="box ">
-            <div class="img-box">
-              <img src="images/feature-1.png" alt="">
-            </div>
-            <div class="detail-box">
-              <h5>
-                Fast Delivery
-              </h5>
-              <p>
-                variations of passages of Lorem Ipsum available
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="box ">
-            <div class="img-box">
-              <img src="images/feature-2.png" alt="">
-            </div>
-            <div class="detail-box">
-              <h5>
-                Free Shiping
-              </h5>
-              <p>
-                variations of passages of Lorem Ipsum available
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="box ">
-            <div class="img-box">
-              <img src="images/feature-3.png" alt="">
-            </div>
-            <div class="detail-box">
-              <h5>
-                Best Quality
-              </h5>
-              <p>
-                variations of passages of Lorem Ipsum available
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="box ">
-            <div class="img-box">
-              <img src="images/feature-4.png" alt="">
-            </div>
-            <div class="detail-box">
-              <h5>
-                24x7 Customer support
-              </h5>
-              <p>
-                variations of passages of Lorem Ipsum available
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- end service section -->
-
-
   <!-- about section -->
 
-  <section class="about_section layout_padding">
+  <section class="about_section layout_padding" id="presentation">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-6">
-          <div class="img_container">
-            <div class="img-box b1">
-              <img src="images/a-1.jpg" alt="">
-            </div>
-            <div class="img-box b2">
-              <img src="images/a-2.jpg" alt="">
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
+        <div class="col-md-8">
           <div class="detail-box">
             <h2>
-              About Our Shop
+              Présentation de l'école
             </h2>
             <p>
-              There are many variations of passages of Lorem Ipsum
-              There are many variations of
-              passages of Lorem Ipsum
+                L’établissement a été créé en 1920 par quelques ingénieurs centraliens chrétiens qui fondèrent une association pour alphabétiser des jeunes gens en difficultés : c’était la naissance de « l’Entraide Éducative ».
+                <br>
+                Plus tard, s’ajouteront différentes formations professionnelles pour devenir le Lycée privé Robert Schuman (Sous contrat d’association avec l'État).
             </p>
-            <a href="">
-              Read More
-            </a>
           </div>
         </div>
+          <div class="col-md-8">
+              <div class="detail-box">
+                  <h2>
+                      Formations
+                  </h2>
+                  <p>
+                      Aujourd'hui, le lycée Robert SCHUMAN propose des formations diverses :
+                  </p>
+                  <ul>
+                      <li><b>3<sup>e</sup> Prépa-Pro (Découverte professionnelle)</b></li>
+                      <li><b>Bac Professionnel 3 ans Technicien en Réalisation de Produit Mécanique (TRPM)</b></li>
+                      <li><b>Bac Professionnel 3 ans Maintenance des Équipements Industriels (MEI)</b></li>
+                      <li><b>Bac Professionnel 3 ans Cybersécurité, Informatique et Réseaux, Électronique (CIEL)<i>option Télécommunications et réseaux informatiques</i></b></li>
+                      <li><b>Bac Technologique STI2D <i>options SIN et ITEC</i></b></li>
+                      <li><b>BTS Services Informatiques aux Organisations (SIO)</b> (Alternance uniquement la 2<sup>ème</sup> année)</li>
+                      <li><b>BTS Conception des Processus de Réalisation de produits (CPRP)</b> (Contrat de professionnalisation sur les 2 ans)</li>
+                      <li><b>BTS Maintenance des systèmes (MS)</b> (Contrat de professionnalisation sur les 2 ans)</li>
+                  </ul>
+              </div>
+          </div>
+          <div class="col-md-8">
+              <div class="detail-box">
+              <h2>
+                  Mission et vision
+              </h2>
+              <p>
+                  Soit actuellement 450 élèves, guidés par une équipe exigeante dont l’objectif est non seulement de donner une formation professionnelle et une formation générale, mais aussi une formation humaine fondée sur la ponctualité, l’assiduité, la rigueur, le respect de soi et des autres ainsi que le sens de l’effort.
+              </p>
+              </div>
+          </div>
+          <div class="img-box b1">
+              <img src="images/etablissement.jpg" alt="">
+          </div>
       </div>
     </div>
   </section>
@@ -780,32 +691,45 @@ session_start();
   <!-- end product section -->
 
   <!-- contact section -->
-  <section class="contact_section layout_padding">
+  <section class="contact_section layout_padding" id="contact">
     <div class="container">
       <div class="heading_container">
         <h2>
-          Contact Us
+          Contactez-nous
         </h2>
       </div>
       <div class="row">
         <div class="col-md-6">
           <div class="form_container">
-            <form action="">
+            <form action="mail.php" method="post">
               <div>
-                <input type="text" placeholder="Your Name" />
+                <input type="text" placeholder="Nom" name="nom" />
               </div>
               <div>
-                <input type="text" placeholder="Phone Number" />
+                <input type="text" placeholder="Prénom" name="prenom" />
               </div>
               <div>
-                <input type="email" placeholder="Email" />
+                  <input type="email" placeholder="E-mail" name="email" />
               </div>
               <div>
-                <input type="text" class="message-box" placeholder="Message" />
+                <select name="role" style="">
+                  <option value="" disabled selected>Rôle</option>
+                  <option value="eleve">Étudiant</option>
+                  <option value="partenaire">Partenaire</option>
+                  <option value="alumni">Alumni</option>
+                  <option value="prof">Professeur</option>
+                  <option value="autre">Autre</option>
+                </select>
+              </div>
+              <div>
+                 <input type="text" placeholder="Sujet" name="sujet" />
+              </div>
+              <div>
+                <input type="text" class="message-box" placeholder="Message" name="message" />
               </div>
               <div class="btn_box">
-                <button>
-                  SEND
+                <button type="submit">
+                  Envoyer
                 </button>
               </div>
             </form>
@@ -814,7 +738,9 @@ session_start();
         <div class="col-md-6 ">
           <div class="map_container">
             <div class="map">
-              <div id="googleMap"></div>
+              <div id="googleMap">
+
+              </div>
             </div>
           </div>
         </div>
@@ -822,273 +748,6 @@ session_start();
     </div>
   </section>
   <!-- end contact section -->
-
-
-  <!-- client section -->
-  <section class="client_section layout_padding-bottom">
-    <div class="container">
-      <div class="heading_container heading_center">
-        <h2>
-          Testimonial
-        </h2>
-      </div>
-    </div>
-    <div id="customCarousel2" class="carousel slide" data-ride="carousel">
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-10 mx-auto">
-                <div class="box">
-                  <div class="img-box">
-                    <img src="images/client.jpg" alt="">
-                  </div>
-                  <div class="detail-box">
-                    <div class="client_info">
-                      <div class="client_name">
-                        <h5>
-                          Morojink
-                        </h5>
-                        <h6>
-                          Customer
-                        </h6>
-                      </div>
-                      <i class="fa fa-quote-left" aria-hidden="true"></i>
-                    </div>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                      labore
-                      et
-                      dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                      aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                      cillum
-                      dolore eu fugia
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-10 mx-auto">
-                <div class="box">
-                  <div class="img-box">
-                    <img src="images/client.jpg" alt="">
-                  </div>
-                  <div class="detail-box">
-                    <div class="client_info">
-                      <div class="client_name">
-                        <h5>
-                          Morojink
-                        </h5>
-                        <h6>
-                          Customer
-                        </h6>
-                      </div>
-                      <i class="fa fa-quote-left" aria-hidden="true"></i>
-                    </div>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                      labore
-                      et
-                      dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                      aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                      cillum
-                      dolore eu fugia
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-10 mx-auto">
-                <div class="box">
-                  <div class="img-box">
-                    <img src="images/client.jpg" alt="">
-                  </div>
-                  <div class="detail-box">
-                    <div class="client_info">
-                      <div class="client_name">
-                        <h5>
-                          Morojink
-                        </h5>
-                        <h6>
-                          Customer
-                        </h6>
-                      </div>
-                      <i class="fa fa-quote-left" aria-hidden="true"></i>
-                    </div>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                      labore
-                      et
-                      dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                      aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                      cillum
-                      dolore eu fugia
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <ol class="carousel-indicators">
-        <li data-target="#customCarousel2" data-slide-to="0" class="active"></li>
-        <li data-target="#customCarousel2" data-slide-to="1"></li>
-        <li data-target="#customCarousel2" data-slide-to="2"></li>
-      </ol>
-    </div>
-  </section>
-  <!-- end client section -->
-
-
-  <!-- info section -->
-  <section class="info_section layout_padding2">
-    <div class="container">
-      <div class="info_logo">
-        <h2>
-          HandTime
-        </h2>
-      </div>
-      <div class="row">
-
-        <div class="col-md-3">
-          <div class="info_contact">
-            <h5>
-              About Shop
-            </h5>
-            <div>
-              <div class="img-box">
-                <img src="images/location-white.png" width="18px" alt="">
-              </div>
-              <p>
-                Address
-              </p>
-            </div>
-            <div>
-              <div class="img-box">
-                <img src="images/telephone-white.png" width="12px" alt="">
-              </div>
-              <p>
-                +01 1234567890
-              </p>
-            </div>
-            <div>
-              <div class="img-box">
-                <img src="images/envelope-white.png" width="18px" alt="">
-              </div>
-              <p>
-                demo@gmail.com
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="info_info">
-            <h5>
-              Informations
-            </h5>
-            <p>
-              ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-            </p>
-          </div>
-        </div>
-
-        <div class="col-md-3">
-          <div class="info_insta">
-            <h5>
-              Instagram
-            </h5>
-            <div class="insta_container">
-              <div class="row m-0">
-                <div class="col-4 px-0">
-                  <a href="">
-                    <div class="insta-box b-1">
-                      <img src="images/w1.png" alt="">
-                    </div>
-                  </a>
-                </div>
-                <div class="col-4 px-0">
-                  <a href="">
-                    <div class="insta-box b-1">
-                      <img src="images/w2.png" alt="">
-                    </div>
-                  </a>
-                </div>
-                <div class="col-4 px-0">
-                  <a href="">
-                    <div class="insta-box b-1">
-                      <img src="images/w3.png" alt="">
-                    </div>
-                  </a>
-                </div>
-                <div class="col-4 px-0">
-                  <a href="">
-                    <div class="insta-box b-1">
-                      <img src="images/w4.png" alt="">
-                    </div>
-                  </a>
-                </div>
-                <div class="col-4 px-0">
-                  <a href="">
-                    <div class="insta-box b-1">
-                      <img src="images/w5.png" alt="">
-                    </div>
-                  </a>
-                </div>
-                <div class="col-4 px-0">
-                  <a href="">
-                    <div class="insta-box b-1">
-                      <img src="images/w6.png" alt="">
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-3">
-          <div class="info_form ">
-            <h5>
-              Newsletter
-            </h5>
-            <form action="">
-              <input type="email" placeholder="Enter your email">
-              <button>
-                Subscribe
-              </button>
-            </form>
-            <div class="social_box">
-              <a href="">
-                <img src="images/fb.png" alt="">
-              </a>
-              <a href="">
-                <img src="images/twitter.png" alt="">
-              </a>
-              <a href="">
-                <img src="images/linkedin.png" alt="">
-              </a>
-              <a href="">
-                <img src="images/youtube.png" alt="">
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- end info_section -->
 
   <!-- footer section -->
   <section class="footer_section">

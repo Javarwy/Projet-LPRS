@@ -311,7 +311,7 @@ a:focus {
 .slider_section .detail-box .btn-box .btn2 {
   display: inline-block;
   padding: 10px 15px;
-  background-color: #19a5c8;
+  background-color: #008AD3;
   color: #ffffff;
   border-radius: 0;
   -webkit-transition: all 0.3s;
@@ -320,7 +320,7 @@ a:focus {
 }
 
 .slider_section .detail-box .btn-box .btn2:hover {
-  background-color: #118484;
+  background-color: #19a5c8;
 }
 
 .slider_section .img-box img {
@@ -350,7 +350,7 @@ a:focus {
 .slider_section .carousel-indicators li.active {
   width: 23px;
   height: 23px;
-  background-color: #19c880;
+  background-color: #008AD3;
 }
 
 .slider_bg_box {
@@ -746,7 +746,7 @@ a:focus {
   margin-right: 15px;
 }
 
-.contact_section .form_container input {
+.contact_section .form_container input, select {
   width: 100%;
   border: none;
   height: 50px;
@@ -757,6 +757,7 @@ a:focus {
   -webkit-box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.15);
           box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.15);
 }
+
 
 .contact_section .form_container input::-webkit-input-placeholder {
   color: #444;
@@ -776,6 +777,10 @@ a:focus {
 
 .contact_section .form_container input.message-box {
   height: 120px;
+}
+
+.contact_section .form_container select{
+  padding-left: 10px;
 }
 
 .contact_section .form_container button {
