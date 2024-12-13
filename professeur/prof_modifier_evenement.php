@@ -275,13 +275,23 @@ if (isset($_POST['id_evenement'])){
             <br>
             <form method="post" action="../PHP/controleur/ModifierEvenementController.php" id="gestionParticipants">
                 <table border="1px" style="text-align: center;">
+                    <thead>
                     <tr>
                         <th>Nom</th>
                         <th>Prénom</th>
                         <th>Rôle</th>
                         <th>Info. sup.</th>
                     </tr>
+                    </thead>
+                    <tbody>
                     <?php
+                    if (empty($resParticipants)) {
+                        ?>
+                        <tr>
+                            <td colspan="4">Aucun participant.</td>
+                        </tr>
+                        <?php
+                    } else {
                     foreach($resParticipants as $participant){
                     ?>
                     <tr>
@@ -307,7 +317,9 @@ if (isset($_POST['id_evenement'])){
                     </tr>
                     <?php
                     }
+                    }
                     ?>
+                    </tbody>
                 </table>
             </form>
         </div>

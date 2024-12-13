@@ -66,6 +66,7 @@ if (isset($_SESSION['id_evenement'])){
     <!-- responsive style -->
     <link href="../css/responsive.css" rel="stylesheet" />
 
+
     <style>
         .dropbtn {
             font-size: 16px;
@@ -265,7 +266,8 @@ if (isset($_SESSION['id_evenement'])){
                     <h5>Liste des événéments</h5>
                     <small>Vous pouvez modifier ou supprimer uniquement les événements que vous avez créés !</small>
                     <br>
-                    <table border="1px" style="text-align: center; margin:auto;">
+                    <table border="1px" style="text-align: center; margin: auto;" id="evenements">
+                        <thead>
                         <tr>
                             <th hidden="hidden">Id</th>
                             <th>Nom</th>
@@ -276,12 +278,13 @@ if (isset($_SESSION['id_evenement'])){
                             <th>Nombre de places restantes</th>
                             <th>Organisateur(s)</th>
                         </tr>
-                        <tr>
-                            <?php
+                        </thead>
+                        <tbody>
+                        <?php
                             if (empty($res)) {
-                            ?>
+                        ?>
                         <tr>
-                            <td colspan="10">Aucun événement trouvé.</td>
+                            <td colspan="7">Aucun événement trouvé.</td>
                         </tr>
                         <?php
                         } else {
@@ -342,6 +345,7 @@ if (isset($_SESSION['id_evenement'])){
                             }
                         }
                         ?>
+                        </tbody>
                     </table>
                     <?php
                     } else {
