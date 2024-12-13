@@ -260,6 +260,10 @@ if (isset($_SESSION['id'])) {
                             ?>
                             <h7 style="color: blue">Votre événement a bien été supprimé.</h7><br><br>
                             <?php
+                        } else if ($_GET['ok'] == 4){
+                            ?>
+                            <h7 style="color: blue">Vous avez bien réservé pour l'événement.</h7><br><br>
+                            <?php
                         }
                     }
                     if (isset($_SESSION['id']) && $_SESSION['role'] == "etudiant") {
@@ -338,7 +342,7 @@ if (isset($_SESSION['id'])) {
                                                 <input type="hidden" name="nb_de_places" value="<?php echo $evenement['nb_de_places'] ?>">
                                                 <input type="hidden" name="date_evenement" value="<?php echo $evenement['date_evenement'] ?>">
                                                 <input type="hidden" name="participant" value="<?php echo $_SESSION['id'] ?>">
-                                                <button type="submit" name="reserverProf">Réserver</button>
+                                                <button type="submit" name="reserverEtudiant">Réserver</button>
                                             </form>
                                         </td>
                                         <?php
