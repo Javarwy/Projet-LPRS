@@ -196,9 +196,21 @@ if (isset($_SESSION['id'])) {
                         </li>
                     </ul>
                     <div class="user_optio_box">
-                        <a href="../connexion_global.php">
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                        </a>
+                        <?php
+                        if (isset($_SESSION['id'])) {
+                            ?>
+                            <a href="../profile.php">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </a>
+                            <?php
+                        } else {
+                            ?>
+                            <a href="../connexion_global.php">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </a>
+                            <?php
+                        }
+                        ?>
                     </div>
                 </div>
             </nav>

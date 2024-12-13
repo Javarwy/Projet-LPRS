@@ -212,10 +212,41 @@ if (isset($_SESSION['id'])) {
                 <div style="text-align: center; margin: auto;">
                     <br>
                     <?php
+                    if (isset($_GET['erreur'])) {
+                        if ($_GET['erreur'] == 1){
+                            ?>
+                            <h7 style="color: red">Erreur lors de la suppression de votre événement. Veuillez réessayer.</h7><br><br>
+                            <?php
+                        } else if ($_GET['erreur'] == 2){
+                            ?>
+                            <h7 style="color: red">Erreur lors de la réservation de votre événement. Veuillez réessayer.</h7><br><br>
+                            <?php
+                        } else if ($_GET['erreur'] == 3){
+                            ?>
+                            <h7 style="color: red">Impossible de réserver cet événement : <b>il n'y a plus de places disponibles</b>.</h7><br><br>
+                            <?php
+                        } else if ($_GET['erreur'] == 4){
+                            ?>
+                            <h7 style="color: red">Impossible de réserver cet événement : il a lieu dans <b>moins de deux jours</b>.</h7><br><br>
+                            <?php
+                        } else if ($_GET['erreur'] == 5){
+                            ?>
+                            <h7 style="color: red">Impossible de réserver cet événement : vous avez <b>déjà réservé</b> pour cet événement.</h7><br><br>
+                            <?php
+                        } else if ($_GET['erreur'] == 6){
+                            ?>
+                            <h7 style="color: red">Erreur lors de la modification de votre événement. Veuillez réessayer.</h7><br><br>
+                            <?php
+                        }
+                    }
                     if (isset($_GET['ok'])){
                         if ($_GET['ok'] == 1){
                         ?>
                             <h7 style="color: blue">Votre événement a bien été créé. <b>Il apparaîtra sur le tableau publiquement après vérification par un gestionnaire</b>.</h7><br><br>
+                        <?php
+                        } else if ($_GET['ok'] == 2){
+                        ?>
+                            <h7 style="color: blue">Votre événement a bien été modifié. <b>Il apparaîtra sur le tableau publiquement après re-vérification par un gestionnaire</b>.</h7><br><br>
                         <?php
                         }
                     }
