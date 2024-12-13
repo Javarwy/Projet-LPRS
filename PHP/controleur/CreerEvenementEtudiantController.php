@@ -20,14 +20,23 @@ if (!isset($_POST['nomEvenement']) || !isset($_POST['type']) || !isset($_POST['d
         foreach ($_POST as $key => $organisateur) {
             if (strpos($key, 'orga') === 0 && !empty($organisateur)) {
                 list($id, $role) = explode('-',$organisateur);
+                if ($role == 'prof' || $role == 'partenaire'){
+                    $autorisation = true;
+                } else {
+                    $autorisation = false;
+                }
                 $organisateurs[] = ['id'=>$id,'role'=>$role];
             }
         }
-        $verif = $evenement->creerEvenement($organisateurs);
-        if ($verif){
-            header('Location: ../../etudiant/etudiant_publication_evenements.php?ok=1');
+        if ($autorisation){
+            $verif = $evenement->creerEvenement($organisateurs);
+            if ($verif){
+                header('Location: ../../etudiant/evenement_etudiants.php?ok=1');
+            } else {
+                header('Location: ../../etudiant/etudiant_creer_evenement.php?erreur=2');
+            }
         } else {
-            header('Location: ../../etudiant/etudiant_creer_evenement.php?erreur=2');
+            header('Location: ../../etudiant/etudiant_creer_evenement.php?erreur=3');
         }
     }
 }

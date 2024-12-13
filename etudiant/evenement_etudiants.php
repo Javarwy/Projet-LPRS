@@ -1,8 +1,38 @@
 <?php
-include '../PHP/bdd/Bdd.php';
-$bdd = new Bdd;
-$req = $bdd->getBdd()->query('SELECT e.id_evenement, e.nom_evenement, e.type, e.description_evenement, e.adresse, e.nb_de_places, e.date_evenement FROM evenement as e');
-$res = $req->fetchAll();
+session_start();
+if (isset($_SESSION['id'])) {
+    include '../PHP/bdd/Bdd.php';
+    $bdd = new Bdd;
+    $req = $bdd->getBdd()->query('SELECT e.id_evenement, e.nom_evenement, e.type, e.description_evenement, e.adresse, e.nb_de_places-COUNT(p.REF_UTILISATEUR) as "nb_de_places", e.date_evenement, u.nom, u.prenom, u.id_utilisateur FROM evenement as e LEFT JOIN participer as p ON e.id_evenement = p.REF_EVENEMENT LEFT JOIN creer as c ON e.id_evenement = c.REF_EVENEMENT LEFT JOIN utilisateur as u ON c.REF_UTILISATEUR = u.id_utilisateur WHERE e.verification = 1 GROUP BY e.id_evenement, u.id_utilisateur ORDER BY e.date_evenement;');
+    $res = $req->fetchAll();
+    $evenements = [];
+    foreach ($res as $evenement) {
+        $id_evenement = $evenement['id_evenement'];
+        if (!isset($evenements[$id_evenement])) {
+            $evenements[$id_evenement] = [
+                'nom_evenement' => $evenement['nom_evenement'],
+                'type' => $evenement['type'],
+                'description_evenement' => $evenement['description_evenement'],
+                'date_evenement' => $evenement['date_evenement'],
+                'adresse' => $evenement['adresse'],
+                'nb_de_places' => $evenement['nb_de_places'],
+                'organisateurs' => [],
+                'est_organisateur' => false
+            ];
+        }
+        $evenements[$id_evenement]['organisateurs'][] = [
+            'id_utilisateur' => $evenement['id_utilisateur'],
+            'nom' => $evenement['nom'],
+            'prenom' => $evenement['prenom']
+        ];
+        if ($evenement['id_utilisateur'] == $_SESSION['id']) {
+            $evenements[$id_evenement]['est_organisateur'] = true;
+        }
+    }
+    if (isset($_SESSION['id_evenement'])) {
+        unset($_SESSION['id_evenement']);
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -99,25 +129,52 @@ $res = $req->fetchAll();
                             <a class="nav-link" href="../index.php">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="etudiant.php">Etudiant</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="alumni.php">Alumni</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="entreprises.php">Entreprises</a>
+                            <div class="dropdown">
+                                <button class="nav-link dropbtn">Etudiant
+                                </button>
+                                <div class="dropdown-content">
+                                    <a href="annuaire_etudiant.php">Annuaire des anciens élèves</a>
+                                    <a href="forum_etudiant.php">Forum de discussion</a>
+                                    <a href="#">Opportunités d'emploi et de stage</a>
+                                    <a href="evenement_etudiants.php">Participation des évènements</a>
+                                </div>
+                            </div>
                         </li>
                         <li class="nav-item">
                             <div class="dropdown">
-                                <a href="professeur.php">
+                                <button class="nav-link dropbtn">Alumni
+                                </button>
+                                <div class="dropdown-content">
+                                    <a href="../Alumni/annuaire_ancien_eleve">Annuaire des anciens élèves</a>
+                                    <a href="../Alumni/forum_discussion_ancien_eleve">Forum de discussion</a>
+                                    <a href="../Alumni/Opportnuites_emploi_stages.php">Opportunités d'emploi et de stage</a>
+                                    <a href="../Alumni/evenement_ancien_eleve.php">Participation des évènements</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <button class="nav-link dropbtn">Entreprises
+                                </button>
+                                <div class="dropdown-content">
+                                    <a href="../profil_entreprise.php">Profil des entreprises</a>
+                                    <a href="../publication_offre.php">Publication d'offres</a>
+                                    <a href="../recherche_alumni.php">Profils des anciens élèves</a>
+                                    <a href="../index.php">Publication d'événements</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <a href="../professeur/professeur.php">
                                     <button class="nav-link dropbtn">Professeur
                                     </button>
                                 </a>
                                 <div class="dropdown-content">
-                                    <a href="prof_profils_anciens_eleves.php">Profils des anciens élèves</a>
-                                    <a href="prof_profils_etudiants_actuels.php">Profils des étudiants actuels</a>
-                                    <a href="prof_publication_evenements.php">Publication d'événements</a>
-                                    <a href="#">Section d'offres</a>
+                                    <a href="../professeur/prof_profils_anciens_eleves.php">Profils des anciens élèves</a>
+                                    <a href="../professeur/prof_profils_etudiants_actuels.php">Profils des étudiants actuels</a>
+                                    <a href="../professeur/prof_publication_evenements.php">Publication d'événements</a>
+                                    <a href="../professeur/prof_section_offres.php">Section d'offres</a>
                                 </div>
                             </div>
                         </li>
@@ -126,12 +183,21 @@ $res = $req->fetchAll();
                         </li>
                     </ul>
                     <div class="user_optio_box">
-                        <a href="">
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                        </a>
+                        <?php
+                        if (isset($_SESSION['id'])) {
+                            ?>
+                            <a href="../profile.php">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </a>
+                            <?php
+                        } else {
+                            ?>
+                            <a href="../connexion_global.php">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </a>
+                            <?php
+                        }
+                        ?>
                     </div>
                 </div>
             </nav>
@@ -145,193 +211,117 @@ $res = $req->fetchAll();
             <div class="row">
                 <div style="text-align: center; margin: auto;">
                     <br>
-                    <h2 style="color: #19c880">Reservation etudiants d'evenements</h2>
+                    <?php
+                    if (isset($_GET['ok'])){
+                        if ($_GET['ok'] == 1){
+                        ?>
+                            <h7 style="color: blue">Votre événement a bien été créé. <b>Il apparaîtra sur le tableau publiquement après vérification par un gestionnaire</b>.</h7><br><br>
+                        <?php
+                        }
+                    }
+                    if (isset($_SESSION['id']) && $_SESSION['role'] == "etudiant") {
+                    ?>
+                    <h2 style="color: #19c880">Participation à des événements</h2>
                     <br>
+                    <a href="etudiant_creer_evenement.php">
+                        <button type="button">Créer un événement</button>
+                    </a>
+                    <br><br>
                     <table border="1px" style="text-align: center; margin:auto;">
+                        <thead>
                         <tr>
                             <th hidden="hidden">Id</th>
                             <th>Nom</th>
                             <th>Type</th>
                             <th>Description</th>
-                            <th>adresse</th>
-                            <th>nombres de places</th>
-                            <th>Date</th>
+                            <th>Date et heure</th>
+                            <th>Adresse</th>
+                            <th>Nombre de places restantes</th>
+                            <th>Organisateur(s)</th>
                         </tr>
+                        </thead>
+                        <tbody>
                         <?php
                         if (empty($res)) {
                             ?>
                             <tr>
-                                <td colspan="6">Aucun étudiant trouvé.</td>
+                                <td colspan="7">Aucun événement trouvé.</td>
                             </tr>
                             <?php
                         } else {
-                            foreach($res as $evenement){
+                            foreach($evenements as $id_evenement => $evenement){
                                 ?>
-                                <form action="">
                                 <tr>
-                                    <td hidden="hidden"><?php echo $evenement['id_evenement'] ?></td>
                                     <td><?php echo $evenement['nom_evenement'] ?></td>
                                     <td><?php echo $evenement['type'] ?></td>
                                     <td><?php echo $evenement['description_evenement'] ?></td>
+                                    <td>
+                                        <?php
+                                            $date = new DateTime($evenement['date_evenement']);
+                                            $dateString = date_format($date,'d/m/Y H:i');
+                                            echo $dateString;
+                                        ?>
+                                    </td>
                                     <td><?php echo $evenement['adresse'] ?></td>
                                     <td><?php echo $evenement['nb_de_places'] ?></td>
-                                    <td><?php echo $evenement['date_evenement'] ?></td>
                                     <td>
-                                       <input type="submit" value="Reserver" name="reserver"></form>
-
+                                        <?php
+                                        foreach($evenement['organisateurs'] as $organisateur) {
+                                            echo $organisateur['nom']." ".$organisateur['prenom']."<br>";
+                                        }
+                                        ?>
+                                    </td>
+                                    <?php
+                                    if ($evenement['est_organisateur']){
+                                        ?>
+                                        <td>
+                                            <form method="post" action="etudiant_modifier_evenement.php">
+                                                <input type="hidden" name="id_evenement" value="<?php echo $id_evenement ?>">
+                                                <button type="submit" name="modification">Modifier</button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form method="post" action="../PHP/controleur/EvenementsController.php" id="supprimer">
+                                                <input type="hidden" name="id_evenement" value="<?php echo $id_evenement ?>">
+                                                <button type="submit" onclick="confirmerSuppression()" name="supprimerProf">Supprimer</button>
+                                            </form>
+                                        </td>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <td colspan="2">
+                                            <form method="post" action="../PHP/controleur/EvenementsController.php">
+                                                <input type="hidden" name="id_evenement" value="<?php echo $id_evenement ?>">
+                                                <input type="hidden" name="nb_de_places" value="<?php echo $evenement['nb_de_places'] ?>">
+                                                <input type="hidden" name="date_evenement" value="<?php echo $evenement['date_evenement'] ?>">
+                                                <input type="hidden" name="participant" value="<?php echo $_SESSION['id'] ?>">
+                                                <button type="submit" name="reserverProf">Réserver</button>
+                                            </form>
+                                        </td>
+                                        <?php
+                                    }
+                                    ?>
                                 </tr>
                                 <?php
                             }
                         }
                         ?>
-
+                        </tbody>
                     </table>
-                    <br>
+                    <?php
+                    } else {
+                        ?>
+                        <h1>Vous n'avez pas accès à cette page.</h1>
+                        <?php
+                    }
+                    ?>
+                <br>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- end service section -->
-
-    <!-- info section -->
-    <section class="info_section layout_padding2">
-        <div class="container">
-            <div class="info_logo">
-                <h2>
-                    HandTime
-                </h2>
-            </div>
-            <div class="row">
-
-                <div class="col-md-3">
-                    <div class="info_contact">
-                        <h5>
-                            About Shop
-                        </h5>
-                        <div>
-                            <div class="img-box">
-                                <img src="../images/location-white.png" width="18px" alt="">
-                            </div>
-                            <p>
-                                Address
-                            </p>
-                        </div>
-                        <div>
-                            <div class="img-box">
-                                <img src="../images/telephone-white.png" width="12px" alt="">
-                            </div>
-                            <p>
-                                +01 1234567890
-                            </p>
-                        </div>
-                        <div>
-                            <div class="img-box">
-                                <img src="../images/envelope-white.png" width="18px" alt="">
-                            </div>
-                            <p>
-                                demo@gmail.com
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="info_info">
-                        <h5>
-                            Informations
-                        </h5>
-                        <p>
-                            ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="info_insta">
-                        <h5>
-                            Instagram
-                        </h5>
-                        <div class="insta_container">
-                            <div class="row m-0">
-                                <div class="col-4 px-0">
-                                    <a href="">
-                                        <div class="insta-box b-1">
-                                            <img src="../images/w1.png" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-4 px-0">
-                                    <a href="">
-                                        <div class="insta-box b-1">
-                                            <img src="../images/w2.png" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-4 px-0">
-                                    <a href="">
-                                        <div class="insta-box b-1">
-                                            <img src="../images/w3.png" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-4 px-0">
-                                    <a href="">
-                                        <div class="insta-box b-1">
-                                            <img src="../images/w4.png" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-4 px-0">
-                                    <a href="">
-                                        <div class="insta-box b-1">
-                                            <img src="../images/w5.png" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-4 px-0">
-                                    <a href="">
-                                        <div class="insta-box b-1">
-                                            <img src="../images/w6.png" alt="">
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="info_form ">
-                        <h5>
-                            Newsletter
-                        </h5>
-                        <form action="">
-                            <input type="email" placeholder="Enter your email">
-                            <button>
-                                Subscribe
-                            </button>
-                        </form>
-                        <div class="social_box">
-                            <a href="">
-                                <img src="../images/fb.png" alt="">
-                            </a>
-                            <a href="">
-                                <img src="../images/twitter.png" alt="">
-                            </a>
-                            <a href="">
-                                <img src="../images/linkedin.png" alt="">
-                            </a>
-                            <a href="">
-                                <img src="../images/youtube.png" alt="">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- end info_section -->
 
     <!-- footer section -->
     <section class="footer_section">

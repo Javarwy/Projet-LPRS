@@ -144,7 +144,7 @@ if (isset($_SESSION['id'])) {
                                 <div class="dropdown-content">
                                     <a href="annuaire_etudiant.php">Annuaire des anciens élèves</a>
                                     <a href="forum_etudiant.php">Forum de discussion</a>
-                                    <a href="publication_offre.php">Opportunités d'emploi et de stage</a>
+                                    <a href="#">Opportunités d'emploi et de stage</a>
                                     <a href="evenement_etudiants.php">Participation à des événements</a>
                                 </div>
                             </div>
@@ -179,15 +179,15 @@ if (isset($_SESSION['id'])) {
                         </li>
                         <li class="nav-item">
                             <div class="dropdown">
-                                <a href="professeur.php">
+                                <a href="../professeur/professeur.php">
                                     <button class="nav-link dropbtn">Professeur
                                     </button>
                                 </a>
                                 <div class="dropdown-content">
-                                    <a href="../prof_profils_anciens_eleves.php">Profils des anciens élèves</a>
-                                    <a href="../prof_profils_etudiants_actuels.php">Profils des étudiants actuels</a>
-                                    <a href="../prof_publication_evenements.php">Publication d'événements</a>
-                                    <a href="../prof_section_offres.php">Section d'offres</a>
+                                    <a href="../professeur/prof_profils_anciens_eleves.php">Profils des anciens élèves</a>
+                                    <a href="../professeur/prof_profils_etudiants_actuels.php">Profils des étudiants actuels</a>
+                                    <a href="../professeur/prof_publication_evenements.php">Publication d'événements</a>
+                                    <a href="../professeur/prof_section_offres.php">Section d'offres</a>
                                 </div>
                             </div>
                         </li>
@@ -209,15 +209,19 @@ if (isset($_SESSION['id'])) {
     <center>
         <?php
         if (isset($_GET['erreur'])){
-            if ($_GET['erreur'] == 1){
-                ?>
-                <h7 style="color: red">Veuillez correctement remplir tous les champs ci-dessous.</h7><br><br>
-                <?php
-            } else if ($_GET['erreur'] == 2){
-                ?>
-                <h7 style="color: red">Erreur lors de la création de votre événement. Veuillez réessayer.</h7><br><br>
-                <?php
-            }
+                if ($_GET['erreur'] == 1){
+                    ?>
+                    <h7 style="color: red">Veuillez correctement remplir tous les champs ci-dessous.</h7><br><br>
+                    <?php
+                } else if ($_GET['erreur'] == 2){
+                    ?>
+                    <h7 style="color: red">Erreur lors de la création de votre événement. Veuillez réessayer.</h7><br><br>
+                    <?php
+                } else if ($_GET['erreur'] == 3){
+                    ?>
+                    <h7 style="color: red">L'un des organisateurs n'est pas un professeur ou un partenaire d'entreprise. Veuillez réessayer.</h7><br><br>
+                    <?php
+                }
         }
         if (isset($_SESSION['id']) && $_SESSION['role'] == "etudiant"){
             ?>
