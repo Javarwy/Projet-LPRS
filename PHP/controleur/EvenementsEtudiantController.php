@@ -36,19 +36,19 @@ if (array_key_exists("reserverEtudiant",$_POST)){
 }
 if (array_key_exists("supprimerEtudiant",$_POST)){
     if (!isset($_POST['id_evenement'])) {
-        header('Location: ../../etudiant/etudiant_publication_evenements.php?erreur=1');
+        header('Location: ../../etudiant/evenement_etudiants.php?erreur=1');
     } else {
         if (empty($_POST['id_evenement'])) {
-            header('Location: ../../etudiant/etudiant_publication_evenements.php?erreur=1');
+            header('Location: ../../etudiant/evenement_etudiants.php?erreur=1');
         } else {
             $evenement = new Evenement([
                 'idEvenement' => $_POST['id_evenement']
             ]);
             $verif = $evenement->supprimerEvenement();
             if ($verif){
-                header('Location: ../../etudiant/etudiant_publication_evenements.php?ok=3');
+                header('Location: ../../etudiant/evenement_etudiants.php?ok=3');
             } else {
-                header('Location: ../../etudiant/etudiant_publication_evenements.php?erreur=1');
+                header('Location: ../../etudiant/evenement_etudiants.php?erreur=1');
             }
         }
     }

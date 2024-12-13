@@ -104,6 +104,14 @@ if (isset($_SESSION['id'])) {
         }
     </style>
 
+    <script>
+        function confirmerSuppression(){
+            if(confirm("Souhaitez-vous réellement supprimer cet événement ?\n(Cette action est irréversible !)")){
+                document.getElementById("supprimer").submit();
+            }
+        }
+    </script>
+
 </head>
 
 <body>
@@ -248,6 +256,10 @@ if (isset($_SESSION['id'])) {
                         ?>
                             <h7 style="color: blue">Votre événement a bien été modifié. <b>Il apparaîtra sur le tableau publiquement après re-vérification par un gestionnaire</b>.</h7><br><br>
                         <?php
+                        } else if ($_GET['ok'] == 3){
+                            ?>
+                            <h7 style="color: blue">Votre événement a bien été supprimé.</h7><br><br>
+                            <?php
                         }
                     }
                     if (isset($_SESSION['id']) && $_SESSION['role'] == "etudiant") {
@@ -312,16 +324,16 @@ if (isset($_SESSION['id'])) {
                                             </form>
                                         </td>
                                         <td>
-                                            <form method="post" action="../PHP/controleur/EvenementsController.php" id="supprimer">
+                                            <form method="post" action="../PHP/controleur/EvenementsEtudiantController.php" id="supprimer">
                                                 <input type="hidden" name="id_evenement" value="<?php echo $id_evenement ?>">
-                                                <button type="submit" onclick="confirmerSuppression()" name="supprimerProf">Supprimer</button>
+                                                <button type="submit" onclick="confirmerSuppression()" name="supprimerEtudiant">Supprimer</button>
                                             </form>
                                         </td>
                                         <?php
                                     } else {
                                         ?>
                                         <td colspan="2">
-                                            <form method="post" action="../PHP/controleur/EvenementsController.php">
+                                            <form method="post" action="../PHP/controleur/EvenementsEtudiantController.php">
                                                 <input type="hidden" name="id_evenement" value="<?php echo $id_evenement ?>">
                                                 <input type="hidden" name="nb_de_places" value="<?php echo $evenement['nb_de_places'] ?>">
                                                 <input type="hidden" name="date_evenement" value="<?php echo $evenement['date_evenement'] ?>">
