@@ -43,7 +43,7 @@ class Message
             $id_message = $element['id_message'];
         }
         if ($verif) {
-            $creer = $bdd->getBdd()->prepare('INSERT INTO creer VALUES (:ref_utilisateur, :id_evenement)');
+            $creer = $bdd->getBdd()->prepare('INSERT INTO creer VALUES (:ref_utilisateur, :id_message)');
             foreach ($createurs as $createur) {
                 $creer->execute(array(
                     'ref_utilisateur' => $createur['id'],

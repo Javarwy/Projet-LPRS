@@ -80,36 +80,7 @@ if (isset($_SESSION['id'])) {
         }
     </style>
 
-    <script>
-        let nbCreas = 1;
-        function ajoutCrea(){
-            nbCreas++;
-            const selectDiv = document.createElement("div");
-            selectDiv.id = "crea"+nbCreas;
 
-            const select = document.createElement("select");
-            select.name = "crea"+nbCreas;
-
-            const utilisateurs = <?php echo json_encode($res) ?>;
-            utilisateurs.forEach(utilisateur => {
-                const option = document.createElement("option");
-                option.value = `${utilisateur.id_utilisateur}-${utilisateur.role}`;
-                option.text = `${utilisateur.nom} ${utilisateur.prenom}`;
-                select.appendChild(option);
-            });
-
-            const retirerOrga = document.createElement("button");
-            retirerOrga.textContent = "Retirer";
-            retirerOrga.onclick = () => {
-                selectDiv.remove();
-                nbOrgas = Math.max(1, nbOrgas - 1);
-            }
-
-            selectDiv.appendChild(select);
-            selectDiv.appendChild(document.createElement("small")).appendChild(retirerOrga);
-            document.getElementById("createurs").appendChild(selectDiv);
-        }
-    </script>
 
 </head>
 
@@ -266,13 +237,8 @@ if (isset($_SESSION['id'])) {
                             <td>
                                 <label for="createur">Createur :</label>
                             </td>
-                            <td id="createur">
-                                <div id="crea1">
-                                    <select name="crea1" readonly="">
-                                        <option value="<?php echo $_SESSION['id'].'-'.$_SESSION['role'] ?>"><?php echo $_SESSION['nom']." ".$_SESSION['prenom'] ?></option>
-                                    </select>
-                                </div>
-
+                            <td>
+                                <input type="text" id="name" name="name" value="<?php echo $_SESSION['nom']." ".$_SESSION['prenom'] ?>" readonly >
                             </td>
 
                         </tr>
