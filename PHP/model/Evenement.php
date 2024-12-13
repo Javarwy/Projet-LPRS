@@ -94,12 +94,16 @@ class Evenement {
 
     public function supprimerEvenement() : bool{
         $bdd = new Bdd();
-        $req = $bdd->getBdd()->prepare('DELETE FROM creer WHERE ref_evenement = :ref_evenement');
+        $req = $bdd->getBdd()->prepare('DELETE FROM participer WHERE ref_evenement = :ref_evenement');
         $req->execute(array(
             'ref_evenement'=>$this->getIdEvenement()
         ));
-        $req2 = $bdd->getBdd()->prepare('DELETE FROM evenement WHERE id_evenement = :id_evenement');
+        $req2 = $bdd->getBdd()->prepare('DELETE FROM creer WHERE ref_evenement = :ref_evenement');
         $req2->execute(array(
+            'ref_evenement'=>$this->getIdEvenement()
+        ));
+        $req3 = $bdd->getBdd()->prepare('DELETE FROM evenement WHERE id_evenement = :id_evenement');
+        $req3->execute(array(
            'id_evenement'=>$this->getIdEvenement()
         ));
         $verif = $this->getEvenementById($this->getIdEvenement());
