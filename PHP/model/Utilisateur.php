@@ -52,7 +52,7 @@ class Utilisateur {
             $_SESSION["active"] = $res['active'];
             header("Location: ../../profile.php");
         } else {
-            header("Location: ../../index.php");
+            header("Location: ../../connexion_global.php?erreur=1");
         }
     }
     public function inscription(){

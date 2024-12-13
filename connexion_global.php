@@ -168,6 +168,15 @@
      <br>
      <h5>Veuillez nous donner quelques informations supplémentaires : </h5>
        <br>
+         <?php
+         if (isset($_GET['erreur'])){
+             if ($_GET['erreur'] == 1){
+                 ?>
+                 <h7 style="color: red;">L'e-mail ou le mot de passe est incorrect. Veuillez réessayer.</h7>
+                 <?php
+             }
+         }
+         ?>
      <br>
   <div>
   <form action="PHP\controleur\TraitementUtilisateur.php" method="post" class="form_connexion">
