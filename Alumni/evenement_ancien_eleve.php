@@ -1,9 +1,38 @@
 <?php
 session_start();
-include '../PHP/bdd/Bdd.php';
-$bdd = new Bdd;
-$req = $bdd->getBdd()->query('SELECT e.id_evenement, e.nom_evenement, e.type, e.description_evenement, e.adresse, e.nb_de_places, e.date_evenement FROM evenement as e');
-$res = $req->fetchAll();
+if (isset($_SESSION['id'])) {
+    include '../PHP/bdd/Bdd.php';
+    $bdd = new Bdd;
+    $req = $bdd->getBdd()->query('SELECT e.id_evenement, e.nom_evenement, e.type, e.description_evenement, e.adresse, e.nb_de_places-COUNT(p.REF_UTILISATEUR) as "nb_de_places", e.date_evenement, u.nom, u.prenom, u.id_utilisateur FROM evenement as e LEFT JOIN participer as p ON e.id_evenement = p.REF_EVENEMENT LEFT JOIN creer as c ON e.id_evenement = c.REF_EVENEMENT LEFT JOIN utilisateur as u ON c.REF_UTILISATEUR = u.id_utilisateur WHERE e.verification = 1 GROUP BY e.id_evenement, u.id_utilisateur ORDER BY e.date_evenement;');
+    $res = $req->fetchAll();
+    $evenements = [];
+    foreach ($res as $evenement) {
+        $id_evenement = $evenement['id_evenement'];
+        if (!isset($evenements[$id_evenement])) {
+            $evenements[$id_evenement] = [
+                'nom_evenement' => $evenement['nom_evenement'],
+                'type' => $evenement['type'],
+                'description_evenement' => $evenement['description_evenement'],
+                'date_evenement' => $evenement['date_evenement'],
+                'adresse' => $evenement['adresse'],
+                'nb_de_places' => $evenement['nb_de_places'],
+                'organisateurs' => [],
+                'est_organisateur' => false
+            ];
+        }
+        $evenements[$id_evenement]['organisateurs'][] = [
+            'id_utilisateur' => $evenement['id_utilisateur'],
+            'nom' => $evenement['nom'],
+            'prenom' => $evenement['prenom']
+        ];
+        if ($evenement['id_utilisateur'] == $_SESSION['id']) {
+            $evenements[$id_evenement]['est_organisateur'] = true;
+        }
+    }
+    if (isset($_SESSION['id_evenement'])) {
+        unset($_SESSION['id_evenement']);
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -75,6 +104,14 @@ $res = $req->fetchAll();
         }
     </style>
 
+    <script>
+        function confirmerSuppression(){
+            if(confirm("Souhaitez-vous réellement supprimer cet événement ?\n(Cette action est irréversible !)")){
+                document.getElementById("supprimer").submit();
+            }
+        }
+    </script>
+
 </head>
 
 <body>
@@ -100,25 +137,52 @@ $res = $req->fetchAll();
                             <a class="nav-link" href="../index.php">Accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="etudiant.php">Etudiant</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="alumni.php">Alumni</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="entreprises.php">Entreprises</a>
+                            <div class="dropdown">
+                                <button class="nav-link dropbtn">Etudiant
+                                </button>
+                                <div class="dropdown-content">
+                                    <a href="../etudiant/annuaire_etudiant.php">Annuaire des anciens élèves</a>
+                                    <a href="../etudiant/forum_etudiant.php">Forum de discussion</a>
+                                    <a href="../etudiant/opportunites_emploi_stages.php">Opportunités d'emploi et de stage</a>
+                                    <a href="../etudiant/evenement_etudiants.php">Participation des évènements</a>
+                                </div>
+                            </div>
                         </li>
                         <li class="nav-item">
                             <div class="dropdown">
-                                <a href="professeur.php">
+                                <button class="nav-link dropbtn">Alumni
+                                </button>
+                                <div class="dropdown-content">
+                                    <a href="annuaire_ancien_eleve.php">Annuaire des anciens élèves</a>
+                                    <a href="forum_discussion_ancien_eleve.php">Forum de discussion</a>
+                                    <a href="Opportnuites_emploi_stages.php">Opportunités d'emploi et de stage</a>
+                                    <a href="evenement_ancien_eleve.php">Participation des évènements</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <button class="nav-link dropbtn">Entreprises
+                                </button>
+                                <div class="dropdown-content">
+                                    <a href="../profil_entreprise.php">Profil des entreprises</a>
+                                    <a href="../publication_offre.php">Publication d'offres</a>
+                                    <a href="../recherche_alumni.php">Profils des anciens élèves</a>
+                                    <a href="../index.php">Publication d'événements</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <a href="../professeur/professeur.php">
                                     <button class="nav-link dropbtn">Professeur
                                     </button>
                                 </a>
                                 <div class="dropdown-content">
-                                    <a href="prof_profils_anciens_eleves.php">Profils des anciens élèves</a>
-                                    <a href="prof_profils_etudiants_actuels.php">Profils des étudiants actuels</a>
-                                    <a href="prof_publication_evenements.php">Publication d'événements</a>
-                                    <a href="#">Section d'offres</a>
+                                    <a href="../professeur/prof_profils_anciens_eleves.php">Profils des anciens élèves</a>
+                                    <a href="../professeur/prof_profils_etudiants_actuels.php">Profils des étudiants actuels</a>
+                                    <a href="../professeur/prof_publication_evenements.php">Publication d'événements</a>
+                                    <a href="../professeur/prof_section_offres.php">Section d'offres</a>
                                 </div>
                             </div>
                         </li>
@@ -127,12 +191,21 @@ $res = $req->fetchAll();
                         </li>
                     </ul>
                     <div class="user_optio_box">
-                        <a href="">
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                        </a>
+                        <?php
+                        if (isset($_SESSION['id'])) {
+                            ?>
+                            <a href="../profile.php">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </a>
+                            <?php
+                        } else {
+                            ?>
+                            <a href="../connexion_global.php">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </a>
+                            <?php
+                        }
+                        ?>
                     </div>
                 </div>
             </nav>
@@ -147,62 +220,140 @@ $res = $req->fetchAll();
                 <div style="text-align: center; margin: auto;">
                     <br>
                     <?php
+                    if (isset($_GET['erreur'])) {
+                        if ($_GET['erreur'] == 1){
+                            ?>
+                            <h7 style="color: red">Erreur lors de la suppression de votre événement. Veuillez réessayer.</h7><br><br>
+                            <?php
+                        } else if ($_GET['erreur'] == 2){
+                            ?>
+                            <h7 style="color: red">Erreur lors de la réservation de votre événement. Veuillez réessayer.</h7><br><br>
+                            <?php
+                        } else if ($_GET['erreur'] == 3){
+                            ?>
+                            <h7 style="color: red">Impossible de réserver cet événement : <b>il n'y a plus de places disponibles</b>.</h7><br><br>
+                            <?php
+                        } else if ($_GET['erreur'] == 4){
+                            ?>
+                            <h7 style="color: red">Impossible de réserver cet événement : il a lieu dans <b>moins de deux jours</b>.</h7><br><br>
+                            <?php
+                        } else if ($_GET['erreur'] == 5){
+                            ?>
+                            <h7 style="color: red">Impossible de réserver cet événement : vous avez <b>déjà réservé</b> pour cet événement.</h7><br><br>
+                            <?php
+                        } else if ($_GET['erreur'] == 6){
+                            ?>
+                            <h7 style="color: red">Erreur lors de la modification de votre événement. Veuillez réessayer.</h7><br><br>
+                            <?php
+                        }
+                    }
+                    if (isset($_GET['ok'])){
+                        if ($_GET['ok'] == 1){
+                            ?>
+                            <h7 style="color: blue">Votre événement a bien été créé. <b>Il apparaîtra sur le tableau publiquement après vérification par un gestionnaire</b>.</h7><br><br>
+                            <?php
+                        } else if ($_GET['ok'] == 2){
+                            ?>
+                            <h7 style="color: blue">Votre événement a bien été modifié. <b>Il apparaîtra sur le tableau publiquement après re-vérification par un gestionnaire</b>.</h7><br><br>
+                            <?php
+                        } else if ($_GET['ok'] == 3){
+                            ?>
+                            <h7 style="color: blue">Votre événement a bien été supprimé.</h7><br><br>
+                            <?php
+                        } else if ($_GET['ok'] == 4){
+                            ?>
+                            <h7 style="color: blue">Vous avez bien réservé pour l'événement.</h7><br><br>
+                            <?php
+                        }
+                    }
                     if (isset($_SESSION['id']) && $_SESSION['role'] == "alumni"){
                     ?>
-                    <h2 style="color: #19c880">Reservation d'evenement pour Alumni</h2>
+                    <h2 style="color: #19c880">Participation à des événements</h2>
                     <br>
-
-                    <table border="1px" style="text-align: center; margin:auto;">
-                        <tr>
-                            <th hidden="hidden">Id</th>
-                            <th>Nom</th>
-                            <th>Type</th>
-                            <th>Description</th>
-                            <th>adresse</th>
-                            <th>Nombre de places</th>
-                            <th>Date</th>
-                        </tr>
-                        <?php
-                        if (empty($res)) {
-                            ?>
+                    <a href="alumni_creer_evenement.php">
+                        <button type="button">Créer un événement</button>
+                    </a>
+                    <br><br>
+                    <h5>Liste des événéments</h5>
+                    <small>Vous pouvez modifier ou supprimer uniquement les événements que vous avez créés !</small>
+                        <table border="1px" style="text-align: center; margin:auto;">
                             <tr>
-                                <td colspan="6">Aucun événement trouvé.</td>
+                                <th hidden="hidden">Id</th>
+                                <th>Nom</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Date et heure</th>
+                                <th>Adresse</th>
+                                <th>Nombre de places restantes</th>
+                                <th>Organisateur(s)</th>
+                            </tr>
+                            <tr>
+                                <?php
+                                if (empty($res)) {
+                                ?>
+                            <tr>
+                                <td colspan="7">Aucun événement trouvé.</td>
                             </tr>
                             <?php
-                        } else {
-                            foreach($res as $evenement){
-                                ?>
+                            } else {
+                                foreach($evenements as $id_evenement => $evenement){
+                                    ?>
                                     <tr>
-                                        <td hidden="hidden"><?php echo $evenement['id_evenement'] ?></td>
                                         <td><?php echo $evenement['nom_evenement'] ?></td>
                                         <td><?php echo $evenement['type'] ?></td>
                                         <td><?php echo $evenement['description_evenement'] ?></td>
+                                        <td>
+                                            <?php
+                                            $date = new DateTime($evenement['date_evenement']);
+                                            $dateString = date_format($date,'d/m/Y H:i');
+                                            echo $dateString;
+                                            ?>
+                                        </td>
                                         <td><?php echo $evenement['adresse'] ?></td>
                                         <td><?php echo $evenement['nb_de_places'] ?></td>
                                         <td>
                                             <?php
-                                                $date = new DateTime($evenement['date_evenement']);
-                                                $dateString = date_format($date, 'd/m/Y H:i');
-                                                echo $dateString;
+                                            foreach($evenement['organisateurs'] as $organisateur) {
+                                                echo $organisateur['nom']." ".$organisateur['prenom']."<br>";
+                                            }
                                             ?>
                                         </td>
-                                        <td>
-                                            <form action="" method="post">
-                                            <input type="hidden" name="id_evenement" value="<?php echo $evenement['id_evenement'] ?>">
-                                            <input type="hidden" name="nb_de_places" value="<?php echo $evenement['nb_de_places'] ?>">
-                                            <input type="hidden" name="date_evenement" value="<?php echo $evenement['date_evenement'] ?>">
-                                            <input type="hidden" name ="participant" value="<?php echo $_SESSION['id'] ?>">
-                                            <input type="submit" value="Reserver" name="reserver">
-                                            </form>
-                                        </td>
-
-                                </tr>
-                                <?php
+                                        <?php
+                                        if ($evenement['est_organisateur']){
+                                            ?>
+                                            <td>
+                                                <form method="post" action="alumni_modifier_evenement.php">
+                                                    <input type="hidden" name="id_evenement" value="<?php echo $id_evenement ?>">
+                                                    <button type="submit" name="modification">Modifier</button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form method="post" action="../PHP/controleur/EvenementsAlumniController.php" id="supprimer">
+                                                    <input type="hidden" name="id_evenement" value="<?php echo $id_evenement ?>">
+                                                    <button type="submit" onclick="confirmerSuppression()" name="supprimerAlumni">Supprimer</button>
+                                                </form>
+                                            </td>
+                                            <?php
+                                        } else {
+                                            ?>
+                                            <td colspan="2">
+                                                <form method="post" action="../PHP/controleur/EvenementsAlumniController.php">
+                                                    <input type="hidden" name="id_evenement" value="<?php echo $id_evenement ?>">
+                                                    <input type="hidden" name="nb_de_places" value="<?php echo $evenement['nb_de_places'] ?>">
+                                                    <input type="hidden" name="date_evenement" value="<?php echo $evenement['date_evenement'] ?>">
+                                                    <input type="hidden" name="participant" value="<?php echo $_SESSION['id'] ?>">
+                                                    <button type="submit" name="reserverAlumni">Réserver</button>
+                                                </form>
+                                            </td>
+                                            <?php
+                                        }
+                                        ?>
+                                    </tr>
+                                    <?php
+                                }
                             }
-                        }
-                        ?>
-
-                    </table>
+                            ?>
+                        </table>
                     <?php
                     } else {
                     ?>
